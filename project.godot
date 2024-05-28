@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/Level.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/Player.gd"
+} ]
+_global_script_class_icons={
+"Level": "",
+"Player": ""
+}
+
 [application]
 
 config/name="wfc-roguelike"

@@ -35,7 +35,6 @@ public partial class Rule : Node
             {
                 Godot.Vector2 coord = position-matchRadVector+new Godot.Vector2(i, j);
                 int tileID = sample.GetCell((int)coord.x, (int)coord.y); //sample.GetCellAtlasCoords(0, coord);
-                GD.Print(i, " ", j, " ", coord, " ", tileID);
                 RuleArray[i][j] = tileID;
             }
     }

@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://addons/Godot-WFC-Csharp/WFCGenerator.cs" type="Script" id=2]
+[ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="WFCGenerator" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -19,6 +21,11 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
+[node name="Envelope" type="TileMap" parent="WFCGenerator/Target"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
 [node name="Sample" type="TileMap" parent="WFCGenerator"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
@@ -29,3 +36,5 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 5, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 anchor_mode = 0
 current = true
 zoom = Vector2( 0.5, 0.5 )
+
+[connection signal="OnDone" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]
