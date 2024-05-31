@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://common/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
+[ext_resource path="res://common/radial.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.0
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -17,6 +23,18 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.75
 one_shot = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+shadow_enabled = true
+
+[node name="JumpArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
+shape = SubResource( 2 )
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
