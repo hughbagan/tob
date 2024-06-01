@@ -41,6 +41,7 @@ func _physics_process(_delta):
 func jump():
 	jumping = true
 	jump_timer.start()
+	$JumpSFX.play()
 	var jump_tween = get_tree().create_tween()
 	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
@@ -51,6 +52,7 @@ func _on_JumpTimer_timeout():
 	# Landing
 	jumping = false
 	col.disabled = false
+	$landSFX.play()
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
 		jump()

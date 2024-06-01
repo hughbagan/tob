@@ -37,4 +37,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
 shape = SubResource( 2 )
 
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
+[node name="LandSFX" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
+
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
