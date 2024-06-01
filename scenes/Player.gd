@@ -52,7 +52,7 @@ func _on_JumpTimer_timeout():
 	# Landing
 	jumping = false
 	col.disabled = false
-	$landSFX.play()
+	$LandSFX.play()
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
 		jump()
