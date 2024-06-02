@@ -5,9 +5,6 @@ onready var spr_scale:Vector2 = sprite.scale
 onready var col:CollisionShape2D = $CollisionShape2D
 onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
-onready var jump_sfxC:AudioStreamPlayer = $SFX/JumpSFX
-onready var land_sfxC:AudioStreamPlayer = $SFX/LandSFX
-onready var hit_sfxC:AudioStreamPlayer = $SFX/HitSFX
 var tilemap:TileMap
 var current_tile_coords:Vector2
 var current_tile:int
@@ -15,6 +12,7 @@ var level
 var speed:float = 75.0
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
+var jump_rand_list
 
 
 
@@ -66,12 +64,16 @@ func _on_leaf_destroy(tile_coords:Vector2):
 
 
 func jump_sfx():
-	var jump_path = ["res://audio/sfx/SWSH_Cloth_01.wav", "res://audio/sfx/SWSH_Cloth_02.wav", "res://audio/sfx/SWSH_Cloth_03.wav"]
-	var jump_randi = randi() % 3
-	var jump_stream = ClassDB.instance(jump_path[jump_randi])
-	jump_sfxC.set_stream(jump_stream)
-	jump_sfxC.play()
+	var jump_sounds = [$SFX/JumpSFX/JumpSFX1, $SFX/JumpSFX/JumpSFX2, $SFX/JumpSFX/JumpSFX3]
+	var jump_randi
+	var rand_loop = true
+	while rand_loop:
+		jump_randi = randi() % jump_sounds.size()
+		if jump_randi != jump_rand_list:
+			rand_loop = false
+	jump_rand_list = jump_randi
+	jump_sounds[jump_randi].play()
 
 
 func land_sfx():
-	land_sfxC.play()
+	$SFX/LandSFX.play()
