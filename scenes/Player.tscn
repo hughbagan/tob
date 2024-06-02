@@ -27,9 +27,8 @@ wait_time = 0.75
 one_shot = true
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 texture = ExtResource( 3 )
-texture_scale = 0.5
+texture_scale = 0.4
 energy = 1.5
 shadow_enabled = true
 

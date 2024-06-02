@@ -1,5 +1,6 @@
 class_name Level extends Node2D
 
+const LEVEL_FLOOR_TILE_ID:int = 0
 const LEVEL_WALL_TILE_ID:int = 24
 const LEVEL_ENEMY_TILE_ID:int = 22
 const LEVEL_LAMP_TILE_ID:int = 23
@@ -30,12 +31,12 @@ func _on_WFCGenerator_OnDone():
 		for x in range(width):
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == LEVEL_ENEMY_TILE_ID:
-				envelope_tilemap.set_cell(x+1, y+1, 0)
+				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
 				var enemy = ENEMY_SCENE.instance()
 				enemy.global_position = place_centered_tile(Vector2(x, y))
 				add_child(enemy)
 			if tile == LEVEL_LAMP_TILE_ID:
-				envelope_tilemap.set_cell(x+1, y+1, 0)
+				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
 				var lamp = LAMP_SCENE.instance()
 				lamp.global_position = place_centered_tile(Vector2(x, y))
 				add_child(lamp)

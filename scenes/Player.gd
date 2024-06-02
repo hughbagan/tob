@@ -57,4 +57,4 @@ func _on_JumpTimer_timeout():
 
 
 func _on_leaf_destroy(tile_coords:Vector2):
-	tilemap.set_cellv(tile_coords, 0)
+	tilemap.set_cellv(tile_coords, level.LEVEL_FLOOR_TILE_ID)
