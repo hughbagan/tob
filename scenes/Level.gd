@@ -2,20 +2,24 @@ class_name Level extends Node2D
 
 const LEVEL_WALL_TILE_ID:int = 24
 const LEVEL_ENEMY_TILE_ID:int = 22
+const LEVEL_LAMP_TILE_ID:int = 23
 const PLAYER_SCENE:PackedScene = preload("res://scenes/Player.tscn")
 const ENEMY_SCENE:PackedScene = preload("res://scenes/Enemy.tscn")
+const LAMP_SCENE:PackedScene = preload("res://scenes/Lamp.tscn")
 onready var generator:Node2D = $WFCGenerator
 onready var target_tilemap:TileMap = $WFCGenerator/Target
-onready var envelope_tilemap:TileMap = $WFCGenerator/Target/Envelope
+onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope
 onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
+var width:int
+var height:int
 
 
 func _on_WFCGenerator_OnDone():
-	var width:int = generator.H+1
-	var height:int = generator.V+1
+	width = generator.H+1
+	height = generator.V+1
 
 	# encase the level in an invisible wall
-	# envelope_tilemap.position = -target_tilemap.cell_size
+	envelope_tilemap.position = -target_tilemap.cell_size
 	# for y in range(height):
 	# 	for x in range(width):
 	# 		if (x==0 or y==0) or (x==width-1 or y==height-1):
@@ -24,11 +28,17 @@ func _on_WFCGenerator_OnDone():
 	# Spawn entities to replace tiles
 	for y in range(height):
 		for x in range(width):
-			print(x, " ", y, " ", target_tilemap.get_cell(x,y))
-			if target_tilemap.get_cell(x, y) == LEVEL_ENEMY_TILE_ID:
+			var tile:int = target_tilemap.get_cell(x, y)
+			if tile == LEVEL_ENEMY_TILE_ID:
+				envelope_tilemap.set_cell(x+1, y+1, 0)
 				var enemy = ENEMY_SCENE.instance()
-				enemy.global_position = place_centered_tile(Vector2(x,y))
+				enemy.global_position = place_centered_tile(Vector2(x, y))
 				add_child(enemy)
+			if tile == LEVEL_LAMP_TILE_ID:
+				envelope_tilemap.set_cell(x+1, y+1, 0)
+				var lamp = LAMP_SCENE.instance()
+				lamp.global_position = place_centered_tile(Vector2(x, y))
+				add_child(lamp)
 
 	# Deploy the player
 	var player = PLAYER_SCENE.instance()
