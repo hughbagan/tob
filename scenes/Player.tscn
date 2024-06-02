@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://common/icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://common/radial.png" type="Texture" id=3]
+[ext_resource path="res://audio/sfx/SWSH_Cloth_01.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -37,10 +38,23 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
 shape = SubResource( 2 )
 
-[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="Node" parent="."]
+__meta__ = {
+"_editor_description_": "Holds the AudioStreamPlayer nodes that trigger SFX"
+}
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="SFX"]
+pause_mode = 2
+stream = ExtResource( 4 )
+mix_target = 2
 bus = "SFX"
 
-[node name="LandSFX" type="AudioStreamPlayer" parent="."]
+[node name="LandSFX" type="AudioStreamPlayer" parent="SFX"]
+mix_target = 2
+bus = "SFX"
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="SFX"]
+mix_target = 2
 bus = "SFX"
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

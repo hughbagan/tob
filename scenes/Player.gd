@@ -5,6 +5,9 @@ onready var spr_scale:Vector2 = sprite.scale
 onready var col:CollisionShape2D = $CollisionShape2D
 onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
+onready var jump_sfxC:AudioStreamPlayer = $SFX/JumpSFX
+onready var land_sfxC:AudioStreamPlayer = $SFX/LandSFX
+onready var hit_sfxC:AudioStreamPlayer = $SFX/HitSFX
 var tilemap:TileMap
 var current_tile_coords:Vector2
 var current_tile:int
@@ -12,6 +15,7 @@ var level
 var speed:float = 75.0
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
+
 
 
 func _physics_process(_delta):
@@ -38,10 +42,10 @@ func _physics_process(_delta):
 	# 		get_tree().reload_current_scene()
 
 
-func jump():
+func jump():		
 	jumping = true
 	jump_timer.start()
-	$JumpSFX.play()
+	jump_sfx()
 	var jump_tween = get_tree().create_tween()
 	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
@@ -52,7 +56,6 @@ func _on_JumpTimer_timeout():
 	# Landing
 	jumping = false
 	col.disabled = false
-	$LandSFX.play()
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
 		jump()
@@ -60,3 +63,15 @@ func _on_JumpTimer_timeout():
 
 func _on_leaf_destroy(tile_coords:Vector2):
 	tilemap.set_cellv(tile_coords, 0)
+
+
+func jump_sfx():
+	var jump_path = ["res://audio/sfx/SWSH_Cloth_01.wav", "res://audio/sfx/SWSH_Cloth_02.wav", "res://audio/sfx/SWSH_Cloth_03.wav"]
+	var jump_randi = randi() % 3
+	var jump_stream = ClassDB.instance(jump_path[jump_randi])
+	jump_sfxC.set_stream(jump_stream)
+	jump_sfxC.play()
+
+
+func land_sfx():
+	land_sfxC.play()
