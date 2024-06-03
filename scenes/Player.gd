@@ -18,14 +18,15 @@ var jump_rand_list
 
 func _physics_process(_delta):
 	velocity = Vector2()
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
+	if not Input.is_action_pressed("bloodvision"):
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1
 	velocity = move_and_slide(velocity.normalized() * speed)
 
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
@@ -45,8 +46,8 @@ func jump():
 	jump_timer.start()
 	jump_sfx()
 	var jump_tween = get_tree().create_tween()
-	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUART)
+	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	col.disabled = true
 
 
@@ -60,7 +61,7 @@ func _on_JumpTimer_timeout():
 
 
 func _on_leaf_destroy(tile_coords:Vector2):
-	tilemap.set_cellv(tile_coords, 0)
+	tilemap.set_cellv(tile_coords, level.LEVEL_FLOOR_TILE_ID)
 
 
 func jump_sfx():
