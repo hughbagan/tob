@@ -51,6 +51,12 @@ public partial class WFCGenerator : Node2D
 		target = GetNode<TileMap>("Target");
 		sample = GetNode<TileMap>("Sample");
 
+		done = false;
+		taskLastState = true;
+		currentN = 0;
+		failed = false;
+		failCount = 0;
+
 		tileMapArray = new List<List<int>>(H + MATCH_RADIUS * 2);
 		for (int i = 0; i < H + MATCH_RADIUS * 2; i++)
 		{
