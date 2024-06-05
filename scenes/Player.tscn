@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://common/radial.png" type="Texture" id=3]
-[ext_resource path="res://audio/sfx/SWSH_Cloth_01.wav" type="AudioStream" id=4]
-[ext_resource path="res://audio/sfx/SWSH_Cloth_02.wav" type="AudioStream" id=5]
-[ext_resource path="res://audio/sfx/SWSH_Cloth_03.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_02.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_01.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav" type="AudioStream" id=6]
+[ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 04.wav" type="AudioStream" id=7]
+[ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_03.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 03.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -19,7 +22,6 @@ collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
-visible = false
 texture = ExtResource( 3 )
 texture_scale = 0.8
 energy = 1.5
@@ -59,26 +61,45 @@ __meta__ = {
 
 [node name="JumpSFX1" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 pause_mode = 2
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX2" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 pause_mode = 2
-stream = ExtResource( 5 )
+stream = ExtResource( 4 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX3" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 pause_mode = 2
-stream = ExtResource( 6 )
+stream = ExtResource( 8 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
-[node name="LandSFX" type="AudioStreamPlayer" parent="SFX"]
+[node name="LandSFX" type="Node" parent="SFX"]
+
+[node name="LandSFX1" type="AudioStreamPlayer" parent="SFX/LandSFX"]
+stream = ExtResource( 9 )
+volume_db = -6.0
+pitch_scale = 0.8
+mix_target = 2
+bus = "SFX"
+
+[node name="LandSFX2" type="AudioStreamPlayer" parent="SFX/LandSFX"]
+stream = ExtResource( 7 )
+volume_db = -6.0
+pitch_scale = 0.8
+mix_target = 2
+bus = "SFX"
+
+[node name="LandSFX3" type="AudioStreamPlayer" parent="SFX/LandSFX"]
+stream = ExtResource( 6 )
+volume_db = -6.0
+pitch_scale = 0.8
 mix_target = 2
 bus = "SFX"
 

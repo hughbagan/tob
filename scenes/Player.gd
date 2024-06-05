@@ -13,6 +13,8 @@ var speed:float = 75.0
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
 var jump_rand_list
+var land_rand_list
+var tile_position:Vector2
 
 
 
@@ -27,17 +29,17 @@ func _physics_process(_delta):
 			velocity.y += 1
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
-
+	
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	current_tile = tilemap.get_cellv(current_tile_coords)
 	
-	print((global_position.x - round(global_position.x)) / 2)
-	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"): #and stepify(global_position.x, 0.01) != 0:
-		velocity.x += ((global_position.x - round(global_position.x)) / 2)
-	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"): #and stepify(global_position.y, 0.01) != 0:
-		velocity.y += ((global_position.y - round(global_position.y)) / 2)
-		
-	velocity = move_and_slide(velocity.normalized() * speed)
+	tile_position = ((global_position / 8) + Vector2(1,1)) / 2
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .01:
+		velocity.x += round(tile_position.x) - tile_position.x
+	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .01:
+		velocity.y += round(tile_position.y) - tile_position.y
+	
+	velocity = move_and_slide(velocity * speed) #used to be velocity.normalized()
 	
 	if Input.is_action_pressed("jump") and not jumping:
 		jump()
@@ -66,9 +68,14 @@ func _on_JumpTimer_timeout():
 	col.disabled = false
 	$Sprite.show()
 	$FlySprite.hide()
+	var has_landed_sfx = 1
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
+		hit_sfx()
 		jump()
+		has_landed_sfx = 0
+	if has_landed_sfx == 1:
+		land_sfx()
 
 
 func _on_leaf_destroy(tile_coords:Vector2):
@@ -88,4 +95,16 @@ func jump_sfx():
 
 
 func land_sfx():
-	$SFX/LandSFX.play()
+	var land_sounds = [$SFX/LandSFX/LandSFX1, $SFX/LandSFX/LandSFX2, $SFX/LandSFX/LandSFX3]
+	var land_randi
+	var rand_loop = true
+	while rand_loop:
+		land_randi = randi() % land_sounds.size()
+		if land_randi != land_rand_list:
+			rand_loop = false
+	land_rand_list = land_randi
+	land_sounds[land_randi].play()
+
+
+func hit_sfx():
+	print("Pow!")

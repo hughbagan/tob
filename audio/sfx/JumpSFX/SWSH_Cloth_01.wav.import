@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/SWSH_Cloth_02.wav-aeb8662a273180a0d915b03eb613e2b0.sample"
+path="res://.import/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample"
 
 [deps]
 
-source_file="res://audio/sfx/SWSH_Cloth_02.wav"
-dest_files=[ "res://.import/SWSH_Cloth_02.wav-aeb8662a273180a0d915b03eb613e2b0.sample" ]
+source_file="res://audio/sfx/JumpSFX/SWSH_Cloth_01.wav"
+dest_files=[ "res://.import/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample" ]
 
 [params]
 
