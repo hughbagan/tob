@@ -27,11 +27,18 @@ func _physics_process(_delta):
 			velocity.y += 1
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
-	velocity = move_and_slide(velocity.normalized() * speed)
 
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	current_tile = tilemap.get_cellv(current_tile_coords)
-
+	
+	print((global_position.x - round(global_position.x)) / 2)
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"): #and stepify(global_position.x, 0.01) != 0:
+		velocity.x += ((global_position.x - round(global_position.x)) / 2)
+	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"): #and stepify(global_position.y, 0.01) != 0:
+		velocity.y += ((global_position.y - round(global_position.y)) / 2)
+		
+	velocity = move_and_slide(velocity.normalized() * speed)
+	
 	if Input.is_action_pressed("jump") and not jumping:
 		jump()
 	# if not jumping:
