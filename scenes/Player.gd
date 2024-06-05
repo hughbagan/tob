@@ -1,6 +1,6 @@
 class_name Player extends KinematicBody2D
 
-onready var sprite:Sprite = $Sprite
+onready var sprite:Sprite = $FlySprite
 onready var spr_scale:Vector2 = sprite.scale
 onready var col:CollisionShape2D = $CollisionShape2D
 onready var jump_area:Area2D = $JumpArea
@@ -56,12 +56,16 @@ func jump():
 	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	col.disabled = true
+	$Sprite.hide()
+	$FlySprite.show()
 
 
 func _on_JumpTimer_timeout():
 	# Landing
 	jumping = false
 	col.disabled = false
+	$Sprite.show()
+	$FlySprite.hide()
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
 		jump()

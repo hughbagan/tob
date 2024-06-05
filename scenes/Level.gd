@@ -9,10 +9,12 @@ const LEVEL_WALL_TILE_ID:int = 24
 const LEVEL_ENEMY_TILE_ID:int = 22
 const LEVEL_LAMP_TILE_ID:int = 23
 onready var generator:Node2D = $WFCGenerator
+onready var sample_tilemap:TileMap = $WFCGenerator/Sample
 onready var target_tilemap:TileMap = $WFCGenerator/Target
-onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope
+onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
 onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
 onready var entities:Node2D = $Entities
+onready var level_label = $GUI/LevelLabel
 var width:int
 var height:int
 var current_level:int = 1
@@ -87,9 +89,23 @@ func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 
 
 func _on_exit_reached():
-	# Advance the level
-	current_level += 1
+	# Reset scene
 	for child in entities.get_children():
 		child.queue_free()
 	envelope_tilemap.clear()
-	generator.OnButtonPressed()
+	# Advance the level
+	current_level += 1
+	if current_level % 10 == 0:
+		if current_level % 20 == 0: # remove walls, add enemies
+			var walls = sample_tilemap.get_used_cells_by_id(LEVEL_WALL_TILE_ID)
+			if not walls.empty():
+				var pick = walls[randi() % walls.size()]
+				sample_tilemap.set_cellv(pick, LEVEL_ENEMY_TILE_ID)
+		if current_level == 40 or current_level == 70: # remove lamps
+			var lamps = sample_tilemap.get_used_cells_by_id(LEVEL_LAMP_TILE_ID)
+			var pick = lamps[lamps.size()-1]
+			sample_tilemap.set_cellv(pick, LEVEL_FLOOR_TILE_ID)
+		generator._Ready() # re-build Rules and generate
+	else:
+		generator.OnButtonPressed() # generate new level
+	level_label.text = str(current_level)
