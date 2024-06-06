@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 04.wav" type="AudioStream" id=7]
 [ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_03.wav" type="AudioStream" id=8]
 [ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 03.wav" type="AudioStream" id=9]
+[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 04.wav" type="AudioStream" id=10]
+[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=11]
+[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" type="AudioStream" id=12]
+[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" type="AudioStream" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -60,21 +64,18 @@ __meta__ = {
 [node name="JumpSFX" type="Node" parent="SFX"]
 
 [node name="JumpSFX1" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
-pause_mode = 2
 stream = ExtResource( 5 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX2" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
-pause_mode = 2
 stream = ExtResource( 4 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX3" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
-pause_mode = 2
 stream = ExtResource( 8 )
 volume_db = -6.0
 mix_target = 2
@@ -85,25 +86,51 @@ bus = "SFX"
 [node name="LandSFX1" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 9 )
 volume_db = -6.0
-pitch_scale = 0.8
+pitch_scale = 0.7
 mix_target = 2
 bus = "SFX"
 
 [node name="LandSFX2" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 7 )
 volume_db = -6.0
-pitch_scale = 0.8
+pitch_scale = 0.7
 mix_target = 2
 bus = "SFX"
 
 [node name="LandSFX3" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 6 )
 volume_db = -6.0
-pitch_scale = 0.8
+pitch_scale = 0.64
 mix_target = 2
 bus = "SFX"
 
 [node name="HitSFX" type="AudioStreamPlayer" parent="SFX"]
+mix_target = 2
+bus = "SFX"
+
+[node name="FootstepSFX" type="Node" parent="SFX"]
+
+[node name="FootstepSFX" type="AudioStreamPlayer" parent="SFX/FootstepSFX"]
+stream = ExtResource( 13 )
+volume_db = -6.0
+mix_target = 2
+bus = "SFX"
+
+[node name="FootstepSFX2" type="AudioStreamPlayer" parent="SFX/FootstepSFX"]
+stream = ExtResource( 10 )
+volume_db = -6.0
+mix_target = 2
+bus = "SFX"
+
+[node name="FootstepSFX3" type="AudioStreamPlayer" parent="SFX/FootstepSFX"]
+stream = ExtResource( 11 )
+volume_db = -6.0
+mix_target = 2
+bus = "SFX"
+
+[node name="FootstepSFX4" type="AudioStreamPlayer" parent="SFX/FootstepSFX"]
+stream = ExtResource( 12 )
+volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 

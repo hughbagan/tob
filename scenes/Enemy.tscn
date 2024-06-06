@@ -121,3 +121,5 @@ region_rect = Rect2( 480, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="FootstepSFX Listener" type="Listener2D" parent="."]
