@@ -9,6 +9,7 @@ var tilemap:TileMap
 var current_tile_coords:Vector2
 var current_tile:int
 var level
+var hp:float = 100.0
 var speed:float = 75.0
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
@@ -18,9 +19,14 @@ var land_rand_list
 var footstep_rand_list
 var footstep_counter = 0.0
 var footstep_frequency = 15 #lower is faster (10ish = Mr. Krabs)
+signal player_die
 
 
-func _physics_process(_delta):
+func _ready() -> void:
+	level.blood_bar.value = hp
+
+
+func _physics_process(delta) -> void:
 	velocity = Vector2()
 	if not Input.is_action_pressed("bloodvision"):
 		if Input.is_action_pressed("move_right"):
@@ -34,7 +40,7 @@ func _physics_process(_delta):
 	velocity = velocity.normalized()
 
 	# Tile centering
-	tile_position = ((global_position / 8) + Vector2(1,1)) #/ 2
+	tile_position = ((global_position / (tilemap.cell_size*0.5)) + Vector2(1,1)) #/ 2
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
 		velocity.x += round(tile_position.x) - tile_position.x
 	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
@@ -50,13 +56,13 @@ func _physics_process(_delta):
 
 	# Footsteps
 	if velocity != Vector2(0,0) and not jumping:
-		footstep_counter += _delta * 60
+		footstep_counter += delta * 60
 		if footstep_counter >= footstep_frequency:
 			footstep_sfx()
 			footstep_counter = 0.0
 
 
-func jump():
+func jump() -> void:
 	jumping = true
 	jump_timer.start()
 	jump_sfx()
@@ -68,7 +74,7 @@ func jump():
 	$FlySprite.show()
 
 
-func _on_JumpTimer_timeout():
+func _on_JumpTimer_timeout() -> void:
 	# Landing
 	jumping = false
 	col.disabled = false
@@ -85,7 +91,14 @@ func _on_JumpTimer_timeout():
 		footstep_counter = 0
 
 
-func jump_sfx():
+func hit(damage:float) -> void:
+	hp -= damage
+	level.blood_bar.value = hp
+	if hp < 0.0:
+		emit_signal("player_die")
+
+
+func jump_sfx() -> void:
 	var jump_sounds = [$SFX/JumpSFX/JumpSFX1, $SFX/JumpSFX/JumpSFX2, $SFX/JumpSFX/JumpSFX3]
 	var jump_randi
 	var rand_loop = true
@@ -97,7 +110,7 @@ func jump_sfx():
 	jump_sounds[jump_randi].play()
 
 
-func land_sfx():
+func land_sfx() -> void:
 	var land_sounds = [$SFX/LandSFX/LandSFX1, $SFX/LandSFX/LandSFX2, $SFX/LandSFX/LandSFX3]
 	var land_randi
 	var rand_loop = true
@@ -109,7 +122,7 @@ func land_sfx():
 	land_sounds[land_randi].play()
 
 
-func footstep_sfx():
+func footstep_sfx() -> void:
 	var footstep_sounds = [$SFX/FootstepSFX/FootstepSFX, $SFX/FootstepSFX/FootstepSFX2, $SFX/FootstepSFX/FootstepSFX3, $SFX/FootstepSFX/FootstepSFX4]
 	var footstep_randi
 	var rand_loop = true
@@ -121,5 +134,5 @@ func footstep_sfx():
 	footstep_sounds[footstep_randi].play()
 
 
-func hit_sfx():
+func hit_sfx() -> void:
 	print("Pow!")

@@ -14,7 +14,8 @@ onready var target_tilemap:TileMap = $WFCGenerator/Target
 onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
 onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
 onready var entities:Node2D = $Entities
-onready var level_label = $GUI/LevelLabel
+onready var level_label:Label = $GUI/LevelLabel
+onready var blood_bar:ProgressBar = $GUI/BloodBar
 var width:int
 var height:int
 var current_level:int = 1
@@ -23,6 +24,7 @@ var current_level:int = 1
 func _on_WFCGenerator_OnDone():
 	width = generator.H
 	height = generator.V
+	camera.position = target_tilemap.get_used_rect().size*target_tilemap.cell_size*0.5
 	var corners = [Vector2(0, 0), Vector2(width-1, 0), Vector2(0, height-1), Vector2(width-1, height-1)]
 
 	# encase the level in an invisible wall
@@ -52,9 +54,10 @@ func _on_WFCGenerator_OnDone():
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)
 
-	# Place the player
+	# Setup the player
 	player.tilemap = target_tilemap
 	player.level = self
+	player.connect("player_die", self, "_on_player_die")
 	var player_corner = corners[randi() % corners.size()]
 	player.global_position = _place_adjacent_random_empty(player_corner)
 	entities.add_child(player)
@@ -67,9 +70,6 @@ func _on_WFCGenerator_OnDone():
 		exit_corner = corners[randi() % corners.size()]
 	exit.global_position = _place_adjacent_random_empty(exit_corner)
 	entities.add_child(exit)
-
-
-	camera.position = target_tilemap.get_used_rect().size*target_tilemap.cell_size*0.5
 
 
 func _place_centered_tile(pos:Vector2) -> Vector2:
@@ -110,6 +110,14 @@ func _on_exit_reached():
 			var pick = lamps[lamps.size()-1]
 			sample_tilemap.set_cellv(pick, LEVEL_FLOOR_TILE_ID)
 		generator._Ready() # re-build Rules and generate
+	elif current_level == 101:
+		# WIN!
+		pass
 	else:
 		generator.OnButtonPressed() # generate new level
 	level_label.text = str(current_level)
+
+
+func _on_player_die():
+	# boot to main screen?
+	get_tree().reload_current_scene()
