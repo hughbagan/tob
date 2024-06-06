@@ -16,8 +16,8 @@ var tile_position:Vector2
 var jump_rand_list
 var land_rand_list
 var footstep_rand_list
-var footstep_counter = 0
-var footstep_frequency = 10 #lower is faster (10ish = Mr. Krabs)
+var footstep_counter = 0.0
+var footstep_frequency = 15 #lower is faster (10ish = Mr. Krabs)
 
 
 func _physics_process(_delta):
@@ -50,10 +50,10 @@ func _physics_process(_delta):
 
 	# Footsteps
 	if velocity != Vector2(0,0) and not jumping:
-		footstep_counter += 1
-		if footstep_counter == footstep_frequency:
+		footstep_counter += _delta * 60
+		if footstep_counter >= footstep_frequency:
 			footstep_sfx()
-			footstep_counter = 0
+			footstep_counter = 0.0
 
 
 func jump():
@@ -82,6 +82,7 @@ func _on_JumpTimer_timeout():
 		has_landed_sfx = 0
 	if has_landed_sfx == 1:
 		land_sfx()
+		footstep_counter = 0
 
 
 func jump_sfx():
