@@ -14,12 +14,10 @@ var current_tile_coords:Vector2
 var sight_distance:int = 2 # in tiles
 var speed:float = 50.0
 var damage:float = 0.1
-var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
-var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3]
 var boots_sfx_randi = 0
 var armour_sfx_randi = 0
 var footstep_counter = 0.0
-var footstep_frequency = 18
+var footstep_frequency = 25
 
 
 func _process(_delta):
