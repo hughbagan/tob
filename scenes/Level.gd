@@ -29,10 +29,10 @@ func _on_WFCGenerator_OnDone():
 
 	# encase the level in an invisible wall
 	envelope_tilemap.position = -target_tilemap.cell_size
-	# for y in range(height):
-	# 	for x in range(width):
-	# 		if (x==0 or y==0) or (x==width-1 or y==height-1):
-	# 			envelope_tilemap.set_cell(x, y, LEVEL_WALL_TILE_ID)
+	for y in range(height+2):
+		for x in range(width+2):
+			if (x==0 or y==0) or (x==width+1 or y==height+1):
+				envelope_tilemap.set_cell(x, y, LEVEL_WALL_TILE_ID)
 
 	var player = PLAYER_SCENE.instance()
 

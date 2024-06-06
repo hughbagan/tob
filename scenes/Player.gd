@@ -6,6 +6,7 @@ onready var col:CollisionShape2D = $CollisionShape2D
 onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
 onready var slay_raycast:RayCast2D = $SlayRaycast
+onready var light:Light2D = $Light2D
 var tilemap:TileMap
 var current_tile_coords:Vector2
 var current_tile:int
@@ -28,17 +29,32 @@ func _ready() -> void:
 	level.blood_bar.value = hp
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta:float) -> void:
+
+	if Input.is_action_pressed("bloodvision"):
+		hp -= 0.05
+		level.blood_bar.value = hp
+		$RedLight.show()
+		if $FlySprite.visible:
+			$FlySpriteShaded.show()
+			$SpriteShaded.hide()
+		else:
+			$FlySpriteShaded.hide()
+			$SpriteShaded.show()
+	else:
+		$RedLight.hide()
+		$FlySpriteShaded.hide()
+		$SpriteShaded.hide()
+
 	velocity = Vector2()
-	if not Input.is_action_pressed("bloodvision"):
-		if Input.is_action_pressed("move_right"):
-			velocity.x += 1
-		if Input.is_action_pressed("move_left"):
-			velocity.x -= 1
-		if Input.is_action_pressed("move_down"):
-			velocity.y += 1
-		if Input.is_action_pressed("move_up"):
-			velocity.y -= 1
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
 	velocity = velocity.normalized()
 	slay_raycast.cast_to = velocity * tilemap.cell_size * attack_range
 
@@ -67,7 +83,7 @@ func _physics_process(delta) -> void:
 			jump()
 
 	# Footsteps
-	if velocity != Vector2(0,0) and not jumping:
+	if velocity != Vector2(0,0) and not jumping and current_tile != level.LEVEL_WALL_TILE_ID:
 		footstep_counter += delta * 60
 		if footstep_counter >= footstep_frequency:
 			footstep_sfx()
@@ -76,12 +92,12 @@ func _physics_process(delta) -> void:
 
 func jump() -> void:
 	jumping = true
+	set_collision_mask_bit(0, 0) # avoid the Level
 	jump_timer.start()
 	jump_sfx()
 	var jump_tween = get_tree().create_tween()
 	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	col.disabled = true
 	$Sprite.hide()
 	$FlySprite.show()
 
@@ -89,7 +105,7 @@ func jump() -> void:
 func _on_JumpTimer_timeout() -> void:
 	# Landing
 	jumping = false
-	col.disabled = false
+	set_collision_mask_bit(0, 1) # re-enable Level collision
 	$Sprite.show()
 	$FlySprite.hide()
 	var has_landed_sfx = 1
@@ -104,6 +120,7 @@ func _on_JumpTimer_timeout() -> void:
 
 
 func hit(damage:float) -> void:
+	# called by a hostile colliding body
 	hp -= damage
 	level.blood_bar.value = hp
 	if hp < 0.0:
