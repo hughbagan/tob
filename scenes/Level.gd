@@ -32,6 +32,8 @@ func _on_WFCGenerator_OnDone():
 	# 		if (x==0 or y==0) or (x==width-1 or y==height-1):
 	# 			envelope_tilemap.set_cell(x, y, LEVEL_WALL_TILE_ID)
 
+	var player = PLAYER_SCENE.instance()
+
 	# Spawn entities to replace tiles
 	for y in range(height):
 		for x in range(width):
@@ -39,6 +41,9 @@ func _on_WFCGenerator_OnDone():
 			if tile == LEVEL_ENEMY_TILE_ID:
 				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
 				var enemy = ENEMY_SCENE.instance()
+				enemy.level = self
+				enemy.tilemap = target_tilemap
+				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(enemy)
 			if tile == LEVEL_LAMP_TILE_ID:
@@ -48,7 +53,6 @@ func _on_WFCGenerator_OnDone():
 				entities.add_child(lamp)
 
 	# Place the player
-	var player = PLAYER_SCENE.instance()
 	player.tilemap = target_tilemap
 	player.level = self
 	var player_corner = corners[randi() % corners.size()]

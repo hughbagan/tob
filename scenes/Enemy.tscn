@@ -123,3 +123,13 @@ region_rect = Rect2( 480, 0, 16, 16 )
 shape = SubResource( 1 )
 
 [node name="FootstepSFX Listener" type="Listener2D" parent="."]
+
+[node name="SightTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 0 )
+collision_mask = 3
+
+[connection signal="timeout" from="SightTimer" to="." method="_on_SightTimer_timeout"]
