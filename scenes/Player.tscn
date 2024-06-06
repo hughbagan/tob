@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=11]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" type="AudioStream" id=12]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" type="AudioStream" id=13]
+[ext_resource path="res://common/bloodvision.material" type="Material" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -22,13 +23,20 @@ radius = 7.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 3 )
-texture_scale = 0.8
-energy = 1.5
+texture_scale = 0.2
+color = Color( 0.776471, 0.87451, 1, 1 )
+energy = 0.7
+shadow_enabled = true
+
+[node name="RedLight" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+color = Color( 1, 0.588235, 0.588235, 1 )
 shadow_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -39,8 +47,22 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 400, 96, 16, 16 )
 
+[node name="SpriteShaded" type="Sprite" parent="."]
+visible = false
+material = ExtResource( 14 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 400, 96, 16, 16 )
+
 [node name="FlySprite" type="Sprite" parent="."]
 visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 416, 128, 16, 16 )
+
+[node name="FlySpriteShaded" type="Sprite" parent="."]
+visible = false
+material = ExtResource( 14 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 416, 128, 16, 16 )

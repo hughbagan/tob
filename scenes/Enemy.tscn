@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=2]
@@ -9,107 +9,14 @@
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" type="AudioStream" id=7]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 04.wav" type="AudioStream" id=8]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" type="AudioStream" id=9]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform float max_line_width = 10.0;
-uniform float min_line_width = 5.0;
-uniform float freq = 1.0;
-uniform float block_size = 20.0;
-uniform vec4 starting_colour = vec4(0,0,0,1);
-uniform vec4 ending_colour = vec4(1);
-
-const float pi = 3.1415;
-const int ang_res = 16;
-const int grad_res = 8;
-
-float hash(vec2 p, float s) {
-	return fract(35.1 * sin(dot(vec3(112.3, 459.2, 753.2), vec3(p, s))));
-}
-
-float noise(vec2 p, float s) {
-	vec2 d = vec2(0, 1);
-	vec2 b = floor(p);
-	vec2 f = fract(p);
-	return mix(
-		mix(hash(b + d.xx, s), hash(b + d.yx, s), f.x),
-		mix(hash(b + d.xy, s), hash(b + d.yy, s), f.x), f.y);
-}
-
-float getLineWidth(vec2 p, float s) {
-	p /= block_size;
-	float w = 0.0;
-	float intensity = 1.0;
-	for (int i = 0; i < 3; i++) {
-		w = mix(w, noise(p, s), intensity);
-		p /= 2.0;
-		intensity /= 2.0;
-	}
-	
-	return mix(max_line_width, min_line_width, w);
-}
-
-bool pixelInRange(sampler2D text, vec2 uv, vec2 dist) {
-	float alpha = 0.0;
-	for (int i = 0; i < ang_res; i++) {
-		float angle = 2.0 * pi * float(i) / float(ang_res);
-		vec2 disp = dist * vec2(cos(angle), sin(angle));
-		if (texture(text, uv + disp).a > 0.0) return true;
-	}
-	return false;
-}
-
-float getClosestDistance(sampler2D text, vec2 uv, vec2 maxDist) {
-	if (!pixelInRange(text, uv, maxDist)) return -1.0;
-	
-	float hi = 1.0; float lo = 0.0;
-	
-	for (int i = 1; i <= grad_res; i++) {
-		float curr = (hi + lo) / 2.0;
-		if (pixelInRange(text, uv, curr * maxDist)) {
-			hi = curr;
-		}
-		else {
-			lo = curr;
-		}
-	}
-	return hi;
-	
-}
-
-void fragment() {
-	float timeStep = floor(freq * TIME);
-	vec2 scaledDist = TEXTURE_PIXEL_SIZE;
-	scaledDist *= getLineWidth(UV / TEXTURE_PIXEL_SIZE, timeStep);
-	float w = getClosestDistance(TEXTURE, UV, scaledDist);
-	
-	if (( w > 0.0) && (texture(TEXTURE, UV).a < 0.2)) {
-		COLOR = mix(starting_colour, ending_colour, tanh(3.0*w));
-	}
-	else {
-		COLOR = texture(TEXTURE, UV);
-		COLOR.a = 0.0;
-	}
-	
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/max_line_width = 2.0
-shader_param/min_line_width = 0.0
-shader_param/freq = 6.0
-shader_param/block_size = 20.0
-shader_param/starting_colour = Plane( 1, 0, 0, 1 )
-shader_param/ending_colour = Plane( 1, 0, 0, 0.1 )
+[ext_resource path="res://common/bloodvision.material" type="Material" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 5
-collision_mask = 4
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -119,7 +26,7 @@ region_rect = Rect2( 480, 0, 16, 16 )
 
 [node name="SpriteShaded" type="Sprite" parent="."]
 visible = false
-material = SubResource( 3 )
+material = ExtResource( 10 )
 z_index = 5
 z_as_relative = false
 texture = ExtResource( 1 )
@@ -130,7 +37,7 @@ region_rect = Rect2( 480, 0, 16, 16 )
 shape = SubResource( 1 )
 
 [node name="SightTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="Timer" type="Timer" parent="."]

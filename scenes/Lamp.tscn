@@ -12,3 +12,4 @@ region_rect = Rect2( 80, 240, 16, 16 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 2 )
+shadow_enabled = true

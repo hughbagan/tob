@@ -20,7 +20,7 @@ var footstep_counter = 0.0
 var footstep_frequency = 25
 
 
-func _process(_delta):
+func _process(delta:float):
 	var velocity:Vector2 = Vector2()
 	if Input.is_action_just_pressed("bloodvision"):
 		$SpriteShaded.show()
@@ -30,6 +30,7 @@ func _process(_delta):
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	match state:
 		STATES.SENTRY:
+			# Look for player
 			if current_tile_coords.distance_to(player.current_tile_coords) <= sight_distance \
 			and sight_timer.is_stopped():
 				sight_timer.start()
@@ -41,7 +42,8 @@ func _process(_delta):
 			agent.set_velocity(velocity)
 			if not agent.is_navigation_finished():
 				velocity = move_and_slide(velocity)
-				enemy_footstep_counter(_delta)
+				if velocity > Vector2():
+					enemy_footstep_counter(delta)
 			for i in get_slide_count():
 				var collider = get_slide_collision(i).collider
 				if collider == player:
