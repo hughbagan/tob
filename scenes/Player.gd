@@ -29,18 +29,19 @@ func _physics_process(_delta):
 			velocity.y += 1
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
-	
+	velocity = velocity.normalized()
+
+	tile_position = ((global_position / 8) + Vector2(1,1)) / 2
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
+		velocity.x += round(tile_position.x) - tile_position.x
+	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
+		velocity.y += round(tile_position.y) - tile_position.y
+
+	velocity = move_and_slide(velocity * speed) #used to be velocity.normalized()
+
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	current_tile = tilemap.get_cellv(current_tile_coords)
-	
-	tile_position = ((global_position / 8) + Vector2(1,1)) / 2
-	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .01:
-		velocity.x += round(tile_position.x) - tile_position.x
-	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .01:
-		velocity.y += round(tile_position.y) - tile_position.y
-	
-	velocity = move_and_slide(velocity * speed) #used to be velocity.normalized()
-	
+
 	if Input.is_action_pressed("jump") and not jumping:
 		jump()
 	# if not jumping:
@@ -50,7 +51,7 @@ func _physics_process(_delta):
 	# 		get_tree().reload_current_scene()
 
 
-func jump():		
+func jump():
 	jumping = true
 	jump_timer.start()
 	jump_sfx()
