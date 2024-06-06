@@ -41,7 +41,7 @@ func _on_SightTimer_timeout():
 		print(self, " spotted player!")
 
 
-func enemy_footstep(location): #plays footstep at enemy's location
+func enemy_footstep(): #plays footstep at enemy's location
 	var loop_randi_boots
 	var loop_randi_armour
 	while true:
@@ -54,5 +54,5 @@ func enemy_footstep(location): #plays footstep at enemy's location
 			break
 	boots_sfx_randi = loop_randi_boots
 	armour_sfx_randi = loop_randi_armour
-	boots_sfx_list.play(boots_sfx_randi)
-	armour_sfx_list.play(armour_sfx_randi)
+	boots_sfx_list[boots_sfx_randi].play()
+	armour_sfx_list[armour_sfx_randi].play()
