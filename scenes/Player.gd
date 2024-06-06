@@ -20,7 +20,6 @@ var footstep_counter = 0
 var footstep_frequency = 10 #lower is faster (10ish = Mr. Krabs)
 
 
-
 func _physics_process(_delta):
 	velocity = Vector2()
 	if not Input.is_action_pressed("bloodvision"):
@@ -48,12 +47,7 @@ func _physics_process(_delta):
 
 	if Input.is_action_pressed("jump") and not jumping:
 		jump()
-	# if not jumping:
-	# 	if current_tile >= 5 and current_tile <= 7:
-	# 		get_tree().create_timer(1.0, false).connect("timeout", self, "_on_leaf_destroy", [current_tile_coords])
-	# 	elif current_tile <= 0:
-	# 		get_tree().reload_current_scene()
-	
+
 	# Footsteps
 	if velocity != Vector2(0,0) and not jumping:
 		footstep_counter += 1
@@ -88,10 +82,6 @@ func _on_JumpTimer_timeout():
 		has_landed_sfx = 0
 	if has_landed_sfx == 1:
 		land_sfx()
-
-
-func _on_leaf_destroy(tile_coords:Vector2):
-	tilemap.set_cellv(tile_coords, level.LEVEL_FLOOR_TILE_ID)
 
 
 func jump_sfx():
