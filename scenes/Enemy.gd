@@ -14,8 +14,10 @@ var speed:float = 50.0
 var damage:float = 0.1
 var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
 var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3]
-var boots_sfx_randi
-var armour_sfx_randi
+var boots_sfx_randi = 0
+var armour_sfx_randi = 0
+var footstep_counter = 0.0
+var footstep_frequency = 18
 
 
 func _process(_delta):
@@ -39,6 +41,7 @@ func _process(_delta):
 			agent.set_velocity(velocity)
 			if not agent.is_navigation_finished():
 				velocity = move_and_slide(velocity)
+				enemy_footstep_counter(_delta)
 			for i in get_slide_count():
 				var collider = get_slide_collision(i).collider
 				if collider == player:
@@ -54,18 +57,28 @@ func _on_SightTimer_timeout():
 		print(self, " spotted player!")
 
 
+func enemy_footstep_counter(_delta):
+	footstep_counter += _delta * 60
+	if footstep_counter >= footstep_frequency:
+		enemy_footstep()
+		footstep_counter = 0.0
+
+
 func enemy_footstep(): #plays footstep at enemy's location
 	var loop_randi_boots
 	var loop_randi_armour
-	while true:
-		loop_randi_boots = randi() % boots_sfx_list.length()
+	var loop_bool = true
+	while loop_bool:
+		loop_randi_boots = randi() % boots_sfx_list.size()
 		if loop_randi_boots == boots_sfx_randi:
-			break
-	while true:
-		loop_randi_armour = randi() % boots_sfx_list.length()
+			loop_bool = false
+	loop_bool = true
+	while loop_bool:
+		loop_randi_armour = randi() % boots_sfx_list.size()
 		if loop_randi_armour == boots_sfx_randi:
-			break
+			loop_bool = false
 	boots_sfx_randi = loop_randi_boots
 	armour_sfx_randi = loop_randi_armour
+	print(boots_sfx_randi)
 	boots_sfx_list[boots_sfx_randi].play()
 	armour_sfx_list[armour_sfx_randi].play()
