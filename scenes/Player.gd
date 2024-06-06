@@ -12,9 +12,12 @@ var level
 var speed:float = 75.0
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
+var tile_position:Vector2
 var jump_rand_list
 var land_rand_list
-var tile_position:Vector2
+var footstep_rand_list
+var footstep_counter = 0
+var footstep_frequency = 10 #lower is faster (10ish = Mr. Krabs)
 
 
 
@@ -31,7 +34,8 @@ func _physics_process(_delta):
 			velocity.y -= 1
 	velocity = velocity.normalized()
 
-	tile_position = ((global_position / 8) + Vector2(1,1)) / 2
+	# Tile centering
+	tile_position = ((global_position / 8) + Vector2(1,1)) #/ 2
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
 		velocity.x += round(tile_position.x) - tile_position.x
 	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
@@ -49,6 +53,13 @@ func _physics_process(_delta):
 	# 		get_tree().create_timer(1.0, false).connect("timeout", self, "_on_leaf_destroy", [current_tile_coords])
 	# 	elif current_tile <= 0:
 	# 		get_tree().reload_current_scene()
+	
+	# Footsteps
+	if velocity != Vector2(0,0) and not jumping:
+		footstep_counter += 1
+		if footstep_counter == footstep_frequency:
+			footstep_sfx()
+			footstep_counter = 0
 
 
 func jump():
@@ -105,6 +116,18 @@ func land_sfx():
 			rand_loop = false
 	land_rand_list = land_randi
 	land_sounds[land_randi].play()
+
+
+func footstep_sfx():
+	var footstep_sounds = [$SFX/FootstepSFX/FootstepSFX, $SFX/FootstepSFX/FootstepSFX2, $SFX/FootstepSFX/FootstepSFX3, $SFX/FootstepSFX/FootstepSFX4]
+	var footstep_randi
+	var rand_loop = true
+	while rand_loop:
+		footstep_randi = randi() % footstep_sounds.size()
+		if footstep_randi != footstep_rand_list:
+			rand_loop = false
+	footstep_rand_list = footstep_randi
+	footstep_sounds[footstep_randi].play()
 
 
 func hit_sfx():
