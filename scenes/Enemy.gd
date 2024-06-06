@@ -51,7 +51,6 @@ func _on_SightTimer_timeout():
 	var collider = raycast.get_collider()
 	if collider == player:
 		state = STATES.ALERT
-		print(self, " spotted player!")
 
 
 func enemy_footstep(): #plays footstep at enemy's location
