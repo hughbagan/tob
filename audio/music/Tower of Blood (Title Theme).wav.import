@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Tower of Blood (Title Theme).wav-7c89f16a1d66a83fcb6e241a4d7cf8da.sample"
+
+[deps]
+
+source_file="res://audio/music/Tower of Blood (Title Theme).wav"
+dest_files=[ "res://.import/Tower of Blood (Title Theme).wav-7c89f16a1d66a83fcb6e241a4d7cf8da.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
