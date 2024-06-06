@@ -8,12 +8,12 @@ var player
 onready var sight_timer:Timer = $SightTimer
 onready var raycast:RayCast2D = $RayCast2D
 onready var agent:NavigationAgent2D = $NavigationAgent2D
+onready var boots_sfx_list = $EnemySFX/EnemyBootsSFX.get_children()
+onready var armour_sfx_list = $EnemySFX/EnemyArmourSFX.get_children()
 var current_tile_coords:Vector2
 var sight_distance:int = 2 # in tiles
 var speed:float = 50.0
 var damage:float = 0.1
-var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
-var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3]
 var boots_sfx_randi
 var armour_sfx_randi
 

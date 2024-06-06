@@ -59,6 +59,10 @@ func _physics_process(delta) -> void:
 		var collider = slay_raycast.get_collider()
 		if collider is Enemy:
 			collider.queue_free()
+			hp += 3.0
+			if hp > 100.0:
+				hp = 100.0
+			level.blood_bar.value = hp
 		else:
 			jump()
 
