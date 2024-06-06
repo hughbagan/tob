@@ -34,9 +34,9 @@ func _on_WFCGenerator_OnDone():
 
 	var player = PLAYER_SCENE.instance()
 
-	# Spawn entities to replace tiles
 	for y in range(height):
 		for x in range(width):
+			# Spawn entities from tilemap
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == LEVEL_ENEMY_TILE_ID:
 				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)

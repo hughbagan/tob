@@ -31,10 +31,6 @@ script = ExtResource( 2 )
 H = 11
 V = 11
 
-[node name="TargetNavPolygon" type="NavigationPolygonInstance" parent="WFCGenerator"]
-
-[node name="SampleNavPolygon" type="NavigationPolygonInstance" parent="WFCGenerator"]
-
 [node name="Target" type="TileMap" parent="WFCGenerator"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
