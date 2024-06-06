@@ -9,6 +9,10 @@ onready var sight_timer:Timer = $SightTimer
 onready var raycast:RayCast2D = $RayCast2D
 var sight_distance:int = 5 # in tiles
 var current_tile_coords:Vector2
+var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
+var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3]
+var boots_sfx_randi
+var armour_sfx_randi
 
 
 func _process(_delta):
@@ -35,3 +39,20 @@ func _on_SightTimer_timeout():
 	if collider == player:
 		state = STATES.ALERT
 		print(self, " spotted player!")
+
+
+func enemy_footstep(location): #plays footstep at enemy's location
+	var loop_randi_boots
+	var loop_randi_armour
+	while true:
+		loop_randi_boots = randi() % boots_sfx_list.length()
+		if loop_randi_boots == boots_sfx_randi:
+			break
+	while true:
+		loop_randi_armour = randi() % boots_sfx_list.length()
+		if loop_randi_armour == boots_sfx_randi:
+			break
+	boots_sfx_randi = loop_randi_boots
+	armour_sfx_randi = loop_randi_armour
+	boots_sfx_list.play(boots_sfx_randi)
+	armour_sfx_list.play(armour_sfx_randi)

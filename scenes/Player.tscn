@@ -56,6 +56,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
 shape = SubResource( 2 )
 
+[node name="Listener2D" type="Listener2D" parent="."]
+current = true
+
 [node name="SFX" type="Node" parent="."]
 __meta__ = {
 "_editor_description_": "Holds the AudioStreamPlayer nodes that trigger SFX"
