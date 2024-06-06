@@ -40,7 +40,7 @@ func _physics_process(delta) -> void:
 	velocity = velocity.normalized()
 
 	# Tile centering
-	tile_position = ((global_position / (tilemap.cell_size*0.5)) + Vector2(1,1)) #/ 2
+	tile_position = ((global_position / (tilemap.cell_size.x*0.5)) + Vector2(1,1)) #/ 2
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
 		velocity.x += round(tile_position.x) - tile_position.x
 	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
