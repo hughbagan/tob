@@ -5,12 +5,14 @@ onready var spr_scale:Vector2 = sprite.scale
 onready var col:CollisionShape2D = $CollisionShape2D
 onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
+onready var slay_raycast:RayCast2D = $SlayRaycast
 var tilemap:TileMap
 var current_tile_coords:Vector2
 var current_tile:int
 var level
 var hp:float = 100.0
 var speed:float = 75.0
+var attack_range:float = 1.5 # in tilemap cells
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
 var tile_position:Vector2
@@ -38,6 +40,7 @@ func _physics_process(delta) -> void:
 		if Input.is_action_pressed("move_up"):
 			velocity.y -= 1
 	velocity = velocity.normalized()
+	slay_raycast.cast_to = velocity * tilemap.cell_size * attack_range
 
 	# Tile centering
 	tile_position = ((global_position / (tilemap.cell_size.x*0.5)) + Vector2(1,1)) #/ 2
@@ -51,8 +54,17 @@ func _physics_process(delta) -> void:
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	current_tile = tilemap.get_cellv(current_tile_coords)
 
-	if Input.is_action_pressed("jump") and not jumping:
-		jump()
+	if Input.is_action_just_pressed("jump") and not jumping:
+		# First raycast to see if we can slay an enemy
+		var collider = slay_raycast.get_collider()
+		if collider is Enemy:
+			collider.queue_free()
+			hp += 3.0
+			if hp > 100.0:
+				hp = 100.0
+			level.blood_bar.value = hp
+		else:
+			jump()
 
 	# Footsteps
 	if velocity != Vector2(0,0) and not jumping:

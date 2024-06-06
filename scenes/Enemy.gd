@@ -8,6 +8,8 @@ var player
 onready var sight_timer:Timer = $SightTimer
 onready var raycast:RayCast2D = $RayCast2D
 onready var agent:NavigationAgent2D = $NavigationAgent2D
+onready var boots_sfx_list = $EnemySFX/EnemyBootsSFX.get_children()
+onready var armour_sfx_list = $EnemySFX/EnemyArmourSFX.get_children()
 var current_tile_coords:Vector2
 var sight_distance:int = 2 # in tiles
 var speed:float = 50.0
@@ -54,7 +56,6 @@ func _on_SightTimer_timeout():
 	var collider = raycast.get_collider()
 	if collider == player:
 		state = STATES.ALERT
-		print(self, " spotted player!")
 
 
 func enemy_footstep_counter(_delta):
