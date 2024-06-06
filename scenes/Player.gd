@@ -17,7 +17,7 @@ var jump_rand_list
 var land_rand_list
 var footstep_rand_list
 var footstep_counter = 0
-var footstep_frequency = 10 #lower is faster (10ish = Mr. Krabs)
+var footstep_frequency = 15 #lower is faster (10ish = Mr. Krabs)
 
 
 
