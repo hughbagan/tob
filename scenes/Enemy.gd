@@ -7,8 +7,11 @@ var tilemap
 var player
 onready var sight_timer:Timer = $SightTimer
 onready var raycast:RayCast2D = $RayCast2D
-var sight_distance:int = 5 # in tiles
+onready var agent:NavigationAgent2D = $NavigationAgent2D
 var current_tile_coords:Vector2
+var sight_distance:int = 2 # in tiles
+var speed:float = 50.0
+var damage:float = 0.1
 var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
 var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3]
 var boots_sfx_randi
@@ -16,6 +19,7 @@ var armour_sfx_randi
 
 
 func _process(_delta):
+	var velocity:Vector2 = Vector2()
 	if Input.is_action_just_pressed("bloodvision"):
 		$SpriteShaded.show()
 	if Input.is_action_just_released("bloodvision"):
@@ -24,12 +28,21 @@ func _process(_delta):
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
 	match state:
 		STATES.SENTRY:
-			if current_tile_coords.distance_to(player.current_tile_coords) <= 2 \
+			if current_tile_coords.distance_to(player.current_tile_coords) <= sight_distance \
 			and sight_timer.is_stopped():
 				sight_timer.start()
 		STATES.ALERT:
-			# chase the player
-			pass
+			# Chase player
+			agent.set_target_location(player.global_position)
+			var dir = position.direction_to(agent.get_next_location())
+			velocity = dir * speed
+			agent.set_velocity(velocity)
+			if not agent.is_navigation_finished():
+				velocity = move_and_slide(velocity)
+			for i in get_slide_count():
+				var collider = get_slide_collision(i).collider
+				if collider == player:
+					player.hit(damage) # maybe put on a timer?
 
 
 func _on_SightTimer_timeout():

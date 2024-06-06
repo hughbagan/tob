@@ -108,7 +108,7 @@ shader_param/ending_colour = Plane( 1, 0, 0, 0.1 )
 radius = 7.0
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 4
+collision_layer = 5
 collision_mask = 4
 script = ExtResource( 2 )
 
@@ -133,9 +133,15 @@ shape = SubResource( 1 )
 wait_time = 0.5
 one_shot = true
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 0 )
 collision_mask = 3
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 4.0
 
 [node name="EnemySFX" type="Node2D" parent="."]
 
