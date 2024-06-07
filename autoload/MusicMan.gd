@@ -54,6 +54,3 @@ func _on_music_quieted() -> void:
 # Steps Sound (stairs.wav)
 func StepsSound(): # Found in MainMenu
 	$StairsSFX.play()
-
-func StairSound(): # Found in Level
-	StepsSound()
