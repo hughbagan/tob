@@ -36,6 +36,7 @@ shadow_enabled = true
 [node name="RedLight" type="Light2D" parent="."]
 visible = false
 texture = ExtResource( 3 )
+texture_scale = 1.5
 color = Color( 1, 0.588235, 0.588235, 1 )
 shadow_enabled = true
 
