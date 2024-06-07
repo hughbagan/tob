@@ -7,10 +7,10 @@ onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
 onready var slay_raycast:RayCast2D = $SlayRaycast
 onready var light:Light2D = $Light2D
-var tilemap:TileMap
+onready var tilemap:Node
+onready var level
 var current_tile_coords:Vector2
 var current_tile:int
-var level
 var hp:float = 100.0
 var speed:float = 75.0
 var attack_range:float = 1.1 # in tilemap cells
@@ -22,18 +22,18 @@ var land_rand_list
 var footstep_rand_list
 var footstep_counter = 0.0
 var footstep_frequency = 15 #lower is faster (8ish = Mr. Krabs)
+signal new_hp(new_hp)
 signal player_die
 
 
 func _ready() -> void:
-	level.blood_bar.value = hp
+	set_hp(hp)
 
 
 func _physics_process(delta:float) -> void:
 
 	if Input.is_action_pressed("bloodvision"):
-		hp -= 0.05
-		level.blood_bar.value = hp
+		set_hp(hp-0.05)
 		$RedLight.show()
 		if $FlySprite.visible:
 			$FlySpriteShaded.show()
@@ -75,15 +75,12 @@ func _physics_process(delta:float) -> void:
 		var collider = slay_raycast.get_collider()
 		if collider is Enemy:
 			collider.queue_free()
-			hp += 3.0
-			if hp > 100.0:
-				hp = 100.0
-			level.blood_bar.value = hp
+			set_hp(hp+3.0)
 		else:
 			jump()
 
 	# Footsteps
-	if velocity != Vector2(0,0) and not jumping and current_tile != level.LEVEL_WALL_TILE_ID:
+	if velocity != Vector2(0,0) and not jumping and current_tile != Global.LEVEL_WALL_TILE_ID:
 		footstep_counter += delta * 60
 		if footstep_counter >= footstep_frequency:
 			footstep_sfx()
@@ -125,8 +122,14 @@ func _on_JumpTimer_timeout() -> void:
 
 func hit(damage:float) -> void:
 	# called by a hostile colliding body
-	hp -= damage
-	level.blood_bar.value = hp
+	set_hp(hp - damage)
+
+
+func set_hp(new_hp:float) -> void:
+	hp = new_hp
+	if hp > 100.0:
+		hp = 100.0
+	emit_signal("new_hp", new_hp)
 	if hp < 0.0:
 		emit_signal("player_die")
 

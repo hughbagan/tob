@@ -44,9 +44,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="wfc-roguelike"
+config/name="Tower of Blood"
 run/main_scene="res://scenes/MainMenu.tscn"
+boot_splash/show_image=false
 config/icon="res://common/icon.png"
+
+[autoload]
+
+Global="*res://autoload/Global.gd"
 
 [display]
 

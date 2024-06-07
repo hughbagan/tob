@@ -2,9 +2,8 @@ class_name Enemy extends KinematicBody2D
 
 enum STATES {SENTRY, ALERT}
 var state = STATES.SENTRY
-var level
-var tilemap
-var player
+onready var tilemap
+onready var player
 onready var sight_timer:Timer = $SightTimer
 onready var raycast:RayCast2D = $RayCast2D
 onready var agent:NavigationAgent2D = $NavigationAgent2D
