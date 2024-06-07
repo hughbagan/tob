@@ -10,9 +10,11 @@ export_presets.cfg
 .mono/
 data_*/
 
-*~
+build/
+builds/
 Test.cs
 test.cs
+*~
 
 /.vscode
 *.reapeaks
