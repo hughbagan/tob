@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://common/gothicfont.theme" type="Theme" id=1]
 [ext_resource path="res://common/right.png" type="Texture" id=2]
 [ext_resource path="res://common/information.png" type="Texture" id=3]
 [ext_resource path="res://common/gear.png" type="Texture" id=4]
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://audio/music/Tower of Blood (Title Theme).wav" type="AudioStream" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -54,5 +55,11 @@ margin_left = 260.0
 margin_right = 360.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 3 )
+
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
