@@ -1,6 +1,6 @@
 extends Node
 
-# Functions are named after what nodes they are children of/replacing
+# Functions are named after the called nodes they are replacing, if they are replacing a called node
 
 # Main Menu Music
 func MainMenu(toggle:bool, tween_len:float = 0):
