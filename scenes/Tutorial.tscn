@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/Exit.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Tutorial.gd" type="Script" id=7]
 [ext_resource path="res://common/tilemap_white_packed.png" type="Texture" id=8]
+[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=9]
+[ext_resource path="res://audio/sfx/stairs.wav" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=3]
 size = 25
@@ -45,6 +47,11 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 value = 100.0
 percent_visible = false
+
+[node name="RedRect" type="ColorRect" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0, 0, 1 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
@@ -104,6 +111,13 @@ texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 496, 224, 48, 16 )
 
+[node name="Stairs" type="Sprite" parent="."]
+modulate = Color( 0.745098, 0.745098, 0.745098, 1 )
+position = Vector2( 24, 24 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 48, 96, 16, 16 )
+
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Lamp" parent="Entities" instance=ExtResource( 5 )]
@@ -126,5 +140,8 @@ position = Vector2( 168, 168 )
 
 [node name="Enemy" parent="Entities" instance=ExtResource( 6 )]
 position = Vector2( 120, 120 )
+
+[node name="StairsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [connection signal="exit_reached" from="Entities/Exit" to="." method="_on_exit_reached"]

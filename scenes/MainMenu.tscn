@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://common/gothicfont.theme" type="Theme" id=1]
 [ext_resource path="res://common/right.png" type="Texture" id=2]
 [ext_resource path="res://common/information.png" type="Texture" id=3]
 [ext_resource path="res://common/gear.png" type="Texture" id=4]
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://audio/sfx/stairs.wav" type="AudioStream" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -55,5 +56,14 @@ margin_left = 208.0
 margin_right = 308.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 3 )
+
+[node name="StepsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="RedRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0, 0, 0 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

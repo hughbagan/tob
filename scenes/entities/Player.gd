@@ -7,7 +7,7 @@ onready var jump_area:Area2D = $JumpArea
 onready var jump_timer:Timer = $JumpTimer
 onready var slay_raycast:RayCast2D = $SlayRaycast
 onready var light:Light2D = $Light2D
-onready var tilemap:Node
+onready var tilemap:TileMap
 onready var level
 var current_tile_coords:Vector2
 var current_tile:int

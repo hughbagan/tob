@@ -75,6 +75,12 @@ func _on_WFCGenerator_OnDone():
 	exit.global_position = _place_adjacent_random_empty(exit_corner)
 	entities.add_child(exit)
 
+	# Fade in
+	var tween = get_tree().create_tween()
+	tween.tween_property($GUI/RedRect, "color:a", 0.0, 1.0)
+	yield(tween, "finished")
+	$GUI/RedRect.hide()
+
 
 func _place_centered_tile(pos:Vector2) -> Vector2:
 	# convert tilemap coords to global centered position
@@ -97,12 +103,22 @@ func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 
 
 func _on_exit_reached():
+	$StairsSound.play()
+
+	# Fade out
+	$GUI/RedRect.show()
+	var tween = get_tree().create_tween()
+	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
+	yield(tween, "finished")
+
 	# Reset scene
 	for child in entities.get_children():
 		child.queue_free()
 	envelope_tilemap.clear()
+
 	# Advance the level
 	current_level += 1
+	level_label.text = str(current_level)
 	if current_level % 10 == 0:
 		if current_level % 20 == 0: # remove walls, add enemies
 			var walls = sample_tilemap.get_used_cells_by_id(Global.LEVEL_WALL_TILE_ID)
@@ -119,7 +135,6 @@ func _on_exit_reached():
 		pass
 	else:
 		generator.OnButtonPressed() # generate new level
-	level_label.text = str(current_level)
 
 
 func _on_player_hp_changed(new_hp:float) -> void:
@@ -128,4 +143,4 @@ func _on_player_hp_changed(new_hp:float) -> void:
 
 func _on_player_die():
 	# boot to main screen?
-	get_tree().reload_current_scene()
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
