@@ -116,6 +116,7 @@ func _on_JumpTimer_timeout() -> void:
 		if body is Enemy:
 			body.hit()
 			hit_sfx()
+			set_hp(hp+3.0)
 			# jump()
 			has_landed_sfx = 0
 	if has_landed_sfx == 1:
