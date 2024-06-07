@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://addons/Godot-WFC-Csharp/WFCGenerator.cs" type="Script" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 [ext_resource path="res://common/Gothic_Pixels.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://audio/sfx/stairs.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=3]
-size = 25
+size = 40
 font_data = ExtResource( 5 )
 
 [sub_resource type="Theme" id=4]
@@ -24,6 +25,7 @@ script = ExtResource( 3 )
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="LevelLabel" type="Label" parent="GUI"]
+modulate = Color( 1, 0.156863, 0.156863, 1 )
 anchor_right = 1.0
 margin_top = 15.0
 theme = SubResource( 4 )
@@ -40,6 +42,11 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 value = 100.0
 percent_visible = false
+
+[node name="RedRect" type="ColorRect" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0, 0, 1 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
@@ -85,5 +92,14 @@ collision_layer = 9
 format = 1
 
 [node name="Entities" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+autoplay = true
+bus = "Music"
+
+[node name="StairsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="OnDone" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]
