@@ -1,4 +1,8 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
+
+[sub_resource type="AudioEffectChorus" id=2]
+resource_name = "Chorus"
+wet = 0.25
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"
@@ -11,6 +15,8 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = "2DSFX"
+bus/1/effect/0/effect = SubResource( 2 )
+bus/1/effect/0/enabled = true
 bus/2/name = "SFX"
 bus/2/solo = false
 bus/2/mute = false

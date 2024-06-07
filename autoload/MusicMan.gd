@@ -6,9 +6,10 @@ var off_music:AudioStreamPlayer
 # Main Menu Music
 func MainMenu(toggle:bool, tween_len:float = 0):
 	var music = $MainMenuMusic
+	var music_vol = music.volume_db
 	if toggle == true:
 		if music.playing == false:
-			tween_music_on(music, tween_len)
+			tween_music_on(music, tween_len, music_vol)
 	if toggle == false:
 		if music.playing == true:
 			tween_music_off(music, tween_len)
@@ -16,9 +17,10 @@ func MainMenu(toggle:bool, tween_len:float = 0):
 # Credits Music
 func Credits(toggle:bool, tween_len:float = 0):
 	var music = $CreditsMusic
+	var music_vol = music.volume_db
 	if toggle == true:
 		if music.playing == false:
-			tween_music_on(music, tween_len)
+			tween_music_on(music, tween_len, music_vol)
 	if toggle == false:
 		if music.playing == true:
 			tween_music_off(music, tween_len)
@@ -26,17 +28,18 @@ func Credits(toggle:bool, tween_len:float = 0):
 # Level Music
 func level_music(toggle:bool, tween_len:float = 0):
 	var music = $LevelMusic
+	var music_vol = music.volume_db
 	if toggle == true:
 		if music.playing == false:
-			tween_music_on(music, tween_len)
+			tween_music_on(music, tween_len, music_vol)
 	if toggle == false:
 		if music.playing == true:
 			tween_music_off(music, tween_len)
 
 
-func tween_music_on(music:AudioStreamPlayer, tween_len:float) -> void:
+func tween_music_on(music:AudioStreamPlayer, tween_len:float, music_vol = 0) -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(music, "volume_db", 0, tween_len)
+	tween.tween_property(music, "volume_db", music_vol, tween_len)
 	music.play()
 
 
