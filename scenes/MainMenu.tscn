@@ -39,20 +39,21 @@ margin_bottom = 347.0
 alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
 margin_left = 52.0
 margin_right = 152.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 4 )
 
 [node name="PlayButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 156.0
-margin_right = 256.0
+margin_left = 104.0
+margin_right = 204.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 2 )
 
 [node name="InfoButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 260.0
-margin_right = 360.0
+margin_left = 208.0
+margin_right = 308.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 3 )
 

@@ -1,13 +1,5 @@
 class_name Level extends Node2D
 
-const EXIT_SCENE:PackedScene = preload("res://scenes/entities/Exit.tscn")
-const PLAYER_SCENE:PackedScene = preload("res://scenes/entities/Player.tscn")
-const ENEMY_SCENE:PackedScene = preload("res://scenes/entities/Enemy.tscn")
-const LAMP_SCENE:PackedScene = preload("res://scenes/entities/Lamp.tscn")
-const LEVEL_FLOOR_TILE_ID:int = 0
-const LEVEL_WALL_TILE_ID:int = 1
-const LEVEL_ENEMY_TILE_ID:int = 2
-const LEVEL_LAMP_TILE_ID:int = 3
 onready var generator:Node2D = $WFCGenerator
 onready var sample_tilemap:TileMap = $WFCGenerator/Sample
 onready var target_tilemap:TileMap = $WFCGenerator/Target
@@ -20,6 +12,7 @@ onready var blood_bar:ProgressBar = $GUI/BloodBar
 var width:int
 var height:int
 var current_level:int = 1
+var exit_corner:Vector2
 
 
 func _on_WFCGenerator_OnDone():
@@ -34,45 +27,49 @@ func _on_WFCGenerator_OnDone():
 	for y in range(height+2):
 		for x in range(width+2):
 			if (x==0 or y==0) or (x==width+1 or y==height+1):
-				envelope_tilemap.set_cell(x, y, LEVEL_WALL_TILE_ID)
+				envelope_tilemap.set_cell(x, y, Global.LEVEL_WALL_TILE_ID)
 	# for the transparent wall tilemap sprite (purely aesthetic)
 	background_tilemap.position = envelope_tilemap.position
 	for y in range(height+2):
 		for x in range(width+2):
-			background_tilemap.set_cell(x, y, LEVEL_FLOOR_TILE_ID)
+			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
-	var player = PLAYER_SCENE.instance()
+	var player = Global.PLAYER_SCENE.instance()
 
 	for y in range(height):
 		for x in range(width):
 			# Spawn entities from tilemap
 			var tile:int = target_tilemap.get_cell(x, y)
-			if tile == LEVEL_ENEMY_TILE_ID:
-				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
-				var enemy = ENEMY_SCENE.instance()
-				enemy.level = self
+			if tile == Global.LEVEL_ENEMY_TILE_ID:
+				envelope_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+				var enemy = Global.ENEMY_SCENE.instance()
 				enemy.tilemap = target_tilemap
 				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(enemy)
-			elif tile == LEVEL_LAMP_TILE_ID:
-				target_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
-				var lamp = LAMP_SCENE.instance()
+			elif tile == Global.LEVEL_LAMP_TILE_ID:
+				target_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+				var lamp = Global.LAMP_SCENE.instance()
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)
 
 	# Setup the player
 	player.tilemap = target_tilemap
 	player.level = self
+	player.connect("new_hp", self, "_on_player_hp_changed")
 	player.connect("player_die", self, "_on_player_die")
-	var player_corner = corners[randi() % corners.size()]
+	var player_corner:Vector2
+	if current_level == 1:
+		player_corner = corners[3] # same as the tutorial
+	else:
+		player_corner = exit_corner # same as the last exit
 	player.global_position = _place_adjacent_random_empty(player_corner)
 	entities.add_child(player)
 
 	# Place the exit in a different corner
-	var exit = EXIT_SCENE.instance()
+	var exit = Global.EXIT_SCENE.instance()
 	exit.connect("exit_reached", self, "_on_exit_reached")
-	var exit_corner = player_corner
+	exit_corner = player_corner
 	while exit_corner == player_corner:
 		exit_corner = corners[randi() % corners.size()]
 	exit.global_position = _place_adjacent_random_empty(exit_corner)
@@ -86,7 +83,7 @@ func _place_centered_tile(pos:Vector2) -> Vector2:
 
 func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 	var pos:Vector2 = startpos
-	while target_tilemap.get_cellv(pos) != LEVEL_FLOOR_TILE_ID:
+	while target_tilemap.get_cellv(pos) != Global.LEVEL_FLOOR_TILE_ID:
 		var flip = randf()
 		if flip <= 0.25 and pos.x < width-1:
 			pos.x += 1
@@ -108,14 +105,14 @@ func _on_exit_reached():
 	current_level += 1
 	if current_level % 10 == 0:
 		if current_level % 20 == 0: # remove walls, add enemies
-			var walls = sample_tilemap.get_used_cells_by_id(LEVEL_WALL_TILE_ID)
+			var walls = sample_tilemap.get_used_cells_by_id(Global.LEVEL_WALL_TILE_ID)
 			if not walls.empty():
 				var pick = walls[randi() % walls.size()]
-				sample_tilemap.set_cellv(pick, LEVEL_ENEMY_TILE_ID)
+				sample_tilemap.set_cellv(pick, Global.LEVEL_ENEMY_TILE_ID)
 		if current_level == 40 or current_level == 70: # remove lamps
-			var lamps = sample_tilemap.get_used_cells_by_id(LEVEL_LAMP_TILE_ID)
+			var lamps = sample_tilemap.get_used_cells_by_id(Global.LEVEL_LAMP_TILE_ID)
 			var pick = lamps[lamps.size()-1]
-			sample_tilemap.set_cellv(pick, LEVEL_FLOOR_TILE_ID)
+			sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
 		generator._Ready() # re-build Rules and generate
 	elif current_level == 101:
 		# WIN!
@@ -123,6 +120,10 @@ func _on_exit_reached():
 	else:
 		generator.OnButtonPressed() # generate new level
 	level_label.text = str(current_level)
+
+
+func _on_player_hp_changed(new_hp:float) -> void:
+	blood_bar.value = new_hp
 
 
 func _on_player_die():
