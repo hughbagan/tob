@@ -19,6 +19,7 @@ func Credits(toggle:bool, tween_len:float = 0):
 	if toggle == true:
 		if music.playing == false:
 			tween_music_on(music, tween_len)
+	if toggle == false:
 		if music.playing == true:
 			tween_music_off(music, tween_len)
 

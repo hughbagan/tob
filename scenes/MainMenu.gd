@@ -20,7 +20,7 @@ func _on_PlayButton_pressed() -> void:
 func _on_InfoButton_pressed():
 	$Credits.show()
 	MusicMan.MainMenu(false, 1)
-	MusicMan.Credits(true)
+	MusicMan.Credits(true, 1)
 
 
 func _on_BackButton_pressed():
