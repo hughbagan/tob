@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://addons/Godot-WFC-Csharp/WFCGenerator.cs" type="Script" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
-[ext_resource path="res://audio/music/Tower of Blood (Title Theme).wav" type="AudioStream" id=4]
 [ext_resource path="res://common/Gothic_Pixels.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="DynamicFont" id=3]
@@ -92,11 +91,5 @@ collision_layer = 9
 format = 1
 
 [node name="Entities" type="Node2D" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -10.0
-autoplay = true
-bus = "Music"
 
 [connection signal="OnDone" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]

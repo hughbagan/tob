@@ -15,6 +15,10 @@ var current_level:int = 1
 var exit_corner:Vector2
 
 
+func _ready():
+	MusicMan.level_music(true, 1)
+
+
 func _on_WFCGenerator_OnDone():
 	width = generator.H
 	height = generator.V
