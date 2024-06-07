@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Ascend The Tower.mp3-eade06e274676d8bae64a5e2e80ac38b.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Ascend The Tower.mp3"
+dest_files=[ "res://.import/Ascend The Tower.mp3-eade06e274676d8bae64a5e2e80ac38b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=53.333
