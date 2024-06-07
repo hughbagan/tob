@@ -111,10 +111,11 @@ func _on_JumpTimer_timeout() -> void:
 	$FlySprite.hide()
 	var has_landed_sfx = 1
 	for body in jump_area.get_overlapping_bodies():
-		body.queue_free()
-		hit_sfx()
-		# jump()
-		has_landed_sfx = 0
+		if body.get_name() == "Enemy":
+			body.queue_free()
+			hit_sfx()
+			# jump()
+			has_landed_sfx = 0
 	if has_landed_sfx == 1:
 		land_sfx()
 		footstep_counter = 0
