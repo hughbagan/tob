@@ -21,9 +21,11 @@ var footstep_frequency = 25
 
 func _physics_process(delta:float):
 	var velocity:Vector2 = Vector2()
-	if Input.is_action_just_pressed("bloodvision"):
+	if Input.is_action_pressed("bloodvision"):
+		$RedLight.show()
 		$SpriteShaded.show()
-	if Input.is_action_just_released("bloodvision"):
+	else:
+		$RedLight.hide()
 		$SpriteShaded.hide()
 
 	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
@@ -66,7 +68,7 @@ func enemy_footstep_counter(_delta):
 
 
 func enemy_footstep(): #plays footstep at enemy's location
-	print("clang")
+	# print("clang")
 	var loop_randi_boots
 	var loop_randi_armour
 	var loop_bool = true

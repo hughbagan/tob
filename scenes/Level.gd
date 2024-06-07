@@ -39,6 +39,7 @@ func _on_WFCGenerator_OnDone():
 			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
 	var player = Global.PLAYER_SCENE.instance()
+	player.hp = Global.player_hp
 
 	for y in range(height):
 		for x in range(width):
@@ -117,6 +118,8 @@ func _on_exit_reached():
 
 	# Reset scene
 	for child in entities.get_children():
+		if child is Player:
+			Global.player_hp = child.hp # shitty hack
 		child.queue_free()
 	envelope_tilemap.clear()
 

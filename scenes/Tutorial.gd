@@ -3,6 +3,7 @@ extends Node2D
 onready var player = $Entities/Player
 
 func _ready():
+	player.hp = Global.player_hp
 	player.tilemap = $Walls
 	$Entities/Enemy.tilemap = $Walls
 	$Entities/Enemy.player = player
@@ -17,6 +18,7 @@ func _ready():
 
 
 func _on_exit_reached():
+	Global.player_hp = 100.0
 	MusicMan.StepsSound()
 	$GUI/RedRect.show()
 	var tween = get_tree().create_tween()

@@ -11,7 +11,7 @@ onready var tilemap:TileMap
 onready var level
 var current_tile_coords:Vector2
 var current_tile:int
-var hp:float = 100.0
+var hp:float
 var speed:float = 75.0
 var attack_range:float = 1.1 # in tilemap cells
 var velocity:Vector2 = Vector2()
@@ -34,6 +34,7 @@ func _physics_process(delta:float) -> void:
 
 	if Input.is_action_pressed("bloodvision"):
 		set_hp(hp-0.05)
+		$Light2D.hide()
 		$RedLight.show()
 		if $FlySprite.visible:
 			$FlySpriteShaded.show()
@@ -42,6 +43,7 @@ func _physics_process(delta:float) -> void:
 			$FlySpriteShaded.hide()
 			$SpriteShaded.show()
 	else:
+		$Light2D.show()
 		$RedLight.hide()
 		$FlySpriteShaded.hide()
 		$SpriteShaded.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" type="AudioStream" id=1]
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" type="AudioStream" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=9]
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=10]
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-003.wav" type="AudioStream" id=11]
+[ext_resource path="res://common/radial.png" type="Texture" id=12]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -41,8 +42,6 @@ shape = SubResource( 1 )
 wait_time = 0.25
 one_shot = true
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 0 )
 collision_mask = 3
@@ -50,6 +49,11 @@ collision_mask = 3
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 4.0
+
+[node name="RedLight" type="Light2D" parent="."]
+texture = ExtResource( 12 )
+color = Color( 1, 0.588235, 0.588235, 1 )
+shadow_enabled = true
 
 [node name="EnemySFX" type="Node2D" parent="."]
 
