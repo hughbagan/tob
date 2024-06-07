@@ -32,3 +32,7 @@ func level_music(toggle:bool):
 		if $LevelMusic.playing() == true:
 			# put tweens here
 			$LevelMusic.stop()
+
+
+func stairsSFX():
+	$StairsSFX.play()
