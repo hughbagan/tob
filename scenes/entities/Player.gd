@@ -111,7 +111,7 @@ func _on_JumpTimer_timeout() -> void:
 	$FlySprite.hide()
 	var has_landed_sfx = 1
 	for body in jump_area.get_overlapping_bodies():
-		if body.get_name() == "Enemy":
+		if body is Enemy:
 			body.queue_free()
 			hit_sfx()
 			# jump()
