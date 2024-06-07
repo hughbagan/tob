@@ -170,26 +170,31 @@ bus = "SFX"
 
 [node name="PlayerSwingSFX1" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 17 )
+volume_db = -2.0
 pitch_scale = 1.1
 bus = "SFX"
 
 [node name="PlayerSwingSFX2" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 16 )
+volume_db = -2.0
 pitch_scale = 1.1
 bus = "SFX"
 
 [node name="PlayerSwingSFX3" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 19 )
+volume_db = -2.0
 pitch_scale = 1.1
 bus = "SFX"
 
 [node name="PlayerSwingSFX4" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 15 )
+volume_db = -2.0
 pitch_scale = 1.1
 bus = "SFX"
 
 [node name="PlayerSwingSFX5" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 18 )
+volume_db = -2.0
 pitch_scale = 1.1
 bus = "SFX"
 

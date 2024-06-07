@@ -15,8 +15,9 @@ var current_level:int = 1
 var exit_corner:Vector2
 
 
+
 func _ready():
-	MusicMan.level_music(true, 1)
+	MusicMan.level_music(true)
 
 
 func _on_WFCGenerator_OnDone():
@@ -152,6 +153,8 @@ func _on_player_die():
 	# Fade out
 	$Entities.pause_mode = PAUSE_MODE_STOP
 	$GUI/RedRect.show()
+	MusicMan.level_music(false, 1)
+	MusicMan.player_dead = true
 	var tween = get_tree().create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
 	yield(tween, "finished")

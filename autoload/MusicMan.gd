@@ -1,6 +1,7 @@
 extends Node
 
 var off_music:AudioStreamPlayer
+var player_dead:bool = false
 # Functions are named after the called nodes they are replacing, if they are replacing a called node
 
 # Main Menu Music

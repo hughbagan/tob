@@ -183,7 +183,7 @@ func hit_sfx() -> void:
 	var loop_bool = true
 	while loop_bool:
 		loop_randi_swing = randi() % player_swing_sfx_list.size()
-		if loop_randi_swing == player_swing_sfx_randi:
+		if loop_randi_swing != player_swing_sfx_randi:
 			loop_bool = false
 	player_swing_sfx_randi = loop_randi_swing
 	player_swing_sfx_list[loop_randi_swing].play()

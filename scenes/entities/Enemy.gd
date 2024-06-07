@@ -18,7 +18,7 @@ onready var boots_sfx_randi:int = 0
 onready var armour_sfx_randi:int = 0
 onready var enemy_swing_sfx_randi:int = 0
 var enemy_swing_counter:float = 0
-var enemy_swing_freq = 60
+var enemy_swing_freq = 90
 var footstep_counter:float = 0
 var footstep_freq = 25
 
@@ -77,34 +77,36 @@ func enemy_footstep_counter(_delta):
 
 
 func enemy_footstep(): #plays footstep at enemy's location
-	# print("clang")
-	var loop_randi_boots
-	var loop_randi_armour
-	var loop_bool = true
-	while loop_bool:
-		loop_randi_boots = randi() % boots_sfx_list.size()
-		if loop_randi_boots != boots_sfx_randi:
-			loop_bool = false
-	loop_bool = true
-	while loop_bool:
-		loop_randi_armour = randi() % armour_sfx_list.size()
-		if loop_randi_armour != armour_sfx_randi:
-			loop_bool = false
-	boots_sfx_randi = loop_randi_boots
-	armour_sfx_randi = loop_randi_armour
-	boots_sfx_list[boots_sfx_randi].play()
-	armour_sfx_list[armour_sfx_randi].play()
+	if MusicMan.player_dead == false:
+		# print("clang")
+		var loop_randi_boots
+		var loop_randi_armour
+		var loop_bool = true
+		while loop_bool:
+			loop_randi_boots = randi() % boots_sfx_list.size()
+			if loop_randi_boots != boots_sfx_randi:
+				loop_bool = false
+		loop_bool = true
+		while loop_bool:
+			loop_randi_armour = randi() % armour_sfx_list.size()
+			if loop_randi_armour != armour_sfx_randi:
+				loop_bool = false
+		boots_sfx_randi = loop_randi_boots
+		armour_sfx_randi = loop_randi_armour
+		boots_sfx_list[boots_sfx_randi].play()
+		armour_sfx_list[armour_sfx_randi].play()
 
 
 func enemy_swing_sfx(delta):
-	enemy_swing_counter += delta * 60
-	if enemy_swing_counter >= enemy_swing_freq:
-		enemy_swing_counter = 0
-		var loop_randi_swing
-		var loop_bool = true
-		while loop_bool:
-			loop_randi_swing = randi() % enemy_swing_sfx_list.size()
-			if loop_randi_swing == enemy_swing_sfx_randi:
-				loop_bool = false
-		enemy_swing_sfx_randi = loop_randi_swing
-		enemy_swing_sfx_list[loop_randi_swing].play()
+	if MusicMan.player_dead == false:
+		enemy_swing_counter += delta * 60
+		if enemy_swing_counter >= enemy_swing_freq:
+			enemy_swing_counter = 0
+			var loop_randi_swing
+			var loop_bool = true
+			while loop_bool:
+				loop_randi_swing = randi() % enemy_swing_sfx_list.size()
+				if loop_randi_swing != enemy_swing_sfx_randi:
+					loop_bool = false
+			enemy_swing_sfx_randi = loop_randi_swing
+			enemy_swing_sfx_list[loop_randi_swing].play()
