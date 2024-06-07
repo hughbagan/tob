@@ -70,6 +70,8 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -10.0
 autoplay = true
+bus = "Music"
 
 [connection signal="OnDone" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]

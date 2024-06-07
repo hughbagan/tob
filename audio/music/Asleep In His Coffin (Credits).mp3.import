@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Asleep In His Coffin (Credits).mp3-6c9d97591ac1d6f36
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
