@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://common/gothicfont.theme" type="Theme" id=1]
 [ext_resource path="res://common/right.png" type="Texture" id=2]
 [ext_resource path="res://common/information.png" type="Texture" id=3]
 [ext_resource path="res://common/gear.png" type="Texture" id=4]
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=5]
-[ext_resource path="res://audio/sfx/stairs.wav" type="AudioStream" id=6]
 [ext_resource path="res://common/DungeonFont.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://common/return.png" type="Texture" id=8]
 
@@ -118,10 +117,6 @@ margin_left = 242.0
 margin_right = 342.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 8 )
-
-[node name="StepsSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-bus = "Music"
 
 [node name="RedRect" type="ColorRect" parent="."]
 visible = false

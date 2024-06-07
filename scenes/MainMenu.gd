@@ -3,10 +3,11 @@ extends Control
 
 func _ready() -> void:
 	$Credits.hide()
+	MusicMan.MainMenu(true)
 
 
 func _on_PlayButton_pressed() -> void:
-	$StepsSound.play()
+	#MusicMan.StepsSound.play()
 	$RedRect.show()
 	var tween = get_tree().create_tween()
 	tween.tween_property($RedRect, "color:a", 1.0, 1.5)
@@ -16,7 +17,11 @@ func _on_PlayButton_pressed() -> void:
 
 func _on_InfoButton_pressed():
 	$Credits.show()
+	#MusicMan.MainMenu(false)
+	#MusicMan.Credits(true)
 
 
 func _on_BackButton_pressed():
 	$Credits.hide()
+	#MusicMan.Credits(false)
+	#MusicMan.MainMenu(true)
