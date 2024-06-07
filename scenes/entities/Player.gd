@@ -33,9 +33,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta:float) -> void:
-	
+
 	jank_delta = delta # sorry -Aiden
-	
+
 	if Input.is_action_pressed("bloodvision"):
 		set_hp(hp-0.05)
 		$Light2D.hide()
@@ -80,7 +80,8 @@ func _physics_process(delta:float) -> void:
 		# First raycast to see if we can slay an enemy
 		var collider = slay_raycast.get_collider()
 		if collider is Enemy:
-			collider.queue_free()
+			collider.hit()
+			hit_sfx()
 			set_hp(hp+3.0)
 		else:
 			jump()
