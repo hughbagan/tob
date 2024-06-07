@@ -104,7 +104,9 @@ verypuzzling.itch.io
 Gothic Pixels font by akezhar.itch.io
 DungeonFont by vrtxrry.itch.io
 
-Made proudly in Godot Engine 3.5"
+Made proudly in Godot Engine 3.5
+
+Special thanks to Jorn Lande \\m/"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
 margin_top = 397.0
