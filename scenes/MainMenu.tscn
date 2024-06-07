@@ -15,7 +15,6 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
-[ext_resource path="res://audio/music/Tower of Blood (Title Theme).wav" type="AudioStream" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -122,6 +121,7 @@ texture_normal = ExtResource( 8 )
 
 [node name="StepsSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Music"
 
 [node name="RedRect" type="ColorRect" parent="."]
 visible = false
@@ -130,11 +130,5 @@ anchor_bottom = 1.0
 color = Color( 0.145098, 0, 0, 0 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/InfoButton" to="." method="_on_InfoButton_pressed"]
-[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -6.0
-autoplay = true
-bus = "Music"
-
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Credits/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

@@ -52,6 +52,7 @@ config/icon="res://common/icon.png"
 [autoload]
 
 Global="*res://autoload/Global.gd"
+MusicMan="*res://autoload/MusicMan.gd"
 
 [display]
 
