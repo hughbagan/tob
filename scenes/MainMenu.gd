@@ -11,8 +11,8 @@ func _on_PlayButton_pressed() -> void:
 	$RedRect.show()
 	var tween = get_tree().create_tween()
 	var tween_len = 1.5
-	MusicMan.MainMenu(false, tween_len)
 	tween.tween_property($RedRect, "color:a", 1.0, tween_len)
+	MusicMan.MainMenu(false, tween_len)
 	yield(tween, "finished")
 	get_tree().change_scene("res://scenes/Tutorial.tscn")
 

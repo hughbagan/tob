@@ -1,6 +1,6 @@
 extends Node
 
-onready var tween = get_tree().create_tween().parallel()
+var off_music:AudioStreamPlayer
 # Functions are named after the called nodes they are replacing, if they are replacing a called node
 
 # Main Menu Music
@@ -8,37 +8,47 @@ func MainMenu(toggle:bool, tween_len:float = 0):
 	var music = $MainMenuMusic
 	if toggle == true:
 		if music.playing == false:
-			tween.tween_property(music, "volume_db", 0, tween_len)
-			music.play()
+			tween_music_on(music, tween_len)
 	if toggle == false:
 		if music.playing == true:
-			tween.tween_property(music, "volume_db", -60, tween_len)
-			yield(tween, "finished")
-			music.stop()
+			tween_music_off(music, tween_len)
 
 # Credits Music
 func Credits(toggle:bool, tween_len:float = 0):
 	var music = $CreditsMusic
 	if toggle == true:
 		if music.playing == false:
-			tween.tween_property(music, "volume_db", 0, tween_len)
-			music.play()
-	if toggle == false:
+			tween_music_on(music, tween_len)
 		if music.playing == true:
-			tween.tween_property(music, "volume_db", -60, tween_len)
-			music.stop()
+			tween_music_off(music, tween_len)
 
 # Level Music
 func level_music(toggle:bool, tween_len:float = 0):
 	var music = $LevelMusic
 	if toggle == true:
 		if music.playing == false:
-			tween.tween_property(music, "volume_db", 0, tween_len)
-			music.play()
+			tween_music_on(music, tween_len)
 	if toggle == false:
 		if music.playing == true:
-			tween.tween_property(music, "volume_db", -60, tween_len)
-			music.stop()
+			tween_music_off(music, tween_len)
+
+
+func tween_music_on(music:AudioStreamPlayer, tween_len:float) -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(music, "volume_db", 0, tween_len)
+	music.play()
+
+
+func tween_music_off(music:AudioStreamPlayer, tween_len:float) -> void:
+	var tween = get_tree().create_tween()
+	off_music = music # assume only turning one music off at a time
+	tween.connect("finished", self, "_on_music_quieted")
+	tween.tween_property(music, "volume_db", -60, tween_len)
+
+
+func _on_music_quieted() -> void:
+	off_music.stop()
+
 
 # Steps Sound (stairs.wav)
 func StepsSound(): # Found in MainMenu
