@@ -1,9 +1,9 @@
 class_name Level extends Node2D
 
-const EXIT_SCENE:PackedScene = preload("res://scenes/Exit.tscn")
-const PLAYER_SCENE:PackedScene = preload("res://scenes/Player.tscn")
-const ENEMY_SCENE:PackedScene = preload("res://scenes/Enemy.tscn")
-const LAMP_SCENE:PackedScene = preload("res://scenes/Lamp.tscn")
+const EXIT_SCENE:PackedScene = preload("res://scenes/entities/Exit.tscn")
+const PLAYER_SCENE:PackedScene = preload("res://scenes/entities/Player.tscn")
+const ENEMY_SCENE:PackedScene = preload("res://scenes/entities/Enemy.tscn")
+const LAMP_SCENE:PackedScene = preload("res://scenes/entities/Lamp.tscn")
 const LEVEL_FLOOR_TILE_ID:int = 0
 const LEVEL_WALL_TILE_ID:int = 1
 const LEVEL_ENEMY_TILE_ID:int = 2
