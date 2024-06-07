@@ -45,9 +45,10 @@ _global_script_class_icons={
 [application]
 
 config/name="Tower of Blood"
+config/description="In the dead of night a vampire stole your heart. Summit the Tower of Blood to get it back. But beware, the cursed Tower is always changing. Don't bleed out!"
 run/main_scene="res://scenes/MainMenu.tscn"
 boot_splash/show_image=false
-config/icon="res://common/icon.png"
+config/icon="res://common/icon_t.png"
 
 [autoload]
 
@@ -59,6 +60,7 @@ MusicMan="*res://autoload/MusicMan.tscn"
 window/size/width=640
 window/size/height=640
 window/size/resizable=false
+window/stretch/aspect="keep"
 
 [gui]
 
