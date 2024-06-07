@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" type="AudioStream" id=1]
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" type="AudioStream" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 04.wav" type="AudioStream" id=8]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=9]
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=10]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-003.wav" type="AudioStream" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -91,7 +92,7 @@ bus = "SFX"
 [node name="EnemyArmourSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 5 )
 volume_db = -10.0
-pitch_scale = 0.4
+pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
 bus = "SFX"
@@ -99,14 +100,15 @@ bus = "SFX"
 [node name="EnemyArmourSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 1 )
 volume_db = -10.0
-pitch_scale = 0.4
+pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
 bus = "SFX"
 
 [node name="EnemyArmourSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
+stream = ExtResource( 11 )
 volume_db = -10.0
-pitch_scale = 0.4
+pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
 bus = "SFX"
@@ -114,7 +116,7 @@ bus = "SFX"
 [node name="EnemyArmourSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 2 )
 volume_db = -10.0
-pitch_scale = 0.4
+pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
 bus = "SFX"

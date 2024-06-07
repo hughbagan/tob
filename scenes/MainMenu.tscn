@@ -59,7 +59,7 @@ texture_normal = ExtResource( 3 )
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -10.0
+volume_db = -6.0
 autoplay = true
 bus = "Music"
 

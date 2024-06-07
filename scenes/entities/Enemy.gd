@@ -13,8 +13,8 @@ var current_tile_coords:Vector2
 var sight_distance:int = 2 # in tiles
 var speed:float = 50.0
 var damage:float = 0.1
-var boots_sfx_randi = 0
-var armour_sfx_randi = 0
+onready var boots_sfx_randi:int = 0
+onready var armour_sfx_randi:int = 0
 var footstep_counter:float = 0
 var footstep_frequency = 25
 
@@ -41,7 +41,7 @@ func _physics_process(delta:float):
 			agent.set_velocity(velocity)
 			if not agent.is_navigation_finished():
 				velocity = move_and_slide(velocity)
-				if velocity > Vector2():
+				if abs(velocity.x) > 10 or abs(velocity.y) > 10:
 					enemy_footstep_counter(delta)
 			for i in get_slide_count():
 				var collider = get_slide_collision(i).collider
@@ -72,14 +72,15 @@ func enemy_footstep(): #plays footstep at enemy's location
 	var loop_bool = true
 	while loop_bool:
 		loop_randi_boots = randi() % boots_sfx_list.size()
-		if loop_randi_boots == boots_sfx_randi:
+		if loop_randi_boots != boots_sfx_randi:
 			loop_bool = false
 	loop_bool = true
 	while loop_bool:
-		loop_randi_armour = randi() % boots_sfx_list.size()
-		if loop_randi_armour == boots_sfx_randi:
+		loop_randi_armour = randi() % armour_sfx_list.size()
+		if loop_randi_armour != armour_sfx_randi:
 			loop_bool = false
 	boots_sfx_randi = loop_randi_boots
 	armour_sfx_randi = loop_randi_armour
+	print(loop_randi_armour)
 	boots_sfx_list[boots_sfx_randi].play()
 	armour_sfx_list[armour_sfx_randi].play()
