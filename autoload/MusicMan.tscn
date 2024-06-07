@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://autoload/MusicMan.gd" type="Script" id=1]
-[ext_resource path="res://audio/music/Tower of Blood (Title Theme).wav" type="AudioStream" id=2]
+[ext_resource path="res://audio/music/Tower of Blood (Title Theme) - final - actualy.mp3" type="AudioStream" id=2]
 [ext_resource path="res://audio/sfx/stairs.wav" type="AudioStream" id=3]
 [ext_resource path="res://audio/music/Asleep In His Coffin (Credits).mp3" type="AudioStream" id=4]
 [ext_resource path="res://audio/music/Ascend The Tower.mp3" type="AudioStream" id=5]
@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = 2.0
 bus = "Music"
 
 [node name="CreditsMusic" type="AudioStreamPlayer" parent="."]
