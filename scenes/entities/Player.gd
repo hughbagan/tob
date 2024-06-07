@@ -114,7 +114,7 @@ func _on_JumpTimer_timeout() -> void:
 	var has_landed_sfx = 1
 	for body in jump_area.get_overlapping_bodies():
 		if body is Enemy:
-			body.queue_free()
+			body.hit()
 			hit_sfx()
 			# jump()
 			has_landed_sfx = 0
@@ -174,4 +174,4 @@ func footstep_sfx() -> void:
 
 
 func hit_sfx() -> void:
-	print("Pow!")
+	$SFX/CutSFX.play()

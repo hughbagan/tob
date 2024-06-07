@@ -52,6 +52,10 @@ func _physics_process(delta:float):
 					footstep_counter = 0
 
 
+func hit() -> void:
+	queue_free()
+
+
 func _on_SightTimer_timeout():
 	raycast.cast_to = raycast.to_local(player.global_position)
 	raycast.force_raycast_update()

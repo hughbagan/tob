@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav" type="AudioStream" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_01.wav" type="AudioStream" id=12]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=13]
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=14]
+[ext_resource path="res://audio/sfx/Whoosh_Sword_Cut_Clean_Fast_Gore-001.wav" type="AudioStream" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -164,5 +165,9 @@ stream = ExtResource( 9 )
 volume_db = -6.0
 mix_target = 2
 bus = "SFX"
+
+[node name="CutSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 15 )
+volume_db = -6.0
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
