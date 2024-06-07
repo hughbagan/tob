@@ -17,11 +17,13 @@ var attack_range:float = 1.1 # in tilemap cells
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
 var tile_position:Vector2
-var jump_rand_list
-var land_rand_list
+var jump_rand_list:int
+var land_rand_list:int
 var footstep_rand_list
 var footstep_counter = 0.0
 var footstep_frequency = 15 #lower is faster (8ish = Mr. Krabs)
+var player_swing_sfx_randi:int
+var jank_delta:float
 signal new_hp(new_hp)
 signal player_die
 
@@ -31,7 +33,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta:float) -> void:
-
+	
+	jank_delta = delta # sorry -Aiden
+	
 	if Input.is_action_pressed("bloodvision"):
 		set_hp(hp-0.05)
 		$Light2D.hide()
@@ -174,4 +178,12 @@ func footstep_sfx() -> void:
 
 
 func hit_sfx() -> void:
-	$SFX/CutSFX.play()
+	var player_swing_sfx_list = [$SFX/PlayerSwingSFX/PlayerSwingSFX1, $SFX/PlayerSwingSFX/PlayerSwingSFX2, $SFX/PlayerSwingSFX/PlayerSwingSFX3, $SFX/PlayerSwingSFX/PlayerSwingSFX4, $SFX/PlayerSwingSFX/PlayerSwingSFX5]
+	var loop_randi_swing
+	var loop_bool = true
+	while loop_bool:
+		loop_randi_swing = randi() % player_swing_sfx_list.size()
+		if loop_randi_swing == player_swing_sfx_randi:
+			loop_bool = false
+	player_swing_sfx_randi = loop_randi_swing
+	player_swing_sfx_list[loop_randi_swing].play()

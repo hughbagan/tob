@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Whoosh Sword Cut Clean Fast Gore-005.wav-73b2dc04f09a36e904c31bcba67800bb.sample"
+
+[deps]
+
+source_file="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-005.wav"
+dest_files=[ "res://.import/Whoosh Sword Cut Clean Fast Gore-005.wav-73b2dc04f09a36e904c31bcba67800bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

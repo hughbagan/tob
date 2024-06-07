@@ -9,14 +9,18 @@ onready var raycast:RayCast2D = $RayCast2D
 onready var agent:NavigationAgent2D = $NavigationAgent2D
 onready var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]
 onready var armour_sfx_list = [$EnemySFX/EnemyArmourSFX/EnemyArmourSFX1, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX2, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX3, $EnemySFX/EnemyArmourSFX/EnemyArmourSFX4]
+onready var enemy_swing_sfx_list = [$EnemySFX/EnemySwingSFX/EnemySwingSFX1, $EnemySFX/EnemySwingSFX/EnemySwingSFX2, $EnemySFX/EnemySwingSFX/EnemySwingSFX3, $EnemySFX/EnemySwingSFX/EnemySwingSFX4, $EnemySFX/EnemySwingSFX/EnemySwingSFX5]
 var current_tile_coords:Vector2
 var sight_distance:int = 2 # in tiles
 var speed:float = 50.0
 var damage:float = 0.1
 onready var boots_sfx_randi:int = 0
 onready var armour_sfx_randi:int = 0
+onready var enemy_swing_sfx_randi:int = 0
+var enemy_swing_counter:float = 0
+var enemy_swing_freq = 60
 var footstep_counter:float = 0
-var footstep_frequency = 25
+var footstep_freq = 25
 
 
 func _physics_process(delta:float):
@@ -49,7 +53,8 @@ func _physics_process(delta:float):
 				var collider = get_slide_collision(i).collider
 				if collider == player:
 					player.hit(damage) # maybe put on a timer?
-					footstep_counter = 0
+					enemy_swing_sfx(delta)
+					footstep_counter = footstep_freq / 2
 
 
 func hit() -> void:
@@ -66,7 +71,7 @@ func _on_SightTimer_timeout():
 
 func enemy_footstep_counter(_delta):
 	footstep_counter += _delta * 60
-	if footstep_counter >= footstep_frequency:
+	if footstep_counter >= footstep_freq:
 		enemy_footstep()
 		footstep_counter = 0
 
@@ -87,6 +92,19 @@ func enemy_footstep(): #plays footstep at enemy's location
 			loop_bool = false
 	boots_sfx_randi = loop_randi_boots
 	armour_sfx_randi = loop_randi_armour
-	print(loop_randi_armour)
 	boots_sfx_list[boots_sfx_randi].play()
 	armour_sfx_list[armour_sfx_randi].play()
+
+
+func enemy_swing_sfx(delta):
+	enemy_swing_counter += delta * 60
+	if enemy_swing_counter >= enemy_swing_freq:
+		enemy_swing_counter = 0
+		var loop_randi_swing
+		var loop_bool = true
+		while loop_bool:
+			loop_randi_swing = randi() % enemy_swing_sfx_list.size()
+			if loop_randi_swing == enemy_swing_sfx_randi:
+				loop_bool = false
+		enemy_swing_sfx_randi = loop_randi_swing
+		enemy_swing_sfx_list[loop_randi_swing].play()

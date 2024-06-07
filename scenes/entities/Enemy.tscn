@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" type="AudioStream" id=1]
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" type="AudioStream" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=10]
 [ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-003.wav" type="AudioStream" id=11]
 [ext_resource path="res://common/radial.png" type="Texture" id=12]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-005.wav" type="AudioStream" id=13]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-002.wav" type="AudioStream" id=14]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-003.wav" type="AudioStream" id=15]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-001.wav" type="AudioStream" id=16]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-004.wav" type="AudioStream" id=17]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -123,6 +128,38 @@ volume_db = -10.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
+bus = "SFX"
+
+[node name="EnemySwingSFX" type="Node2D" parent="EnemySFX"]
+
+[node name="EnemySwingSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
+stream = ExtResource( 16 )
+volume_db = -2.0
+pitch_scale = 0.63
+bus = "SFX"
+
+[node name="EnemySwingSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
+stream = ExtResource( 14 )
+volume_db = -2.0
+pitch_scale = 0.63
+bus = "SFX"
+
+[node name="EnemySwingSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
+stream = ExtResource( 15 )
+volume_db = -2.0
+pitch_scale = 0.63
+bus = "SFX"
+
+[node name="EnemySwingSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
+stream = ExtResource( 17 )
+volume_db = -2.0
+pitch_scale = 0.63
+bus = "SFX"
+
+[node name="EnemySwingSFX5" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
+stream = ExtResource( 13 )
+volume_db = -2.0
+pitch_scale = 0.63
 bus = "SFX"
 
 [connection signal="timeout" from="SightTimer" to="." method="_on_SightTimer_timeout"]

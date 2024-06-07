@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav" type="AudioStream" id=2]
@@ -14,7 +14,11 @@
 [ext_resource path="res://audio/sfx/JumpSFX/SWSH_Cloth_01.wav" type="AudioStream" id=12]
 [ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=13]
 [ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=14]
-[ext_resource path="res://audio/sfx/Whoosh_Sword_Cut_Clean_Fast_Gore-001.wav" type="AudioStream" id=15]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-004.wav" type="AudioStream" id=15]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-002.wav" type="AudioStream" id=16]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-001.wav" type="AudioStream" id=17]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-005.wav" type="AudioStream" id=18]
+[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-003.wav" type="AudioStream" id=19]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -136,10 +140,6 @@ pitch_scale = 0.64
 mix_target = 2
 bus = "SFX"
 
-[node name="HitSFX" type="AudioStreamPlayer" parent="SFX"]
-mix_target = 2
-bus = "SFX"
-
 [node name="FootstepSFX" type="Node" parent="SFX"]
 
 [node name="FootstepSFX" type="AudioStreamPlayer" parent="SFX/FootstepSFX"]
@@ -166,8 +166,31 @@ volume_db = -6.0
 mix_target = 2
 bus = "SFX"
 
-[node name="CutSFX" type="AudioStreamPlayer" parent="SFX"]
+[node name="PlayerSwingSFX" type="Node" parent="SFX"]
+
+[node name="PlayerSwingSFX1" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
+stream = ExtResource( 17 )
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="PlayerSwingSFX2" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
+stream = ExtResource( 16 )
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="PlayerSwingSFX3" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
+stream = ExtResource( 19 )
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="PlayerSwingSFX4" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
 stream = ExtResource( 15 )
-volume_db = -6.0
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="PlayerSwingSFX5" type="AudioStreamPlayer" parent="SFX/PlayerSwingSFX"]
+stream = ExtResource( 18 )
+pitch_scale = 1.1
+bus = "SFX"
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

@@ -16,7 +16,6 @@ bus = "Music"
 
 [node name="CreditsMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = 6.0
 bus = "Music"
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
