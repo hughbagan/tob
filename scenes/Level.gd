@@ -1,17 +1,18 @@
 class_name Level extends Node2D
 
-const EXIT_SCENE:PackedScene = preload("res://scenes/Exit.tscn")
-const PLAYER_SCENE:PackedScene = preload("res://scenes/Player.tscn")
-const ENEMY_SCENE:PackedScene = preload("res://scenes/Enemy.tscn")
-const LAMP_SCENE:PackedScene = preload("res://scenes/Lamp.tscn")
+const EXIT_SCENE:PackedScene = preload("res://scenes/entities/Exit.tscn")
+const PLAYER_SCENE:PackedScene = preload("res://scenes/entities/Player.tscn")
+const ENEMY_SCENE:PackedScene = preload("res://scenes/entities/Enemy.tscn")
+const LAMP_SCENE:PackedScene = preload("res://scenes/entities/Lamp.tscn")
 const LEVEL_FLOOR_TILE_ID:int = 0
-const LEVEL_WALL_TILE_ID:int = 24
-const LEVEL_ENEMY_TILE_ID:int = 22
-const LEVEL_LAMP_TILE_ID:int = 23
+const LEVEL_WALL_TILE_ID:int = 1
+const LEVEL_ENEMY_TILE_ID:int = 2
+const LEVEL_LAMP_TILE_ID:int = 3
 onready var generator:Node2D = $WFCGenerator
 onready var sample_tilemap:TileMap = $WFCGenerator/Sample
 onready var target_tilemap:TileMap = $WFCGenerator/Target
 onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
+onready var background_tilemap:TileMap = $WFCGenerator/Background
 onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
 onready var entities:Node2D = $Entities
 onready var level_label:Label = $GUI/LevelLabel
@@ -28,11 +29,17 @@ func _on_WFCGenerator_OnDone():
 	var corners = [Vector2(0, 0), Vector2(width-1, 0), Vector2(0, height-1), Vector2(width-1, height-1)]
 
 	# encase the level in an invisible wall
+	# trying to set_cell on target_tilemap does nothing here, so I'll do this
 	envelope_tilemap.position = -target_tilemap.cell_size
 	for y in range(height+2):
 		for x in range(width+2):
 			if (x==0 or y==0) or (x==width+1 or y==height+1):
 				envelope_tilemap.set_cell(x, y, LEVEL_WALL_TILE_ID)
+	# for the transparent wall tilemap sprite (purely aesthetic)
+	background_tilemap.position = envelope_tilemap.position
+	for y in range(height+2):
+		for x in range(width+2):
+			background_tilemap.set_cell(x, y, LEVEL_FLOOR_TILE_ID)
 
 	var player = PLAYER_SCENE.instance()
 
@@ -48,8 +55,8 @@ func _on_WFCGenerator_OnDone():
 				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(enemy)
-			if tile == LEVEL_LAMP_TILE_ID:
-				envelope_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
+			elif tile == LEVEL_LAMP_TILE_ID:
+				target_tilemap.set_cell(x+1, y+1, LEVEL_FLOOR_TILE_ID)
 				var lamp = LAMP_SCENE.instance()
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)

@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://scenes/Enemy.gd"
+"path": "res://scenes/entities/Enemy.gd"
 }, {
 "base": "Area2D",
 "class": "Exit",
 "language": "GDScript",
-"path": "res://scenes/Exit.gd"
+"path": "res://scenes/entities/Exit.gd"
+}, {
+"base": "Node2D",
+"class": "Lamp",
+"language": "GDScript",
+"path": "res://scenes/entities/Lamp.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -27,11 +32,12 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scenes/Player.gd"
+"path": "res://scenes/entities/Player.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Exit": "",
+"Lamp": "",
 "Level": "",
 "Player": ""
 }
@@ -39,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="wfc-roguelike"
-run/main_scene="res://scenes/Level.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://common/icon.png"
 
 [display]

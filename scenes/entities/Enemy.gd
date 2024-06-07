@@ -20,7 +20,7 @@ var footstep_counter:float = 0
 var footstep_frequency = 25
 
 
-func _process(delta:float):
+func _physics_process(delta:float):
 	var velocity:Vector2 = Vector2()
 	if Input.is_action_just_pressed("bloodvision"):
 		$SpriteShaded.show()

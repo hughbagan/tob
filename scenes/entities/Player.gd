@@ -13,7 +13,7 @@ var current_tile:int
 var level
 var hp:float = 100.0
 var speed:float = 75.0
-var attack_range:float = 1.5 # in tilemap cells
+var attack_range:float = 1.1 # in tilemap cells
 var velocity:Vector2 = Vector2()
 var jumping:bool = false
 var tile_position:Vector2
@@ -93,6 +93,8 @@ func _physics_process(delta:float) -> void:
 func jump() -> void:
 	jumping = true
 	set_collision_mask_bit(0, 0) # avoid the Level
+	set_collision_mask_bit(2, 0) # avoid enemies
+	set_collision_layer_bit(1, 0) # enemies avoid the player
 	jump_timer.start()
 	jump_sfx()
 	var jump_tween = get_tree().create_tween()
@@ -105,14 +107,16 @@ func jump() -> void:
 func _on_JumpTimer_timeout() -> void:
 	# Landing
 	jumping = false
-	set_collision_mask_bit(0, 1) # re-enable Level collision
+	set_collision_mask_bit(0, 1) # enable level collision
+	set_collision_mask_bit(2, 4) # enable player-enemy collision
+	set_collision_layer_bit(1, 2) # enable enemy-player collision
 	$Sprite.show()
 	$FlySprite.hide()
 	var has_landed_sfx = 1
 	for body in jump_area.get_overlapping_bodies():
 		body.queue_free()
 		hit_sfx()
-		jump()
+		# jump()
 		has_landed_sfx = 0
 	if has_landed_sfx == 1:
 		land_sfx()
