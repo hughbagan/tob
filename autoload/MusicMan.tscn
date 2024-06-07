@@ -22,3 +22,5 @@ stream = ExtResource( 3 )
 bus = "Music"
 
 [node name="StairsSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"

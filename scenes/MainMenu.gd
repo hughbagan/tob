@@ -3,25 +3,27 @@ extends Control
 
 func _ready() -> void:
 	$Credits.hide()
-	MusicMan.MainMenu(true)
+	MusicMan.MainMenu(true, 2)
 
 
 func _on_PlayButton_pressed() -> void:
-	MusicMan.StepsSound.play()
+	MusicMan.StepsSound()
 	$RedRect.show()
 	var tween = get_tree().create_tween()
-	tween.tween_property($RedRect, "color:a", 1.0, 1.5)
+	var tween_len = 1.5
+	MusicMan.MainMenu(false, tween_len)
+	tween.tween_property($RedRect, "color:a", 1.0, tween_len)
 	yield(tween, "finished")
 	get_tree().change_scene("res://scenes/Tutorial.tscn")
 
 
 func _on_InfoButton_pressed():
 	$Credits.show()
-	MusicMan.MainMenu(false)
+	MusicMan.MainMenu(false, 1)
 	MusicMan.Credits(true)
 
 
 func _on_BackButton_pressed():
 	$Credits.hide()
-	MusicMan.Credits(false)
-	MusicMan.MainMenu(true)
+	MusicMan.Credits(false, 1)
+	MusicMan.MainMenu(true, 1)
