@@ -33,13 +33,25 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/entities/Player.gd"
+}, {
+"base": "Node",
+"class": "Rule",
+"language": "GDScript",
+"path": "res://addons/Godot-WFC-Csharp/Rule.gd"
+}, {
+"base": "Node2D",
+"class": "WFCGenerator",
+"language": "GDScript",
+"path": "res://addons/Godot-WFC-Csharp/WFCGenerator.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Exit": "",
 "Lamp": "",
 "Level": "",
-"Player": ""
+"Player": "",
+"Rule": "",
+"WFCGenerator": ""
 }
 
 [application]
