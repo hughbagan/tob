@@ -1,47 +1,44 @@
 extends Node
 
+var MusicMan_debug:bool = false
+
 var off_music:AudioStreamPlayer
 var player_dead:bool = false
-# Functions are named after the called nodes they are replacing, if they are replacing a called node
 
-# Main Menu Music
-func MainMenu(toggle:bool, tween_len:float = 0):
+# Main Menu music
+func MainMenu(toggle:bool = false, tween_len:float = 0):
 	var music = $MainMenuMusic
-	var music_vol = music.volume_db
-	if toggle == true:
-		if music.playing == false:
-			tween_music_on(music, tween_len, music_vol)
-	if toggle == false:
-		if music.playing == true:
-			tween_music_off(music, tween_len)
+	_music_changer(toggle, tween_len, music)
 
-# Credits Music
-func Credits(toggle:bool, tween_len:float = 0):
+# Credits music
+func Credits(toggle:bool = false, tween_len:float = 0):
 	var music = $CreditsMusic
-	var music_vol = music.volume_db
-	if toggle == true:
-		if music.playing == false:
-			tween_music_on(music, tween_len, music_vol)
-	if toggle == false:
-		if music.playing == true:
-			tween_music_off(music, tween_len)
+	_music_changer(toggle, tween_len, music)
 
-# Level Music
-func level_music(toggle:bool, tween_len:float = 0):
+# Level music
+func level_music(toggle:bool = false, tween_len:float = 0):
 	var music = $LevelMusic
+	_music_changer(toggle, tween_len, music)
+
+# --------------------------------------------------------------------------
+# Toggles the music
+func _music_changer(toggle:bool, tween_len:float, music:AudioStreamPlayer):
 	var music_vol = music.volume_db
 	if toggle == true:
 		if music.playing == false:
 			tween_music_on(music, tween_len, music_vol)
-	if toggle == false:
+	elif toggle == false:
 		if music.playing == true:
 			tween_music_off(music, tween_len)
 
 
 func tween_music_on(music:AudioStreamPlayer, tween_len:float, music_vol = 0) -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(music, "volume_db", music_vol, tween_len)
+	music.volume_db = -60
 	music.play()
+	tween.tween_property(music, "volume_db", music_vol, tween_len)
+	if MusicMan_debug == true:
+		print("Playing: ", music)
 
 
 func tween_music_off(music:AudioStreamPlayer, tween_len:float) -> void:
@@ -53,8 +50,12 @@ func tween_music_off(music:AudioStreamPlayer, tween_len:float) -> void:
 
 func _on_music_quieted() -> void:
 	off_music.stop()
+	if MusicMan_debug == true:
+		print("Stopped: ", off_music)
 
 
 # Steps Sound (stairs.wav)
-func StepsSound(): # Found in MainMenu
+func StepsSound():
 	$StairsSFX.play()
+	if MusicMan_debug == true:
+		print("Playing: ", $StairsSFX)
