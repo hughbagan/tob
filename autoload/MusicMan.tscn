@@ -31,5 +31,7 @@ bus = "SFX"
 autostart = true
 
 [node name="VolumeDebugGCTimer" type="Timer" parent="."]
+wait_time = 6.0
 
 [connection signal="timeout" from="VolumeDebugTimer" to="." method="_on_DebugTimer_timeout"]
+[connection signal="timeout" from="VolumeDebugGCTimer" to="." method="_on_VolumeDebugGCTimer_timeout"]

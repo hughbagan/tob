@@ -5,6 +5,7 @@ var MusicMan_debug:bool = true
 var off_music:AudioStreamPlayer
 var player_dead:bool = false
 var vol_debug_list:Array = []
+var vol_debug_gc_list:Array = []
 
 # Possible music_ease enums:
 # EASE_IN = 0 		slow -> fast (cross-fade out)
@@ -76,22 +77,24 @@ func StepsSound():
 	if MusicMan_debug == true:
 		print("Playing: ", $StairsSFX, " Clang Clang Clang...")
 
+
 # Volume debuging
 func _on_DebugTimer_timeout():
-	var vol_debug_gc_list:Array
 	if MusicMan_debug == false:
 		$VolumeDebugTimer.stop()
-	
 	# prints volume
-	if vol_debug_list.size() != 0:
+	elif vol_debug_list.size() != 0:
 		for i in range(vol_debug_list.size()):
 			print("Volume of ", vol_debug_list[i], ": ", vol_debug_list[i].volume_db)
 			if vol_debug_list[i].volume_db == -60:
 				vol_debug_gc_list.append(i)
-		
-		# vol_debug_list garbage collection
-#		if vol_debug_gc_list.size() != 0:
-#			vol_debug_gc_list.invert()
-#			for i in range(vol_debug_gc_list.size()):
-#				print("Removed ", vol_debug_list[i], " from vol_debug_list")
-#				vol_debug_list.remove(vol_debug_gc_list[i])
+
+
+func _on_VolumeDebugGCTimer_timeout():
+	if MusicMan_debug == false:
+		$VolumeDebugGCTimer.stop()
+	elif vol_debug_gc_list.size() != 0:
+		vol_debug_gc_list.invert()
+		for i in range(vol_debug_gc_list.size()):
+			print("Removed ", vol_debug_list[i], " from vol_debug_list")
+			vol_debug_list.remove(vol_debug_gc_list[i])
