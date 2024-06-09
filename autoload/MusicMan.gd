@@ -90,8 +90,8 @@ func _on_DebugTimer_timeout():
 				vol_debug_kill_list.append(i)
 		
 		# vol_debug_list garbage collection
-		if vol_debug_kill_list.size() != 0:
-			vol_debug_kill_list.invert()
-			for i in range(vol_debug_kill_list.size()):
-				print("Removed ", vol_debug_list[i], " from vol_debug_list")
-				vol_debug_list.remove(vol_debug_kill_list[i])
+#		if vol_debug_kill_list.size() != 0:
+#			vol_debug_kill_list.invert()
+#			for i in range(vol_debug_kill_list.size()):
+#				print("Removed ", vol_debug_list[i], " from vol_debug_list")
+#				vol_debug_list.remove(vol_debug_kill_list[i])
