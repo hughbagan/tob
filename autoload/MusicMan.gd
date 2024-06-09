@@ -50,7 +50,6 @@ func tween_music_on(music:AudioStreamPlayer, tween_len:float, music_ease = -1, m
 	if MusicMan_debug == true:
 		print("Playing: ", music)
 		print("Start-time: ", music.get_playback_position())
-		print("Volume: ", music.volume_db)
 
 
 func tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1) -> void:
