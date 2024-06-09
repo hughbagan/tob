@@ -1,6 +1,6 @@
 extends Node
 
-var MusicMan_debug:bool = false
+var MusicMan_debug:bool = true
 
 var off_music:AudioStreamPlayer
 var player_dead:bool = false
@@ -49,6 +49,8 @@ func tween_music_on(music:AudioStreamPlayer, tween_len:float, music_ease = -1, m
 	tween.tween_property(music, "volume_db", music_vol, tween_len)
 	if MusicMan_debug == true:
 		print("Playing: ", music)
+		print("Start-time: ", music.get_playback_position())
+		print("Volume: ", music.volume_db)
 
 
 func tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1) -> void:
@@ -62,10 +64,11 @@ func _on_music_quieted() -> void:
 	off_music.stop()
 	if MusicMan_debug == true:
 		print("Stopped: ", off_music)
+		print("Stop-time: ", off_music.get_playback_position())
 
 
 # Steps Sound (stairs.wav)
 func StepsSound():
 	$StairsSFX.play()
 	if MusicMan_debug == true:
-		print("Playing: ", $StairsSFX)
+		print("Playing: ", $StairsSFX, " Clang Clang Clang...")
