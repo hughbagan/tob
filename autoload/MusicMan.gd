@@ -78,7 +78,7 @@ func StepsSound():
 
 # Volume debuging
 func _on_DebugTimer_timeout():
-	var vol_debug_kill_list:Array
+	var vol_debug_gc_list:Array
 	if MusicMan_debug == false:
 		$VolumeDebugTimer.stop()
 	
@@ -87,11 +87,11 @@ func _on_DebugTimer_timeout():
 		for i in range(vol_debug_list.size()):
 			print("Volume of ", vol_debug_list[i], ": ", vol_debug_list[i].volume_db)
 			if vol_debug_list[i].volume_db == -60:
-				vol_debug_kill_list.append(i)
+				vol_debug_gc_list.append(i)
 		
 		# vol_debug_list garbage collection
-#		if vol_debug_kill_list.size() != 0:
-#			vol_debug_kill_list.invert()
-#			for i in range(vol_debug_kill_list.size()):
+#		if vol_debug_gc_list.size() != 0:
+#			vol_debug_gc_list.invert()
+#			for i in range(vol_debug_gc_list.size()):
 #				print("Removed ", vol_debug_list[i], " from vol_debug_list")
-#				vol_debug_list.remove(vol_debug_kill_list[i])
+#				vol_debug_list.remove(vol_debug_gc_list[i])
