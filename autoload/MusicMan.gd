@@ -4,6 +4,7 @@ var MusicMan_debug:bool = true
 
 var off_music:AudioStreamPlayer
 var player_dead:bool = false
+var vol_debug_list:Array = []
 
 # Possible music_ease enums:
 # EASE_IN = 0 		slow -> fast (cross-fade out)
@@ -48,8 +49,10 @@ func tween_music_on(music:AudioStreamPlayer, tween_len:float, music_ease = -1, m
 	music.play()
 	tween.tween_property(music, "volume_db", music_vol, tween_len)
 	if MusicMan_debug == true:
-		print("Playing: ", music)
-		print("Start-time: ", music.get_playback_position())
+		if music.playing == true:
+			print("Playing ", music)
+			print("Start-time: ", music.get_playback_position())
+			vol_debug_list.append(music)
 
 
 func tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1) -> void:
@@ -62,8 +65,9 @@ func tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1) 
 func _on_music_quieted() -> void:
 	off_music.stop()
 	if MusicMan_debug == true:
-		print("Stopped: ", off_music)
-		print("Stop-time: ", off_music.get_playback_position())
+		if off_music.playing == false:
+			print("Stopped ", off_music)
+			print("Stop-time: ", off_music.get_playback_position())
 
 
 # Steps Sound (stairs.wav)
@@ -71,3 +75,23 @@ func StepsSound():
 	$StairsSFX.play()
 	if MusicMan_debug == true:
 		print("Playing: ", $StairsSFX, " Clang Clang Clang...")
+
+# Volume debuging
+func _on_DebugTimer_timeout():
+	var vol_debug_kill_list:Array
+	if MusicMan_debug == false:
+		$VolumeDebugTimer.stop()
+	
+	# prints volume
+	if vol_debug_list.size() != 0:
+		for i in range(vol_debug_list.size()):
+			print("Volume of ", vol_debug_list[i], ": ", vol_debug_list[i].volume_db)
+			if vol_debug_list[i].volume_db == -60:
+				vol_debug_kill_list.append(i)
+		
+		# vol_debug_list garbage collection
+		if vol_debug_kill_list.size() != 0:
+			vol_debug_kill_list.invert()
+			for i in range(vol_debug_kill_list.size()):
+				print("Removed ", vol_debug_list[i], " from vol_debug_list")
+				vol_debug_list.remove(vol_debug_kill_list[i])
