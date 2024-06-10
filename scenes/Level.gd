@@ -23,7 +23,7 @@ func _ready():
 func _on_WFCGenerator_OnDone():
 	width = generator.H
 	height = generator.V
-	camera.position = target_tilemap.get_used_rect().size*target_tilemap.cell_size*0.5
+	camera.position = Vector2(width, height)*target_tilemap.cell_size*0.5
 	var corners = [Vector2(0, 0), Vector2(width-1, 0), Vector2(0, height-1), Vector2(width-1, height-1)]
 
 	# encase the level in an invisible wall
