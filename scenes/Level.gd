@@ -109,7 +109,7 @@ func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 
 
 func _on_exit_reached():
-	MusicMan.StepsSound()
+	MusicMan.steps_sound()
 
 	# Fade out
 	$GUI/RedRect.show()

@@ -18,17 +18,17 @@ var vol_debug_gc_list:Array = []
 
 # ------------------------------------------------------
 # Main Menu music
-func MainMenu(toggle:bool = true, tween_len:float = 0, music_ease = .5):
+func main_menu(toggle:bool = true, tween_len:float = 0, music_ease = .5):
 	var music = $MainMenuMusic
 	_music_changer(toggle, tween_len, music, music_ease)
 
 # Credits music
-func Credits(toggle:bool = true, tween_len:float = 0, music_ease = .5):
+func credits(toggle:bool = true, tween_len:float = 0, music_ease = .5):
 	var music = $CreditsMusic
 	_music_changer(toggle, tween_len, music, music_ease)
 
 # Level music
-func level_music(toggle:bool = true, tween_len:float = 0, music_ease = .5):
+func level(toggle:bool = true, tween_len:float = 0, music_ease = .5):
 	var music = $LevelMusic
 	_music_changer(toggle, tween_len, music, music_ease)
 
@@ -75,7 +75,7 @@ func tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1, 
 
 
 # Steps Sound (stairs.wav)
-func StepsSound():
+func steps_sound():
 	$StairsSFX.play()
 	if MusicMan_debug == true:
 		print("Playing: ", $StairsSFX, " Clang Clang Clang...")
