@@ -1,6 +1,6 @@
 extends Node
 
-var MusicMan_debug:bool = true
+var MusicMan_debug:bool = false
 
 var off_music:AudioStreamPlayer
 var player_dead:bool = false #global variable, do not touch! It should always start as 'false'
