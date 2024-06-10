@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://addons/Godot-WFC-Csharp/WFCGenerator.gd" type="Script" id=2]
+[ext_resource path="res://scenes/generator/WFCGenerator.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Level.gd" type="Script" id=3]
 [ext_resource path="res://common/gothicfont.theme" type="Theme" id=4]
 [ext_resource path="res://common/Gothic_Pixels.ttf" type="DynamicFontData" id=5]
@@ -62,14 +62,12 @@ theme = ExtResource( 4 )
 text = "Mortis"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="WFCGenerator" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="Background" type="TileMap" parent="WFCGenerator"]
-visible = false
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 0

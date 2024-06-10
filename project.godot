@@ -37,12 +37,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Rule",
 "language": "GDScript",
-"path": "res://addons/Godot-WFC-Csharp/Rule.gd"
+"path": "res://scenes/generator/Rule.gd"
 }, {
 "base": "Node2D",
 "class": "WFCGenerator",
 "language": "GDScript",
-"path": "res://addons/Godot-WFC-Csharp/WFCGenerator.gd"
+"path": "res://scenes/generator/WFCGenerator.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",

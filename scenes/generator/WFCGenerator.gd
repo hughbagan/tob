@@ -9,10 +9,10 @@ export var match_radius:int = 1 # the radius around a tile check for matching ti
 export var correction_radius:int = 2 # the radius around a failed tile that will be cleared on fixing. A number bigger than match_radius is recommended.
 export var choose_by_probability:bool = false
 export var show_progress:bool = false # may impact performance
-var used_rules:Dictionary = {} # {int, Array[Rule]} Holds tile occurrences in the sample for future use as rules
-var tile_repetitions:Dictionary = {} # {int, int} Holds number of repetitions for each option. Used for calculating occurance probability.
-var tilemap_array:Array = [] # Array[Array[int]] Holds tiles data for internal use only. Do not use directly! Use set_tile(), get_tile()
-var tilemap_count:Array = [] # Array[Array[int]] Holds possible options counts
+var used_rules:Dictionary # {int, Array[Rule]} Holds tile occurrences in the sample for future use as rules
+var tile_repetitions:Dictionary # {int, int} Holds number of repetitions for each option. Used for calculating occurance probability.
+var tilemap_array:Array # Array[Array[int]] Holds tiles data for internal use only. Do not use directly! Use set_tile(), get_tile()
+var tilemap_count:Array # Array[Array[int]] Holds possible options counts
 var max_n:int # total number of tiles that need to be set
 var current_n:int = 0 # number of tiles currently set
 var failed:bool = false
@@ -21,12 +21,15 @@ var fail_count:int = 0
 var fail_max:int = 400
 var generation_thread:Thread
 signal done
-var numthreads:= 0
 
 
 func _ready() -> void:
 	randomize()
 	generation_thread = Thread.new()
+	used_rules = {}
+	tile_repetitions = {}
+	tilemap_array = []
+	tilemap_count = []
 	current_n = 0
 	failed = false
 	fail_count = 0
@@ -80,7 +83,7 @@ func _generate_map(clear_target:bool = true):
 		if current_n >= max_n:
 			break
 		var next_tile:Vector2 = get_next_tile() # find the next tile to set
-		print(current_n, "/", max_n, " ", next_tile)
+		#print(current_n, "/", max_n, " ", next_tile)
 		if get_tile(next_tile) != EMPTY:
 			failed = true
 
@@ -99,8 +102,7 @@ func _generate_map(clear_target:bool = true):
 		if fail_count > fail_max:
 			print("generator stuck; start over")
 			# TODO: refactor to a more appropriate function name
-			assert(false)
-			#_on_button_pressed() # regenerates without Init() (re-building rules)
+			_on_button_pressed() # regenerates without Init() (re-building rules)
 		fix_fail()
 	return OK
 
@@ -115,6 +117,7 @@ func apply_tilemap() -> void:
 # Create the rules from the sample tilemap
 func init() -> void:
 	used_rules.clear()
+	tile_repetitions.clear()
 	var used_cells:Array = sample.get_used_cells() # Array[Vector2]
 	for cell in used_cells:
 		var tile_id:int = sample.get_cell(cell.x, cell.y)
@@ -299,12 +302,16 @@ func set_tile(coord:Vector2, value:int) -> void:
 
 
 func _on_button_pressed() -> void:
-	# to kill a thread I would need to track a stop request inside the thread
+	# TODO: to kill a thread I would need to track a stop request inside the thread
 	# and then wait_to_finish()
+	tilemap_array = []
+	tilemap_count = []
+
 	current_n = 0
 	failed = false
 	fail_count = 0
 
+	tilemap_array = []
 	for i in H+match_radius*2:
 		var row = []
 		for j in H+match_radius*2:

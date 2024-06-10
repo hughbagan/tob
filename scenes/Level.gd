@@ -137,12 +137,12 @@ func _on_exit_reached():
 			var lamps = sample_tilemap.get_used_cells_by_id(Global.LEVEL_LAMP_TILE_ID)
 			var pick = lamps[lamps.size()-1]
 			sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
-		generator._Ready() # re-build Rules and generate
+		generator._ready() # re-build Rules and generate
 	elif current_level == 101:
 		# WIN!
 		pass
 	else:
-		generator.OnButtonPressed() # generate new level
+		generator._on_button_pressed() # generate new level
 
 
 func _on_player_hp_changed(new_hp:float) -> void:
