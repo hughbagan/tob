@@ -87,11 +87,12 @@ func _physics_process(delta:float) -> void:
 			jump()
 
 	# Footsteps
-	if velocity != Vector2(0,0) and not jumping and current_tile != Global.LEVEL_WALL_TILE_ID:
-		footstep_counter += delta * 60
-		if footstep_counter >= footstep_frequency:
-			footstep_sfx()
-			footstep_counter = 0.0
+	if MusicMan.player_dead == false:
+		if velocity != Vector2(0,0) and not jumping and current_tile != Global.LEVEL_WALL_TILE_ID:
+			footstep_counter += delta * 60
+			if footstep_counter >= footstep_frequency:
+				footstep_sfx()
+				footstep_counter = 0.0
 
 
 func jump() -> void:
@@ -141,6 +142,7 @@ func set_hp(new_hp:float) -> void:
 	emit_signal("new_hp", new_hp)
 	if hp < 0.0:
 		emit_signal("player_die")
+		MusicMan.player_dead = true
 
 
 func jump_sfx() -> void:
