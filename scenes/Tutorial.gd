@@ -19,7 +19,7 @@ func _ready():
 
 func _on_exit_reached():
 	Global.player_hp = 100.0
-	MusicMan.StepsSound()
+	MusicMan.steps_sound()
 	$GUI/RedRect.show()
 	var tween = get_tree().create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
