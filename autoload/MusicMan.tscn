@@ -26,3 +26,9 @@ bus = "Music"
 [node name="StairsSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
+
+[node name="VolumeDebugTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="VolumeDebugTimer" to="." method="_on_DebugTimer_timeout"]

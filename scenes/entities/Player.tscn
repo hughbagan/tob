@@ -90,6 +90,7 @@ cast_to = Vector2( 0, 0 )
 collision_mask = 4
 
 [node name="Listener2D" type="Listener2D" parent="."]
+current = true
 
 [node name="SFX" type="Node" parent="."]
 __meta__ = {
@@ -101,18 +102,21 @@ __meta__ = {
 [node name="JumpSFX1" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 stream = ExtResource( 12 )
 volume_db = -6.0
+pitch_scale = 1.5
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX2" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 stream = ExtResource( 10 )
 volume_db = -6.0
+pitch_scale = 1.5
 mix_target = 2
 bus = "SFX"
 
 [node name="JumpSFX3" type="AudioStreamPlayer" parent="SFX/JumpSFX"]
 stream = ExtResource( 6 )
 volume_db = -6.0
+pitch_scale = 1.5
 mix_target = 2
 bus = "SFX"
 
@@ -120,21 +124,21 @@ bus = "SFX"
 
 [node name="LandSFX1" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 8 )
-volume_db = -6.0
+volume_db = -4.0
 pitch_scale = 0.7
 mix_target = 2
 bus = "SFX"
 
 [node name="LandSFX2" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 5 )
-volume_db = -6.0
+volume_db = -4.0
 pitch_scale = 0.7
 mix_target = 2
 bus = "SFX"
 
 [node name="LandSFX3" type="AudioStreamPlayer" parent="SFX/LandSFX"]
 stream = ExtResource( 2 )
-volume_db = -6.0
+volume_db = -4.0
 pitch_scale = 0.64
 mix_target = 2
 bus = "SFX"

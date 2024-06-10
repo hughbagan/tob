@@ -66,7 +66,7 @@ shadow_enabled = true
 
 [node name="EnemyBootsSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
 stream = ExtResource( 6 )
-volume_db = -6.0
+volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
@@ -74,7 +74,7 @@ bus = "SFX"
 
 [node name="EnemyBootsSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
 stream = ExtResource( 8 )
-volume_db = -6.0
+volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
@@ -82,7 +82,7 @@ bus = "SFX"
 
 [node name="EnemyBootsSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
 stream = ExtResource( 9 )
-volume_db = -6.0
+volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
@@ -90,7 +90,7 @@ bus = "SFX"
 
 [node name="EnemyBootsSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
 stream = ExtResource( 7 )
-volume_db = -6.0
+volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
@@ -100,7 +100,7 @@ bus = "SFX"
 
 [node name="EnemyArmourSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 5 )
-volume_db = -10.0
+volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
@@ -108,7 +108,7 @@ bus = "SFX"
 
 [node name="EnemyArmourSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 1 )
-volume_db = -10.0
+volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
@@ -116,7 +116,7 @@ bus = "SFX"
 
 [node name="EnemyArmourSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 11 )
-volume_db = -10.0
+volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
@@ -124,7 +124,7 @@ bus = "SFX"
 
 [node name="EnemyArmourSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
 stream = ExtResource( 2 )
-volume_db = -10.0
+volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5

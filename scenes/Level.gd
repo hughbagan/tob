@@ -17,7 +17,7 @@ var exit_corner:Vector2
 
 
 func _ready():
-	MusicMan.level_music(true)
+	MusicMan.level(true)
 
 
 func _on_WFCGenerator_OnDone():
@@ -109,7 +109,7 @@ func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 
 
 func _on_exit_reached():
-	MusicMan.StepsSound()
+	MusicMan.steps_sound()
 
 	# Fade out
 	$GUI/RedRect.show()
@@ -153,7 +153,7 @@ func _on_player_die():
 	# Fade out
 	$Entities.pause_mode = PAUSE_MODE_STOP
 	$GUI/RedRect.show()
-	MusicMan.level_music(false, 1)
+	MusicMan.level(false, 1)
 	MusicMan.player_dead = true
 	var tween = get_tree().create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
