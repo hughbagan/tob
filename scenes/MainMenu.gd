@@ -3,7 +3,7 @@ extends Control
 
 func _ready() -> void:
 	$Credits.hide()
-	MusicMan.main_menu(true, 1, .75)
+	MusicMan.main_menu(true, .75, 1.5)
 
 
 func _on_PlayButton_pressed() -> void:

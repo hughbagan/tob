@@ -65,7 +65,7 @@ func _physics_process(delta:float) -> void:
 	slay_raycast.cast_to = velocity * tilemap.cell_size * attack_range
 
 	# Tile centering
-	tile_position = ((global_position / (tilemap.cell_size.x*0.5)) + Vector2(1,1)) #/ 2
+	tile_position = ((global_position / (tilemap.cell_size.x*0.5)) + Vector2(1,1))
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
 		velocity.x += round(tile_position.x) - tile_position.x
 	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
@@ -146,48 +146,52 @@ func set_hp(new_hp:float) -> void:
 
 
 func jump_sfx() -> void:
-	var jump_sounds = [$SFX/JumpSFX/JumpSFX1, $SFX/JumpSFX/JumpSFX2, $SFX/JumpSFX/JumpSFX3]
-	var jump_randi
-	var rand_loop = true
-	while rand_loop:
-		jump_randi = randi() % jump_sounds.size()
-		if jump_randi != jump_rand_list:
-			rand_loop = false
-	jump_rand_list = jump_randi
-	jump_sounds[jump_randi].play()
+	if MusicMan.player_dead == false:
+		var jump_sounds = [$SFX/JumpSFX/JumpSFX1, $SFX/JumpSFX/JumpSFX2, $SFX/JumpSFX/JumpSFX3]
+		var jump_randi
+		var rand_loop = true
+		while rand_loop:
+			jump_randi = randi() % jump_sounds.size()
+			if jump_randi != jump_rand_list:
+				rand_loop = false
+		jump_rand_list = jump_randi
+		jump_sounds[jump_randi].play()
 
 
 func land_sfx() -> void:
-	var land_sounds = [$SFX/LandSFX/LandSFX1, $SFX/LandSFX/LandSFX2, $SFX/LandSFX/LandSFX3]
-	var land_randi
-	var rand_loop = true
-	while rand_loop:
-		land_randi = randi() % land_sounds.size()
-		if land_randi != land_rand_list:
-			rand_loop = false
-	land_rand_list = land_randi
-	land_sounds[land_randi].play()
+	if MusicMan.player_dead == false:
+		var land_sounds = [$SFX/LandSFX/LandSFX1, $SFX/LandSFX/LandSFX2, $SFX/LandSFX/LandSFX3]
+		var land_randi
+		var rand_loop = true
+		while rand_loop:
+			land_randi = randi() % land_sounds.size()
+			if land_randi != land_rand_list:
+				rand_loop = false
+		land_rand_list = land_randi
+		land_sounds[land_randi].play()
 
 
 func footstep_sfx() -> void:
-	var footstep_sounds = [$SFX/FootstepSFX/FootstepSFX, $SFX/FootstepSFX/FootstepSFX2, $SFX/FootstepSFX/FootstepSFX3, $SFX/FootstepSFX/FootstepSFX4]
-	var footstep_randi
-	var rand_loop = true
-	while rand_loop:
-		footstep_randi = randi() % footstep_sounds.size()
-		if footstep_randi != footstep_rand_list:
-			rand_loop = false
-	footstep_rand_list = footstep_randi
-	footstep_sounds[footstep_randi].play()
+	if MusicMan.player_dead == false:
+		var footstep_sounds = [$SFX/FootstepSFX/FootstepSFX, $SFX/FootstepSFX/FootstepSFX2, $SFX/FootstepSFX/FootstepSFX3, $SFX/FootstepSFX/FootstepSFX4]
+		var footstep_randi
+		var rand_loop = true
+		while rand_loop:
+			footstep_randi = randi() % footstep_sounds.size()
+			if footstep_randi != footstep_rand_list:
+				rand_loop = false
+		footstep_rand_list = footstep_randi
+		footstep_sounds[footstep_randi].play()
 
 
 func hit_sfx() -> void:
-	var player_swing_sfx_list = [$SFX/PlayerSwingSFX/PlayerSwingSFX1, $SFX/PlayerSwingSFX/PlayerSwingSFX2, $SFX/PlayerSwingSFX/PlayerSwingSFX3, $SFX/PlayerSwingSFX/PlayerSwingSFX4, $SFX/PlayerSwingSFX/PlayerSwingSFX5]
-	var loop_randi_swing
-	var loop_bool = true
-	while loop_bool:
-		loop_randi_swing = randi() % player_swing_sfx_list.size()
-		if loop_randi_swing != player_swing_sfx_randi:
-			loop_bool = false
-	player_swing_sfx_randi = loop_randi_swing
-	player_swing_sfx_list[loop_randi_swing].play()
+	if MusicMan.player_dead == false:
+		var player_swing_sfx_list = [$SFX/PlayerSwingSFX/PlayerSwingSFX1, $SFX/PlayerSwingSFX/PlayerSwingSFX2, $SFX/PlayerSwingSFX/PlayerSwingSFX3, $SFX/PlayerSwingSFX/PlayerSwingSFX4, $SFX/PlayerSwingSFX/PlayerSwingSFX5]
+		var loop_randi_swing
+		var loop_bool = true
+		while loop_bool:
+			loop_randi_swing = randi() % player_swing_sfx_list.size()
+			if loop_randi_swing != player_swing_sfx_randi:
+				loop_bool = false
+		player_swing_sfx_randi = loop_randi_swing
+		player_swing_sfx_list[loop_randi_swing].play()

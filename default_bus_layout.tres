@@ -1,8 +1,12 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=2]
+[gd_resource type="AudioBusLayout" load_steps=6 format=2]
 
 [sub_resource type="AudioEffectChorus" id=2]
 resource_name = "Chorus"
 wet = 0.25
+
+[sub_resource type="AudioEffectCompressor" id=7]
+resource_name = "Compressor"
+threshold = -10.0
 
 [sub_resource type="AudioEffectEQ" id=5]
 resource_name = "EQ"
@@ -14,6 +18,7 @@ pan_pullout = 4.0
 
 [sub_resource type="AudioEffectReverb" id=6]
 resource_name = "Reverb"
+room_size = 0.5
 wet = 0.1
 
 [resource]
@@ -25,6 +30,8 @@ bus/1/volume_db = 0.0
 bus/1/send = "2DSFX"
 bus/1/effect/0/effect = SubResource( 2 )
 bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource( 7 )
+bus/1/effect/1/enabled = true
 bus/2/name = "SFX"
 bus/2/solo = false
 bus/2/mute = false
@@ -37,3 +44,9 @@ bus/2/effect/1/effect = SubResource( 4 )
 bus/2/effect/1/enabled = true
 bus/2/effect/2/effect = SubResource( 6 )
 bus/2/effect/2/enabled = true
+bus/3/name = "UI"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = "Master"

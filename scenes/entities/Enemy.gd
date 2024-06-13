@@ -18,9 +18,9 @@ onready var boots_sfx_randi:int = 0
 onready var armour_sfx_randi:int = 0
 onready var enemy_swing_sfx_randi:int = 0
 var enemy_swing_freq = 90
-var enemy_swing_counter:float = enemy_swing_freq - 15
+var enemy_swing_counter:float = enemy_swing_freq - 5
 var footstep_freq = 25
-var footstep_counter:float = 10
+var footstep_counter:float = footstep_freq - 5
 
 
 func _physics_process(delta:float):
