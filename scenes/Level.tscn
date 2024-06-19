@@ -20,9 +20,11 @@ bg_color = Color( 0.647059, 0.00784314, 0.00784314, 1 )
 bg_color = Color( 0, 0, 0, 0 )
 
 [node name="Level" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="LevelLabel" type="Label" parent="GUI"]
 modulate = Color( 1, 0.156863, 0.156863, 1 )
@@ -62,9 +64,11 @@ theme = ExtResource( 4 )
 text = "Mortis"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+pause_mode = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="WFCGenerator" type="Node2D" parent="."]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Background" type="TileMap" parent="WFCGenerator"]
@@ -103,5 +107,6 @@ collision_layer = 9
 format = 1
 
 [node name="Entities" type="Node2D" parent="."]
+pause_mode = 1
 
 [connection signal="done" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]

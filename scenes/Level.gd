@@ -15,7 +15,6 @@ var current_level:int = 1
 var exit_corner:Vector2
 
 
-
 func _ready():
 	MusicMan.level(true)
 
@@ -82,10 +81,11 @@ func _on_WFCGenerator_OnDone():
 	entities.add_child(exit)
 
 	# Fade in
-	var tween = get_tree().create_tween()
+	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 0.0, 1.0)
 	yield(tween, "finished")
 	$GUI/RedRect.hide()
+	get_tree().paused = false
 
 
 func _place_centered_tile(pos:Vector2) -> Vector2:
@@ -109,11 +109,12 @@ func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 
 
 func _on_exit_reached():
+	get_tree().paused = true
 	MusicMan.steps_sound()
 
 	# Fade out
 	$GUI/RedRect.show()
-	var tween = get_tree().create_tween()
+	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
 	yield(tween, "finished")
 
@@ -151,16 +152,14 @@ func _on_player_hp_changed(new_hp:float) -> void:
 
 func _on_player_die():
 	# Fade out
-	$Entities.pause_mode = PAUSE_MODE_STOP
+	get_tree().paused = true
 	$GUI/RedRect.show()
 	MusicMan.level(false, 1)
 	MusicMan.player_dead = true
-	var tween = get_tree().create_tween()
+	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
 	yield(tween, "finished")
 	$GUI/DeathLabel.show()
 	yield(get_tree().create_timer(5.0), "timeout")
-	var tween2 = get_tree().create_tween()
-	tween2.tween_property($GUI/DeathLabel, "color:a", 0.0, 1.0)
-	yield(tween2, "finished")
+	get_tree().paused = false
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
