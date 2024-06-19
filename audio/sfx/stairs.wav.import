@@ -11,13 +11,13 @@ dest_files=[ "res://.import/stairs.wav-f74db688cbd30c467b49a9150bfdb5f8.sample" 
 
 [params]
 
-force/8_bit=false
+force/8_bit=true
 force/mono=false
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=0
 edit/loop_begin=0
 edit/loop_end=-1
-compress/mode=0
+compress/mode=1
