@@ -56,6 +56,7 @@ path_desired_distance = 2.0
 target_desired_distance = 4.0
 
 [node name="RedLight" type="Light2D" parent="."]
+visible = false
 texture = ExtResource( 12 )
 color = Color( 1, 0.588235, 0.588235, 1 )
 shadow_enabled = true
