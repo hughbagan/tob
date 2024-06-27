@@ -73,7 +73,6 @@ text = "Mortis"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 pause_mode = 2
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="WFCGenerator" type="Node2D" parent="."]
