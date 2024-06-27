@@ -23,8 +23,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 1 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 10
@@ -36,6 +36,9 @@ texture = ExtResource( 4 )
 texture_scale = 0.7
 color = Color( 0.776471, 0.87451, 1, 1 )
 shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RedLight" type="Light2D" parent="."]
 visible = false
