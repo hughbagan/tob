@@ -56,6 +56,7 @@ path_desired_distance = 2.0
 target_desired_distance = 4.0
 
 [node name="RedLight" type="Light2D" parent="."]
+visible = false
 texture = ExtResource( 12 )
 color = Color( 1, 0.588235, 0.588235, 1 )
 shadow_enabled = true
@@ -161,5 +162,3 @@ stream = ExtResource( 13 )
 volume_db = -2.0
 pitch_scale = 0.63
 bus = "SFX"
-
-[connection signal="timeout" from="SightTimer" to="." method="_on_SightTimer_timeout"]

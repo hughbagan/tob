@@ -20,13 +20,14 @@ func _ready():
 
 
 func _on_WFCGenerator_OnDone():
+	# WARNING: generator's H & V are tilemap size + WFC window size
 	width = generator.H
 	height = generator.V
 	camera.position = Vector2(width, height)*target_tilemap.cell_size*0.5
 	var corners = [Vector2(0, 0), Vector2(width-1, 0), Vector2(0, height-1), Vector2(width-1, height-1)]
 
 	# encase the level in an invisible wall
-	# trying to set_cell on target_tilemap does nothing here, so I'll do this
+	# trying to set_cell on target_tilemap does nothing? so I'll do this
 	envelope_tilemap.position = -target_tilemap.cell_size
 	for y in range(height+2):
 		for x in range(width+2):
@@ -47,7 +48,11 @@ func _on_WFCGenerator_OnDone():
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == Global.LEVEL_ENEMY_TILE_ID:
 				envelope_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
-				var enemy = Global.ENEMY_SCENE.instance()
+				var enemy
+				if randf() >= 0.6:
+					enemy = Global.ENEMY_TANK_SCENE.instance()
+				else:
+					enemy = Global.ENEMY_SCENE.instance()
 				enemy.tilemap = target_tilemap
 				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
