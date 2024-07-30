@@ -45,6 +45,7 @@ func _physics_process(delta:float) -> void:
 			$FlySpriteShaded.hide()
 			$SpriteShaded.show()
 	else:
+		set_hp(hp-0.008)
 		$Light2D.show()
 		$RedLight.hide()
 		$FlySpriteShaded.hide()
