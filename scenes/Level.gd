@@ -40,6 +40,7 @@ func _on_WFCGenerator_OnDone():
 			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
 	var player = Global.PLAYER_SCENE.instance()
+	assert(Global.player_hp)
 	player.hp = Global.player_hp
 
 	for y in range(height):

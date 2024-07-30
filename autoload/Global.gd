@@ -10,4 +10,4 @@ const LEVEL_WALL_TILE_ID:int = 1
 const LEVEL_ENEMY_TILE_ID:int = 2
 const LEVEL_LAMP_TILE_ID:int = 3
 const PLAYER_MAX_HP:float = 100.0
-var player_hp:float
+var player_hp:float = PLAYER_MAX_HP
