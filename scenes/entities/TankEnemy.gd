@@ -9,6 +9,7 @@ var shield_targetpos:Vector2 = Vector2(0, sheild_armlength)
 func _ready():
     # Override parent variables
     hp = 2
+    blood = 6.0
     speed = 15.0
     sprite_shaded = $YSort/SpriteShaded
 

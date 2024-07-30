@@ -138,7 +138,7 @@ func _on_JumpTimer_timeout() -> void:
 					if body.hp > 0:
 						jump()
 					else:
-						set_hp(hp+3.0)
+						set_hp(hp+body.blood)
 					hit_sfx()
 
 
