@@ -141,8 +141,9 @@ func _on_exit_reached():
 				sample_tilemap.set_cellv(pick, Global.LEVEL_ENEMY_TILE_ID)
 		if current_level == 40 or current_level == 70: # remove lamps
 			var lamps = sample_tilemap.get_used_cells_by_id(Global.LEVEL_LAMP_TILE_ID)
-			var pick = lamps[lamps.size()-1]
-			sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
+			if not lamps.empty():
+				var pick = lamps[lamps.size()-1]
+				sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
 		generator._ready() # re-build Rules and generate
 	elif current_level == 101:
 		# WIN!
