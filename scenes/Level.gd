@@ -49,11 +49,17 @@ func _on_WFCGenerator_OnDone():
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == Global.LEVEL_ENEMY_TILE_ID:
 				envelope_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+
+				# Select an enemy type to spawn
 				var enemy
-				if randf() >= 0.6:
+				var prob := randf()
+				if prob >= 0.8:
+					enemy = Global.ENEMY_SHOOT_SCENE.instance()
+				elif prob >= 0.6:
 					enemy = Global.ENEMY_TANK_SCENE.instance()
 				else:
 					enemy = Global.ENEMY_SCENE.instance()
+
 				enemy.tilemap = target_tilemap
 				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))

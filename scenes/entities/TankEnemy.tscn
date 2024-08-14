@@ -49,4 +49,7 @@ autostart = true
 
 [node name="ShieldTween" type="Tween" parent="." index="2"]
 
+[node name="Sprite" parent="." index="3"]
+visible = false
+
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]

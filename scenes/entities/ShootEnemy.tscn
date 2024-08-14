@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/entities/ShootEnemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
+
+[node name="ShootEnemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="ShootTimer" type="Timer" parent="." index="0"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ShapeCast" type="Area2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 3
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShapeCast" index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+region_rect = Rect2( 608, 176, 16, 16 )
+
+[node name="SpriteShaded" parent="." index="3"]
+region_rect = Rect2( 464, 80, 16, 16 )
