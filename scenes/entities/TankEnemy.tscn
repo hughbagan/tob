@@ -44,9 +44,12 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 400, 80, 16, 16 )
 
-[node name="ShieldTimer" type="Timer" parent="." index="9"]
+[node name="ShieldTimer" type="Timer" parent="." index="1"]
 autostart = true
 
-[node name="ShieldTween" type="Tween" parent="." index="10"]
+[node name="ShieldTween" type="Tween" parent="." index="2"]
+
+[node name="Sprite" parent="." index="3"]
+visible = false
 
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]

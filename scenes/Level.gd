@@ -40,6 +40,7 @@ func _on_WFCGenerator_OnDone():
 			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
 	var player = Global.PLAYER_SCENE.instance()
+	assert(Global.player_hp)
 	player.hp = Global.player_hp
 
 	for y in range(height):
@@ -48,11 +49,17 @@ func _on_WFCGenerator_OnDone():
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == Global.LEVEL_ENEMY_TILE_ID:
 				envelope_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+
+				# Select an enemy type to spawn
 				var enemy
-				if randf() >= 0.6:
+				var prob := randf()
+				if prob >= 0.8:
+					enemy = Global.ENEMY_SHOOT_SCENE.instance()
+				elif prob >= 0.6:
 					enemy = Global.ENEMY_TANK_SCENE.instance()
 				else:
 					enemy = Global.ENEMY_SCENE.instance()
+
 				enemy.tilemap = target_tilemap
 				enemy.player = player
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
@@ -141,8 +148,9 @@ func _on_exit_reached():
 				sample_tilemap.set_cellv(pick, Global.LEVEL_ENEMY_TILE_ID)
 		if current_level == 40 or current_level == 70: # remove lamps
 			var lamps = sample_tilemap.get_used_cells_by_id(Global.LEVEL_LAMP_TILE_ID)
-			var pick = lamps[lamps.size()-1]
-			sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
+			if not lamps.empty():
+				var pick = lamps[lamps.size()-1]
+				sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
 		generator._ready() # re-build Rules and generate
 	elif current_level == 101:
 		# WIN!

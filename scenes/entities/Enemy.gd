@@ -19,6 +19,7 @@ var direction:Vector2 = Vector2()
 var velocity:Vector2 = Vector2()
 var damage:float = 0.1
 var hp:int = 1
+var blood:float = 3.0 # reaped by player
 onready var boots_sfx_randi:int = 0
 onready var armour_sfx_randi:int = 0
 onready var enemy_swing_sfx_randi:int = 0

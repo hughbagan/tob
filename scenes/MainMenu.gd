@@ -14,6 +14,8 @@ func _on_PlayButton_pressed() -> void:
 	tween.tween_property($RedRect, "color:a", 1.0, tween_len)
 	MusicMan.main_menu(false, tween_len)
 	yield(tween, "finished")
+
+	Global.player_hp = Global.PLAYER_MAX_HP
 	get_tree().change_scene("res://scenes/Tutorial.tscn")
 
 

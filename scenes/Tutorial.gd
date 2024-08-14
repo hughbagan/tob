@@ -19,7 +19,7 @@ func _ready():
 
 func _on_exit_reached():
 	get_tree().paused = true
-	Global.player_hp = 100.0
+	Global.player_hp = Global.PLAYER_MAX_HP
 	MusicMan.steps_sound()
 	$GUI/RedRect.show()
 	var tween = $GUI.create_tween()

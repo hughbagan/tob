@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/entities/Enemy.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "EnemyBullet",
+"language": "GDScript",
+"path": "res://scenes/entities/EnemyBullet.gd"
+}, {
 "base": "Area2D",
 "class": "Exit",
 "language": "GDScript",
@@ -40,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://scenes/generator/Rule.gd"
 }, {
 "base": "Enemy",
+"class": "ShootEnemy",
+"language": "GDScript",
+"path": "res://scenes/entities/ShootEnemy.gd"
+}, {
+"base": "Enemy",
 "class": "TankEnemy",
 "language": "GDScript",
 "path": "res://scenes/entities/TankEnemy.gd"
@@ -51,11 +61,13 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Enemy": "",
+"EnemyBullet": "",
 "Exit": "",
 "Lamp": "",
 "Level": "",
 "Player": "",
 "Rule": "",
+"ShootEnemy": "",
 "TankEnemy": "",
 "WFCGenerator": ""
 }
@@ -127,6 +139,7 @@ bloodvision={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Envelope"
+2d_physics/layer_5="EnemyBullet"
 
 [mono]
 
