@@ -1,14 +1,14 @@
 class_name WFCGenerator extends Node2D
 
-onready var target:TileMap = $Target # tilemap node to output to
-onready var sample:TileMap = $Sample # tilemap node to create rules from
+@onready var target:TileMap = $Target # tilemap node to output to
+@onready var sample:TileMap = $Sample # tilemap node to create rules from
 const EMPTY:int = -1 # no tile
-export var H:int = 11 # map size horizontal
-export var V:int = 11 # map size vertical
-export var match_radius:int = 1 # the radius around a tile check for matching tiles with sample
-export var correction_radius:int = 2 # the radius around a failed tile that will be cleared on fixing. A number bigger than match_radius is recommended.
-export var choose_by_probability:bool = false
-export var show_progress:bool = false # may impact performance
+@export var H:int = 11 # map size horizontal
+@export var V:int = 11 # map size vertical
+@export var match_radius:int = 1 # the radius around a tile check for matching tiles with sample
+@export var correction_radius:int = 2 # the radius around a failed tile that will be cleared on fixing. A number bigger than match_radius is recommended.
+@export var choose_by_probability:bool = false
+@export var show_progress:bool = false # may impact performance
 var used_rules:Dictionary # {int, Array[Rule]} Holds tile occurrences in the sample for future use as rules
 var tile_repetitions:Dictionary # {int, int} Holds number of repetitions for each option. Used for calculating occurance probability.
 var tilemap_array:Array # Array[Array[int]] Holds tiles data for internal use only. Do not use directly! Use set_tile(), get_tile()
@@ -69,7 +69,7 @@ func _process(delta:float) -> void:
 
 # Starts generating the map on a new thread
 func generate_map(clear_target:bool = true) -> void:
-	generation_thread.start(self, "_generate_map", clear_target)
+	generation_thread.start(Callable(self, "_generate_map").bind(clear_target))
 	print("started ", generation_thread.get_id())
 
 
@@ -194,7 +194,7 @@ func get_options(coord:Vector2) -> Array: # Array[int]
 
 # Chooses a tile from the given options based on its occurance proability
 func choose_option(options:Array) -> int: # Array[int]
-	if options.empty():
+	if options.is_empty():
 		return EMPTY
 	var sum:int = 0
 	for option in options:
@@ -250,7 +250,7 @@ func update_count_radius(coord:Vector2, radius:int) -> void:
 				tilemap_count[i][j] = 0
 			else:
 				var thread = Thread.new()
-				thread.start(self, "get_options_count", tempcoord)
+				thread.start(Callable(self, "get_options_count").bind(tempcoord))
 				threads.append(thread)
 				var intarr = [-1,-1]
 				intarr[0] = i

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav-5c0b23c6d0bc28882ecf2d20fcc02625.sample"
+type="AudioStreamWAV"
+uid="uid://dy2vjes0exaaq"
+path="res://.godot/imported/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav-5c0b23c6d0bc28882ecf2d20fcc02625.sample"
 
 [deps]
 
 source_file="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav"
-dest_files=[ "res://.import/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav-5c0b23c6d0bc28882ecf2d20fcc02625.sample" ]
+dest_files=["res://.godot/imported/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav-5c0b23c6d0bc28882ecf2d20fcc02625.sample"]
 
 [params]
 

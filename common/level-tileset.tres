@@ -1,27 +1,27 @@
 [gd_resource type="TileSet" load_steps=7 format=2]
 
-[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=2]
+[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture2D" id=2]
 
 [sub_resource type="NavigationPolygon" id=8]
-vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
+vertices = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PackedInt32Array( 0, 1, 2, 3 ) ]
+outlines = [ PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
 
 [sub_resource type="OccluderPolygon2D" id=9]
-polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygon = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="NavigationPolygon" id=12]
-vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
+vertices = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PackedInt32Array( 0, 1, 2, 3 ) ]
+outlines = [ PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
 
 [sub_resource type="NavigationPolygon" id=11]
-vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
+vertices = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PackedInt32Array( 0, 1, 2, 3 ) ]
+outlines = [ PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
 
 [resource]
 0/name = "0"

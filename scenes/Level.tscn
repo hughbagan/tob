@@ -1,120 +1,102 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://0f6tv88i1bsc"]
 
-[ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/generator/WFCGenerator.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Level.gd" type="Script" id=3]
-[ext_resource path="res://common/gothicfont.theme" type="Theme" id=4]
-[ext_resource path="res://common/Gothic_Pixels.ttf" type="DynamicFontData" id=5]
+[ext_resource type="TileSet" path="res://common/level-tileset.tres" id="1"]
+[ext_resource type="Script" path="res://scenes/generator/WFCGenerator.gd" id="2"]
+[ext_resource type="Script" path="res://scenes/Level.gd" id="3"]
+[ext_resource type="Theme" path="res://common/gothicfont.theme" id="4"]
+[ext_resource type="FontFile" uid="uid://df133rgmpb1vc" path="res://common/Gothic_Pixels.ttf" id="5"]
 
-[sub_resource type="DynamicFont" id=3]
-size = 40
-font_data = ExtResource( 5 )
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("5")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.647059, 0.00784314, 0.00784314, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 0 )
+[sub_resource type="Theme" id="4"]
+default_font = SubResource("3")
 
 [node name="Level" type="Node2D"]
-pause_mode = 2
-script = ExtResource( 3 )
+process_mode = 3
+script = ExtResource("3")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
-pause_mode = 2
+process_mode = 3
 
 [node name="LevelLabel" type="Label" parent="GUI"]
-modulate = Color( 1, 0.156863, 0.156863, 1 )
+modulate = Color(1, 0.156863, 0.156863, 1)
+anchors_preset = 10
 anchor_right = 1.0
-margin_top = 15.0
-theme = SubResource( 4 )
+offset_top = 15.0
+theme = SubResource("4")
 text = "1"
-align = 1
-valign = 2
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="BloodBar" type="ProgressBar" parent="GUI"]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -16.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+offset_top = -16.0
 value = 100.0
-percent_visible = false
 
 [node name="RedRect" type="ColorRect" parent="GUI"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.145098, 0, 0, 1 )
+color = Color(0.145098, 0, 0, 1)
 
 [node name="DeathLabel" type="Label" parent="GUI"]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.5
-margin_top = -60.0
-margin_right = 158.5
-margin_bottom = 60.0
-theme = ExtResource( 4 )
+offset_left = -158.5
+offset_top = -60.0
+offset_right = 158.5
+offset_bottom = 60.0
+theme = ExtResource("4")
 text = "Mortis"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-pause_mode = 2
-color = Color( 0, 0, 0, 1 )
+process_mode = 3
+color = Color(0, 0, 0, 1)
 
 [node name="WFCGenerator" type="Node2D" parent="."]
-pause_mode = 2
-script = ExtResource( 2 )
+process_mode = 3
+script = ExtResource("2")
 
 [node name="Background" type="TileMap" parent="WFCGenerator"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 0
-collision_mask = 0
-navigation_layers = 0
-occluder_light_mask = 0
-format = 1
+tile_set = ExtResource("1")
+format = 2
 
 [node name="Sample" type="TileMap" parent="WFCGenerator"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 0
-collision_mask = 0
-navigation_layers = 0
-occluder_light_mask = 0
-format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 65536, 0, 0, 65537, 1, 0, 65538, 0, 0, 65539, 1, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 1, 0, 65544, 0, 0, 65545, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 2, 0, 131075, 0, 0, 131076, 0, 0, 131077, 1, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196608, 0, 0, 196609, 1, 0, 196610, 0, 0, 196611, 1, 0, 196612, 0, 0, 196613, 1, 0, 196614, 0, 0, 196615, 1, 0, 196616, 0, 0, 196617, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 3, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 2, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 327680, 0, 0, 327681, 1, 0, 327682, 0, 0, 327683, 1, 0, 327684, 1, 0, 327685, 0, 0, 327686, 0, 0, 327687, 1, 0, 327688, 0, 0, 327689, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 1, 0, 458757, 1, 0, 458758, 0, 0, 458759, 1, 0, 458760, 0, 0, 458761, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 1, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0 )
+tile_set = ExtResource("1")
+format = 2
 
 [node name="Target" type="TileMap" parent="WFCGenerator"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-bake_navigation = true
-format = 1
+tile_set = ExtResource("1")
+format = 2
 
 [node name="Camera2D" type="Camera2D" parent="WFCGenerator/Target"]
-current = true
-zoom = Vector2( 0.3, 0.3 )
+zoom = Vector2(0.3, 0.3)
 
 [node name="Envelope" type="TileMap" parent="WFCGenerator"]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 9
-format = 1
+tile_set = ExtResource("1")
+format = 2
 
 [node name="Entities" type="Node2D" parent="."]
-pause_mode = 1
-
-[connection signal="done" from="WFCGenerator" to="." method="_on_WFCGenerator_OnDone"]
+process_mode = 1

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Tower of Blood (Title Theme) - final - actualy.mp3-3904d7b0d3b5a6b87e12acef9d546235.mp3str"
+uid="uid://cfwg5nvta8rtp"
+path="res://.godot/imported/Tower of Blood (Title Theme) - final - actualy.mp3-3904d7b0d3b5a6b87e12acef9d546235.mp3str"
 
 [deps]
 
 source_file="res://audio/music/Tower of Blood (Title Theme) - final - actualy.mp3"
-dest_files=[ "res://.import/Tower of Blood (Title Theme) - final - actualy.mp3-3904d7b0d3b5a6b87e12acef9d546235.mp3str" ]
+dest_files=["res://.godot/imported/Tower of Blood (Title Theme) - final - actualy.mp3-3904d7b0d3b5a6b87e12acef9d546235.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=26.181
+bpm=0
+beat_count=0
+bar_beats=4

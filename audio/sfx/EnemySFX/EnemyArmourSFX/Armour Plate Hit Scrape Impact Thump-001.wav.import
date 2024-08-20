@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Armour Plate Hit Scrape Impact Thump-001.wav-8bf8dfbcd3aaad88640324bca11f59ad.sample"
+type="AudioStreamWAV"
+uid="uid://bkarqne2rxamh"
+path="res://.godot/imported/Armour Plate Hit Scrape Impact Thump-001.wav-8bf8dfbcd3aaad88640324bca11f59ad.sample"
 
 [deps]
 
 source_file="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-001.wav"
-dest_files=[ "res://.import/Armour Plate Hit Scrape Impact Thump-001.wav-8bf8dfbcd3aaad88640324bca11f59ad.sample" ]
+dest_files=["res://.godot/imported/Armour Plate Hit Scrape Impact Thump-001.wav-8bf8dfbcd3aaad88640324bca11f59ad.sample"]
 
 [params]
 

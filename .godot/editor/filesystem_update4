@@ -1,0 +1,7 @@
+res://default_bus_layout.tres
+res://common/default_env.tres
+res://scenes/entities/Player.tscn
+res://scenes/entities/Player.gd
+res://scenes/entities/Enemy.tscn
+res://scenes/Level.tscn
+res://scenes/Tutorial.tscn

@@ -13,10 +13,10 @@ func _on_PlayButton_pressed() -> void:
 	var tween_len = 1.5
 	tween.tween_property($RedRect, "color:a", 1.0, tween_len)
 	MusicMan.main_menu(false, tween_len)
-	yield(tween, "finished")
+	await tween.finished
 
 	Global.player_hp = Global.PLAYER_MAX_HP
-	get_tree().change_scene("res://scenes/Tutorial.tscn")
+	get_tree().change_scene_to_file("res://scenes/Tutorial.tscn")
 
 
 func _on_InfoButton_pressed():

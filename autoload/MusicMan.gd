@@ -67,8 +67,8 @@ func _tween_music_off(music:AudioStreamPlayer, tween_len:float, music_ease = -1,
 #	off_music = music # assume only turning one music off at a time
 #	tween.connect("finished", self, "_on_music_quieted")
 	tween.tween_property(music, "volume_db", -60, tween_len)
-	tween.tween_callback(music, "stop")
-	yield(tween, "finished")
+	tween.tween_callback(Callable(music, "stop"))
+	await tween.finished
 	music.volume_db = music_vol
 	
 	if _MusicMan_debug == true:
@@ -98,9 +98,9 @@ func _on_DebugTimer_timeout():
 	
 	# removes silent stuff from print list
 	if _vol_debug_gc_list.size() != 0:
-		_vol_debug_gc_list.invert()
+		_vol_debug_gc_list.reverse()
 		print(_vol_debug_gc_list)
 		for i in _vol_debug_gc_list:
 			print("Removed ", _vol_debug_list[i], " from vol_debug_list")
-			_vol_debug_list.remove(_vol_debug_gc_list[i])
+			_vol_debug_list.remove_at(_vol_debug_gc_list[i])
 		_vol_debug_gc_list = []

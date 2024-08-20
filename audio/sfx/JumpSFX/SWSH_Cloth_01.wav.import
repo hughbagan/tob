@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample"
+type="AudioStreamWAV"
+uid="uid://b3rys8p4w53sl"
+path="res://.godot/imported/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample"
 
 [deps]
 
 source_file="res://audio/sfx/JumpSFX/SWSH_Cloth_01.wav"
-dest_files=[ "res://.import/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample" ]
+dest_files=["res://.godot/imported/SWSH_Cloth_01.wav-8e757f80685465a9a7423626cc6cc535.sample"]
 
 [params]
 

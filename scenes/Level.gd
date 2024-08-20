@@ -1,14 +1,14 @@
 class_name Level extends Node2D
 
-onready var generator:Node2D = $WFCGenerator
-onready var sample_tilemap:TileMap = $WFCGenerator/Sample
-onready var target_tilemap:TileMap = $WFCGenerator/Target
-onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
-onready var background_tilemap:TileMap = $WFCGenerator/Background
-onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
-onready var entities:Node2D = $Entities
-onready var level_label:Label = $GUI/LevelLabel
-onready var blood_bar:ProgressBar = $GUI/BloodBar
+@onready var generator:Node2D = $WFCGenerator
+@onready var sample_tilemap:TileMap = $WFCGenerator/Sample
+@onready var target_tilemap:TileMap = $WFCGenerator/Target
+@onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
+@onready var background_tilemap:TileMap = $WFCGenerator/Background
+@onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
+@onready var entities:Node2D = $Entities
+@onready var level_label:Label = $GUI/LevelLabel
+@onready var blood_bar:ProgressBar = $GUI/BloodBar
 var width:int
 var height:int
 var current_level:int = 1
@@ -39,7 +39,7 @@ func _on_WFCGenerator_OnDone():
 		for x in range(width+2):
 			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
-	var player = Global.PLAYER_SCENE.instance()
+	var player = Global.PLAYER_SCENE.instantiate()
 	assert(Global.player_hp)
 	player.hp = Global.player_hp
 
@@ -54,11 +54,11 @@ func _on_WFCGenerator_OnDone():
 				var enemy
 				var prob := randf()
 				if prob >= 0.8:
-					enemy = Global.ENEMY_SHOOT_SCENE.instance()
+					enemy = Global.ENEMY_SHOOT_SCENE.instantiate()
 				elif prob >= 0.6:
-					enemy = Global.ENEMY_TANK_SCENE.instance()
+					enemy = Global.ENEMY_TANK_SCENE.instantiate()
 				else:
-					enemy = Global.ENEMY_SCENE.instance()
+					enemy = Global.ENEMY_SCENE.instantiate()
 
 				enemy.tilemap = target_tilemap
 				enemy.player = player
@@ -66,15 +66,15 @@ func _on_WFCGenerator_OnDone():
 				entities.add_child(enemy)
 			elif tile == Global.LEVEL_LAMP_TILE_ID:
 				target_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
-				var lamp = Global.LAMP_SCENE.instance()
+				var lamp = Global.LAMP_SCENE.instantiate()
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)
 
 	# Setup the player
 	player.tilemap = target_tilemap
 	player.level = self
-	player.connect("new_hp", self, "_on_player_hp_changed")
-	player.connect("player_die", self, "_on_player_die")
+	player.connect("new_hp", Callable(self, "_on_player_hp_changed"))
+	player.connect("player_die", Callable(self, "_on_player_die"))
 	var player_corner:Vector2
 	if current_level == 1:
 		player_corner = corners[3] # same as the tutorial
@@ -84,8 +84,8 @@ func _on_WFCGenerator_OnDone():
 	entities.add_child(player)
 
 	# Place the exit in a different corner
-	var exit = Global.EXIT_SCENE.instance()
-	exit.connect("exit_reached", self, "_on_exit_reached")
+	var exit = Global.EXIT_SCENE.instantiate()
+	exit.connect("exit_reached", Callable(self, "_on_exit_reached"))
 	exit_corner = player_corner
 	while exit_corner == player_corner:
 		exit_corner = corners[randi() % corners.size()]
@@ -95,14 +95,14 @@ func _on_WFCGenerator_OnDone():
 	# Fade in
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 0.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 	$GUI/RedRect.hide()
 	get_tree().paused = false
 
 
 func _place_centered_tile(pos:Vector2) -> Vector2:
 	# convert tilemap coords to global centered position
-	return target_tilemap.map_to_world(pos)+target_tilemap.cell_size/2
+	return target_tilemap.map_to_local(pos)+target_tilemap.cell_size/2
 
 
 func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
@@ -128,7 +128,7 @@ func _on_exit_reached():
 	$GUI/RedRect.show()
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 
 	# Reset scene
 	for child in entities.get_children():
@@ -143,12 +143,12 @@ func _on_exit_reached():
 	if current_level % 10 == 0:
 		if current_level % 20 == 0: # remove walls, add enemies
 			var walls = sample_tilemap.get_used_cells_by_id(Global.LEVEL_WALL_TILE_ID)
-			if not walls.empty():
+			if not walls.is_empty():
 				var pick = walls[randi() % walls.size()]
 				sample_tilemap.set_cellv(pick, Global.LEVEL_ENEMY_TILE_ID)
 		if current_level == 40 or current_level == 70: # remove lamps
 			var lamps = sample_tilemap.get_used_cells_by_id(Global.LEVEL_LAMP_TILE_ID)
-			if not lamps.empty():
+			if not lamps.is_empty():
 				var pick = lamps[lamps.size()-1]
 				sample_tilemap.set_cellv(pick, Global.LEVEL_FLOOR_TILE_ID)
 		generator._ready() # re-build Rules and generate
@@ -171,8 +171,8 @@ func _on_player_die():
 	MusicMan.player_dead = true
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 	$GUI/DeathLabel.show()
-	yield(get_tree().create_timer(5.0), "timeout")
+	await get_tree().create_timer(5.0).timeout
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
