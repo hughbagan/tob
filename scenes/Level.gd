@@ -1,10 +1,13 @@
 class_name Level extends Node2D
 
+
+
 onready var generator:Node2D = $WFCGenerator
 onready var sample_tilemap:TileMap = $WFCGenerator/Sample
 onready var target_tilemap:TileMap = $WFCGenerator/Target
 onready var envelope_tilemap:TileMap = $WFCGenerator/Envelope # patch target_tilemap
 onready var background_tilemap:TileMap = $WFCGenerator/Background
+onready var navigation_tilemap:TileMap = $WFCGenerator/Navigation
 onready var camera:Camera2D = $WFCGenerator/Target/Camera2D
 onready var entities:Node2D = $Entities
 onready var level_label:Label = $GUI/LevelLabel
@@ -39,6 +42,7 @@ func _on_WFCGenerator_OnDone():
 		for x in range(width+2):
 			background_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
+	# Initialize the player
 	var player = Global.PLAYER_SCENE.instance()
 	assert(Global.player_hp)
 	player.hp = Global.player_hp
@@ -69,6 +73,13 @@ func _on_WFCGenerator_OnDone():
 				var lamp = Global.LAMP_SCENE.instance()
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)
+
+			# Setup the navmesh
+			# for x_off in []
+
+	# Setup the navmesh
+	navigation_tilemap.clear()
+
 
 	# Setup the player
 	player.tilemap = target_tilemap
@@ -107,7 +118,7 @@ func _place_centered_tile(pos:Vector2) -> Vector2:
 
 func _place_adjacent_random_empty(startpos:Vector2) -> Vector2:
 	var pos:Vector2 = startpos
-	while target_tilemap.get_cellv(pos) != Global.LEVEL_FLOOR_TILE_ID:
+	while not Global.is_floor_tile(target_tilemap.get_cellv(pos)):
 		var flip = randf()
 		if flip <= 0.25 and pos.x < width-1:
 			pos.x += 1
