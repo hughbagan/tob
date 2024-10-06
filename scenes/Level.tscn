@@ -55,6 +55,7 @@ value = 100.0
 percent_visible = false
 
 [node name="RedRect" type="ColorRect" parent="GUI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.145098, 0, 0, 1 )

@@ -1,7 +1,5 @@
 class_name Level extends Node2D
 
-
-
 onready var generator:Node2D = $WFCGenerator
 onready var sample_tilemap:TileMap = $WFCGenerator/Sample
 onready var target_tilemap:TileMap = $WFCGenerator/Target
@@ -52,7 +50,7 @@ func _on_WFCGenerator_OnDone():
 			# Spawn entities from tilemap
 			var tile:int = target_tilemap.get_cell(x, y)
 			if tile == Global.LEVEL_ENEMY_TILE_ID:
-				envelope_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+				target_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 
 				# Select an enemy type to spawn
 				var enemy
@@ -69,17 +67,43 @@ func _on_WFCGenerator_OnDone():
 				enemy.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(enemy)
 			elif tile == Global.LEVEL_LAMP_TILE_ID:
-				target_tilemap.set_cell(x+1, y+1, Global.LEVEL_FLOOR_TILE_ID)
+				target_tilemap.set_cell(x, y, Global.LEVEL_FLOOR_TILE_ID)
 				var lamp = Global.LAMP_SCENE.instance()
 				lamp.global_position = _place_centered_tile(Vector2(x, y))
 				entities.add_child(lamp)
 
-			# Setup the navmesh
-			# for x_off in []
-
 	# Setup the navmesh
 	navigation_tilemap.clear()
-
+	for y in range(height):
+		for x in range(width):
+			var tile:int = target_tilemap.get_cell(x, y)
+			if tile == Global.LEVEL_FLOOR_TILE_ID:
+				var navtile_found:bool = false
+				var neighbours:Array = []
+				for y_off in [-1, 0, 1]:
+					for x_off in [-1, 0, 1]:
+						if y_off == 0 and x_off == 0:
+							continue
+						neighbours.append(target_tilemap.get_cell(x+x_off, y+y_off))
+				# TODO: could a smarter mapping be done so we don't have to
+				# iterate over NAV_CRITERIA ?
+				for set in Global.NAV_CRITERIA.keys():
+					var satisfied:bool = true
+					for t in set.size():
+						if set[t] == Global.N:
+							continue
+						if set[t] != neighbours[t]:
+							if neighbours[t] >= 0:
+								satisfied = false
+								break
+					if satisfied:
+						navigation_tilemap.set_cell(
+							x,
+							y,
+							Global.NAV_TILEMAP[Global.NAV_CRITERIA[set]])
+						navtile_found = true
+						break
+				assert(navtile_found, "no match found for tile "+str(x)+","+str(y)+" with neighbours: "+str(neighbours))
 
 	# Setup the player
 	player.tilemap = target_tilemap
