@@ -1,9 +1,9 @@
 class_name ShootEnemy extends Enemy
 
-onready var shoot_timer:Timer = $ShootTimer
-onready var shapecast:Area2D = $ShapeCast
-onready var shapecast_col:CollisionShape2D = $ShapeCast/CollisionShape2D
-onready var col:CollisionShape2D = $CollisionShape2D
+@onready var shoot_timer:Timer = $ShootTimer
+@onready var shapecast:Area2D = $ShapeCast
+@onready var shapecast_col:CollisionShape2D = $ShapeCast/CollisionShape2D
+@onready var col:CollisionShape2D = $CollisionShape2D
 
 
 func _ready():
@@ -27,12 +27,14 @@ func state_chase(delta:float) -> void:
 				damage))
 			shoot_timer.start()
 	else:
-		agent.set_target_location(player.global_position)
-		direction = position.direction_to(agent.get_next_location())
+		agent.set_target_position(player.global_position)
+		direction = position.direction_to(agent.get_next_path_position())
 		velocity = direction * speed
 		agent.set_velocity(velocity)
 		if not agent.is_navigation_finished():
-			velocity = move_and_slide(velocity)
+			set_velocity(velocity)
+			move_and_slide()
+			velocity = velocity
 			if abs(velocity.x) > 10 or abs(velocity.y) > 10:
 				enemy_footstep_counter(delta)
 

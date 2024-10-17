@@ -1,19 +1,18 @@
-class_name Player extends KinematicBody2D
+class_name Player extends CharacterBody2D
 
-onready var sprite:Sprite = $FlySprite
-onready var spr_scale:Vector2 = sprite.scale
-onready var col:CollisionShape2D = $CollisionShape2D
-onready var jump_area:Area2D = $JumpArea
-onready var jump_timer:Timer = $JumpTimer
-onready var slay_raycast:RayCast2D = $SlayRaycast
-onready var light:Light2D = $Light2D
-onready var tilemap:TileMap
-onready var level
+@onready var sprite:Sprite2D = $FlySprite
+@onready var spr_scale:Vector2 = sprite.scale
+@onready var col:CollisionShape2D = $CollisionShape2D
+@onready var jump_area:Area2D = $JumpArea
+@onready var jump_timer:Timer = $JumpTimer
+@onready var slay_raycast:RayCast2D = $SlayRaycast
+@onready var light:PointLight2D = $PointLight2D
+@onready var tilemap:TileMapLayer
+@onready var level
 var current_tile_coords:Vector2
 var current_tile:int
 var hp:float
 var speed:float = 75.0
-var velocity:Vector2 = Vector2()
 var jumping:bool = false
 var attack_range:float = 1.1 # in tilemap cells
 var damage:int = 1
@@ -36,7 +35,7 @@ func _physics_process(delta:float) -> void:
 
 	if Input.is_action_pressed("bloodvision"):
 		set_hp(hp-0.05)
-		$Light2D.hide()
+		$PointLight2D.hide()
 		$RedLight.show()
 		if $FlySprite.visible:
 			$FlySpriteShaded.show()
@@ -46,7 +45,7 @@ func _physics_process(delta:float) -> void:
 			$SpriteShaded.show()
 	else:
 		set_hp(hp-0.008)
-		$Light2D.show()
+		$PointLight2D.show()
 		$RedLight.hide()
 		$FlySpriteShaded.hide()
 		$SpriteShaded.hide()
@@ -61,19 +60,20 @@ func _physics_process(delta:float) -> void:
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	velocity = velocity.normalized()
-	slay_raycast.cast_to = velocity * tilemap.cell_size * attack_range
+	slay_raycast.target_position = velocity * Vector2(tilemap.tile_set.tile_size) * attack_range
 
 	# Tile centering
-	tile_position = ((global_position / (tilemap.cell_size.x*0.5)) + Vector2(1,1))
+	tile_position = ((global_position / (tilemap.tile_set.tile_size.x*0.5)) + Vector2(1,1))
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right") and abs(round(tile_position.x) - tile_position.x) > .02:
 		velocity.x += round(tile_position.x) - tile_position.x
 	if not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down") and abs(round(tile_position.y) - tile_position.y) > .02:
 		velocity.y += round(tile_position.y) - tile_position.y
 
-	velocity = move_and_slide(velocity * speed) #used to be velocity.normalized()
+	set_velocity(velocity * speed)
+	move_and_slide()
 
-	current_tile_coords = tilemap.world_to_map(tilemap.to_local(global_position))
-	current_tile = tilemap.get_cellv(current_tile_coords)
+	current_tile_coords = tilemap.local_to_map(tilemap.to_local(global_position))
+	current_tile = Global.get_cell_id(tilemap, current_tile_coords)
 
 	if Input.is_action_just_pressed("jump") and not jumping:
 		# First raycast to see if we can hit an enemy
@@ -97,29 +97,29 @@ func _physics_process(delta:float) -> void:
 
 func jump() -> void:
 	jumping = true
-	set_collision_mask_bit(0, 0) # avoid the Level
-	set_collision_mask_bit(2, 0) # avoid enemies
-	set_collision_layer_bit(1, 0) # enemies avoid the player
+	set_collision_mask_value(1, 0) # avoid the Level
+	set_collision_mask_value(3, 0) # avoid enemies
+	set_collision_layer_value(2, 0) # enemies avoid the player
 	jump_timer.start()
 	jump_sfx()
 	var jump_tween = get_tree().create_tween()
 	jump_tween.tween_property(sprite, "scale", spr_scale*1.5, jump_timer.wait_time*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	jump_tween.chain().tween_property(sprite, "scale", spr_scale, jump_timer.wait_time*0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-	$Sprite.hide()
+	$Sprite2D.hide()
 	$FlySprite.show()
 
 
 func _on_JumpTimer_timeout() -> void:
 	# Landing
 	jumping = false
-	set_collision_mask_bit(0, 1) # enable level collision
-	set_collision_mask_bit(2, 4) # enable player-enemy collision
-	set_collision_layer_bit(1, 2) # enable enemy-player collision
-	$Sprite.show()
+	set_collision_mask_value(1, 1) # enable level collision
+	set_collision_mask_value(3, 4) # enable player-enemy collision
+	set_collision_layer_value(2, 2) # enable enemy-player collision
+	$Sprite2D.show()
 	$FlySprite.hide()
 	var bodies = jump_area.get_overlapping_bodies()
 	# landing on floor
-	if bodies.empty():
+	if bodies.is_empty():
 		land_sfx()
 		footstep_counter = 0
 	else:
@@ -148,11 +148,11 @@ func hit(dmg:float) -> void:
 	set_hp(hp - dmg)
 
 
-func set_hp(new_hp:float) -> void:
-	hp = new_hp
+func set_hp(_hp:float) -> void:
+	hp = _hp
 	if hp > 100.0:
 		hp = 100.0
-	emit_signal("new_hp", new_hp)
+	emit_signal("new_hp", hp)
 	if hp < 0.0:
 		emit_signal("player_die")
 		MusicMan.player_dead = true

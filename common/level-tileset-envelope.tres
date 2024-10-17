@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cw2pvbap61mvm"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dvywata8k6afo"]
 
-[ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="1_5ff0d"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gvrxv"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -44,7 +44,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(16, 16, 0, 16, 0, 0, 16, 0)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qukvj"]
-texture = ExtResource("2")
+texture = ExtResource("1_5ff0d")
 8:5/next_alternative_id = 10
 8:5/0 = 0
 8:5/0/modulate = Color(0.278431, 0.176471, 0.235294, 1)
@@ -89,6 +89,6 @@ texture = ExtResource("2")
 
 [resource]
 occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 9
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_qukvj")

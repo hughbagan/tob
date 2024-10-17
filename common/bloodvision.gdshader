@@ -34,7 +34,7 @@ float getLineWidth(vec2 p, float s) {
 		p /= 2.0;
 		intensity /= 2.0;
 	}
-	
+
 	return mix(max_line_width, min_line_width, w);
 }
 
@@ -50,9 +50,9 @@ bool pixelInRange(sampler2D text, vec2 uv, vec2 dist) {
 
 float getClosestDistance(sampler2D text, vec2 uv, vec2 maxDist) {
 	if (!pixelInRange(text, uv, maxDist)) return -1.0;
-	
+
 	float hi = 1.0; float lo = 0.0;
-	
+
 	for (int i = 1; i <= grad_res; i++) {
 		float curr = (hi + lo) / 2.0;
 		if (pixelInRange(text, uv, curr * maxDist)) {
@@ -63,7 +63,7 @@ float getClosestDistance(sampler2D text, vec2 uv, vec2 maxDist) {
 		}
 	}
 	return hi;
-	
+
 }
 
 void fragment() {
@@ -71,7 +71,7 @@ void fragment() {
 	vec2 scaledDist = TEXTURE_PIXEL_SIZE;
 	scaledDist *= getLineWidth(UV / TEXTURE_PIXEL_SIZE, timeStep);
 	float w = getClosestDistance(TEXTURE, UV, scaledDist);
-	
+
 	if (( w > 0.0) && (texture(TEXTURE, UV).a < 0.2)) {
 		COLOR = mix(starting_colour, ending_colour, tanh(3.0*w));
 	}
@@ -79,5 +79,5 @@ void fragment() {
 		COLOR = texture(TEXTURE, UV);
 		COLOR.a = 0.0;
 	}
-	
+
 }

@@ -1,19 +1,19 @@
 extends Node2D
 
-onready var player = $Entities/Player
+@onready var player = $Entities/Player
 
 func _ready():
 	player.hp = Global.player_hp
 	player.tilemap = $Walls
 	$Entities/Enemy.tilemap = $Walls
 	$Entities/Enemy.player = player
-	player.connect("new_hp", self, "_on_player_hp_changed")
-	player.connect("player_die", self, "_on_player_die")
+	player.connect("new_hp", Callable(self, "_on_player_hp_changed"))
+	player.connect("player_die", Callable(self, "_on_player_die"))
 
 	$GUI/RedRect.show()
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 0.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 	$GUI/RedRect.hide()
 
 
@@ -24,9 +24,9 @@ func _on_exit_reached():
 	$GUI/RedRect.show()
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/Level.tscn")
+	get_tree().change_scene_to_file("res://scenes/Level.tscn")
 
 
 func _on_player_hp_changed(new_hp:float) -> void:
@@ -41,8 +41,8 @@ func _on_player_die():
 	MusicMan.player_dead = true
 	var tween = $GUI.create_tween()
 	tween.tween_property($GUI/RedRect, "color:a", 1.0, 1.0)
-	yield(tween, "finished")
+	await tween.finished
 	$GUI/DeathLabel.show()
-	yield(get_tree().create_timer(5.0), "timeout")
+	await get_tree().create_timer(5.0).timeout
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

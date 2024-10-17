@@ -1,14 +1,14 @@
 class_name WFCGenerator extends Node2D
 
-onready var target:TileMap = $Target # tilemap node to output to
-onready var sample:TileMap = $Sample # tilemap node to create rules from
+@onready var target:TileMapLayer = $Target # tilemap node to output to
+@onready var sample:TileMapLayer = $Sample # tilemap node to create rules from
 const EMPTY:int = -1 # no tile
-export var H:int = 11 # map size horizontal
-export var V:int = 11 # map size vertical
-export var match_radius:int = 1 # the radius around a tile check for matching tiles with sample
-export var correction_radius:int = 2 # the radius around a failed tile that will be cleared on fixing. A number bigger than match_radius is recommended.
-export var choose_by_probability:bool = false
-export var show_progress:bool = false # may impact performance
+@export var H:int = 11 # map size horizontal
+@export var V:int = 11 # map size vertical
+@export var match_radius:int = 1 # the radius around a tile check for matching tiles with sample
+@export var correction_radius:int = 2 # the radius around a failed tile that will be cleared on fixing. A number bigger than match_radius is recommended.
+@export var choose_by_probability:bool = false
+@export var show_progress:bool = false # may impact performance
 var used_rules:Dictionary # {int, Array[Rule]} Holds tile occurrences in the sample for future use as rules
 var tile_repetitions:Dictionary # {int, int} Holds number of repetitions for each option. Used for calculating occurance probability.
 var tilemap_array:Array # Array[Array[int]] Holds tiles data for internal use only. Do not use directly! Use set_tile(), get_tile()
@@ -57,19 +57,20 @@ func _ready() -> void:
 func _process(delta:float) -> void:
 	if show_progress: # expensive!
 		apply_tilemap()
-	if generation_thread.is_active():
+	if generation_thread.is_started():
 		if not generation_thread.is_alive():
 			# when the generation is done, apply the output to the tilemap and finish up.
 			var result = generation_thread.wait_to_finish()
 			if result != OK:
 				printerr("GEN ERROR: ", result)
 			apply_tilemap()
+			print("completed ", generation_thread.get_id())
 			emit_signal("done")
 
 
 # Starts generating the map on a new thread
 func generate_map(clear_target:bool = true) -> void:
-	generation_thread.start(self, "_generate_map", clear_target)
+	generation_thread.start(Callable(self, "_generate_map").bind(clear_target))
 	print("started ", generation_thread.get_id())
 
 
@@ -111,16 +112,16 @@ func _generate_map(clear_target:bool = true):
 func apply_tilemap() -> void:
 	for i in H:
 		for j in V:
-			target.set_cell(i, j, get_tile(Vector2(i, j)))
+			Global.set_cell_id(target, Vector2i(i, j), get_tile(Vector2(i, j)))
 
 
 # Create the rules from the sample tilemap
 func init() -> void:
 	used_rules.clear()
 	tile_repetitions.clear()
-	var used_cells:Array = sample.get_used_cells() # Array[Vector2]
+	var used_cells:Array = sample.get_used_cells() # Array[Vector2i]
 	for cell in used_cells:
-		var tile_id:int = sample.get_cell(cell.x, cell.y)
+		var tile_id:int = Global.get_cell_id(sample, cell)
 		if not used_rules.has(tile_id):
 			used_rules[tile_id] = [] # Array[Rule]
 		var rule:Rule = Rule.new(match_radius, cell, sample)
@@ -194,7 +195,7 @@ func get_options(coord:Vector2) -> Array: # Array[int]
 
 # Chooses a tile from the given options based on its occurance proability
 func choose_option(options:Array) -> int: # Array[int]
-	if options.empty():
+	if options.is_empty():
 		return EMPTY
 	var sum:int = 0
 	for option in options:
@@ -250,7 +251,7 @@ func update_count_radius(coord:Vector2, radius:int) -> void:
 				tilemap_count[i][j] = 0
 			else:
 				var thread = Thread.new()
-				thread.start(self, "get_options_count", tempcoord)
+				thread.start(Callable(self, "get_options_count").bind(tempcoord))
 				threads.append(thread)
 				var intarr = [-1,-1]
 				intarr[0] = i

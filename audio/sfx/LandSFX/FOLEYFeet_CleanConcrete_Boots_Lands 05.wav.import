@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav-de46e7a9d3503791ba44ebf2cf686a78.sample"
+type="AudioStreamWAV"
+uid="uid://bytqwlu8qo6hq"
+path="res://.godot/imported/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav-de46e7a9d3503791ba44ebf2cf686a78.sample"
 
 [deps]
 
 source_file="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav"
-dest_files=[ "res://.import/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav-de46e7a9d3503791ba44ebf2cf686a78.sample" ]
+dest_files=["res://.godot/imported/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav-de46e7a9d3503791ba44ebf2cf686a78.sample"]
 
 [params]
 
