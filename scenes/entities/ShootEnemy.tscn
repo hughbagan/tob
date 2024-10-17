@@ -7,7 +7,6 @@
 size = Vector2(8, 8)
 
 [node name="ShootEnemy" instance=ExtResource("1")]
-motion_mode = 1
 script = ExtResource("2")
 
 [node name="ShootTimer" type="Timer" parent="." index="0"]
@@ -26,4 +25,4 @@ shape = SubResource("1")
 region_rect = Rect2(608, 176, 16, 16)
 
 [node name="SpriteShaded" parent="." index="3"]
-region_rect = Rect2(464, 80, 16, 16)
+region_rect = Rect2(608, 176, 16, 16)

@@ -7,6 +7,7 @@ var state = STATES.SENTRY
 @onready var sight_timer:Timer = $SightTimer
 @onready var raycast:RayCast2D = $RayCast2D
 @onready var agent:NavigationAgent2D = $NavigationAgent2D
+@onready var sprite:Sprite2D = $Sprite2D
 @onready var sprite_shaded:Sprite2D = $SpriteShaded
 @onready var redlight:PointLight2D = $RedLight
 @onready var boots_sfx_list = [$EnemySFX/EnemyBootsSFX/EnemyBootsSFX1, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX2, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX3, $EnemySFX/EnemyBootsSFX/EnemyBootsSFX4]

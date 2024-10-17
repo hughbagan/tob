@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://d4felchet573e" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" id="1"]
 [ext_resource type="AudioStream" uid="uid://bvfgan75fteyd" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" id="2"]
 [ext_resource type="Script" path="res://scenes/entities/Enemy.gd" id="3"]
-[ext_resource type="Material" path="res://common/bloodvision.material" id="4"]
+[ext_resource type="Material" uid="uid://d4jjfns1s5tel" path="res://common/bloodvision.material" id="4"]
 [ext_resource type="AudioStream" uid="uid://cq6dmqgkxpu5p" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-001.wav" id="5"]
 [ext_resource type="AudioStream" uid="uid://bj0lcggdw2unl" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" id="6"]
 [ext_resource type="AudioStream" uid="uid://cji52i2yg4d33" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" id="7"]
@@ -22,6 +22,7 @@
 radius = 7.0
 
 [node name="Enemy" type="CharacterBody2D"]
+texture_filter = 1
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1

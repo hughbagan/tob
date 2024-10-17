@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ub7s5qdwisi1" path="res://scenes/entities/Enemy.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/entities/TankEnemy.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="3"]
-[ext_resource type="Material" path="res://common/bloodvision.material" id="4"]
+[ext_resource type="Material" uid="uid://d4jjfns1s5tel" path="res://common/bloodvision.material" id="4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(12, 12)
