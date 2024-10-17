@@ -1,6 +1,9 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cw2pvbap61mvm"]
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://cw2pvbap61mvm"]
 
 [ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="2"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vn0nf"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_gvrxv"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -83,6 +86,7 @@ texture = ExtResource("2")
 8:5/7/modulate = Color(0.278431, 0.176471, 0.235294, 1)
 8:5/7/navigation_layer_0/polygon = SubResource("NavigationPolygon_1qgnv")
 0:13/0 = 0
+0:13/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_vn0nf")
 0:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 29:6/0 = 0
 5:15/0 = 0
