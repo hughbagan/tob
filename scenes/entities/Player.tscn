@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/entities/Player.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://bytqwlu8qo6hq" path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 05.wav" id="2"]
-[ext_resource type="Material" path="res://common/bloodvision.material" id="3"]
+[ext_resource type="Material" uid="uid://d4jjfns1s5tel" path="res://common/bloodvision.material" id="3"]
 [ext_resource type="Texture2D" uid="uid://preq1df673hk" path="res://common/radial.png" id="4"]
 [ext_resource type="AudioStream" uid="uid://cmjij4fhg2g30" path="res://audio/sfx/LandSFX/FOLEYFeet_CleanConcrete_Boots_Lands 04.wav" id="5"]
 [ext_resource type="AudioStream" uid="uid://miv21rhghqw8" path="res://audio/sfx/JumpSFX/SWSH_Cloth_03.wav" id="6"]
