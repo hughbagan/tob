@@ -53,7 +53,9 @@ func _on_WFCGenerator_OnDone():
 				# Select an enemy type to spawn
 				var enemy
 				var prob := randf()
-				if prob >= 0.8:# and current_level > 40:
+				if prob >= 0.95:# and current_level > 60:
+					enemy = Global.ENEMY_GHOST_SCENE.instantiate()
+				elif prob >= 0.8:# and current_level > 40:
 					enemy = Global.ENEMY_SHOOT_SCENE.instantiate()
 				elif prob >= 0.6:# and current_level > 20:
 					enemy = Global.ENEMY_TANK_SCENE.instantiate()
