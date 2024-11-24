@@ -1,188 +1,186 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=15 format=4 uid="uid://dbxs81u25spaw"]
 
-[ext_resource path="res://common/level-tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/entities/Exit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/entities/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://common/Gothic_Pixels.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://scenes/entities/Lamp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Tutorial.gd" type="Script" id=7]
-[ext_resource path="res://common/tilemap_white_packed.png" type="Texture" id=8]
-[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=9]
-[ext_resource path="res://common/gothicfont.theme" type="Theme" id=10]
+[ext_resource type="TileSet" uid="uid://cw2pvbap61mvm" path="res://common/level-tileset.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dunmadvtnbchv" path="res://scenes/entities/Exit.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ok67slss8fc3" path="res://scenes/entities/Player.tscn" id="3"]
+[ext_resource type="FontFile" uid="uid://bxq16ljt4v6el" path="res://common/Gothic_Pixels.ttf" id="4"]
+[ext_resource type="TileSet" uid="uid://dvywata8k6afo" path="res://common/level-tileset-envelope.tres" id="4_ef5vu"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Lamp.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ub7s5qdwisi1" path="res://scenes/entities/Enemy.tscn" id="6"]
+[ext_resource type="Script" path="res://scenes/Tutorial.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://dou8qyabwpa61" path="res://common/tilemap_white_packed.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="9"]
+[ext_resource type="Theme" path="res://common/gothicfont.theme" id="10"]
 
-[sub_resource type="DynamicFont" id=3]
-size = 25
-font_data = ExtResource( 4 )
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("4")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
+[sub_resource type="Theme" id="4"]
+default_font = SubResource("3")
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.647059, 0.00784314, 0.00784314, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 0 )
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2y8sy"]
+bg_color = Color(0.647059, 0.00784314, 0.00784314, 1)
 
 [node name="Tutorial" type="Node2D"]
-pause_mode = 2
-script = ExtResource( 7 )
+process_mode = 3
+texture_filter = 1
+script = ExtResource("7")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
-pause_mode = 2
+process_mode = 3
+visible = false
 
 [node name="LevelLabel" type="Label" parent="GUI"]
 visible = false
+anchors_preset = 10
 anchor_right = 1.0
-margin_top = 15.0
-theme = SubResource( 4 )
+offset_top = 15.0
+theme = SubResource("4")
 text = "1"
-align = 1
-valign = 2
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="BloodBar" type="ProgressBar" parent="GUI"]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -16.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_2y8sy")
 value = 100.0
-percent_visible = false
+show_percentage = false
 
 [node name="RedRect" type="ColorRect" parent="GUI"]
-visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.145098, 0, 0, 1 )
+color = Color(0.145098, 0, 0, 1)
 
 [node name="DeathLabel" type="Label" parent="GUI"]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.5
-margin_top = -60.0
-margin_right = 158.5
-margin_bottom = 60.0
-theme = ExtResource( 10 )
+offset_left = -158.5
+offset_top = -60.0
+offset_right = 158.5
+offset_bottom = 60.0
+theme = ExtResource("10")
 text = "Mortis"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-pause_mode = 2
-color = Color( 0, 0, 0, 1 )
+process_mode = 3
+color = Color(0, 0, 0, 1)
 
-[node name="Floor" type="TileMap" parent="."]
-pause_mode = 2
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-bake_navigation = true
-format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 720896, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0 )
+[node name="Floor" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAAIAAUAAAAAAAEAAAAIAAUAAAAAAAIAAAAIAAUAAAAAAAMAAAAIAAUAAAAAAAQAAAAIAAUAAAAAAAUAAAAIAAUAAAAAAAYAAAAIAAUAAAAAAAcAAAAIAAUAAAAAAAgAAAAIAAUAAAAAAAkAAAAIAAUAAAAAAAoAAAAIAAUAAAABAAoAAAAIAAUAAAACAAoAAAAIAAUAAAADAAoAAAAIAAUAAAAEAAoAAAAIAAUAAAAFAAoAAAAIAAUAAAAGAAoAAAAIAAUAAAAHAAoAAAAIAAUAAAAIAAoAAAAIAAUAAAAJAAoAAAAIAAUAAAAKAAoAAAAIAAUAAAAKAAkAAAAIAAUAAAAKAAgAAAAIAAUAAAAKAAcAAAAIAAUAAAAKAAYAAAAIAAUAAAAKAAUAAAAIAAUAAAAKAAQAAAAIAAUAAAAKAAMAAAAIAAUAAAAKAAIAAAAIAAUAAAAKAAEAAAAIAAUAAAAKAAAAAAAIAAUAAAAJAAAAAAAIAAUAAAAIAAAAAAAIAAUAAAAHAAAAAAAIAAUAAAAGAAAAAAAIAAUAAAAFAAAAAAAIAAUAAAAEAAAAAAAIAAUAAAADAAAAAAAIAAUAAAACAAAAAAAIAAUAAAABAAAAAAAIAAUAAAAFAAcAAAAIAAUAAAAFAAYAAAAIAAUAAAAFAAUAAAAIAAUAAAAFAAQAAAAIAAUAAAAFAAMAAAAIAAUAAAAFAAIAAAAIAAUAAAAFAAEAAAAIAAUAAAAEAAEAAAAIAAUAAAADAAEAAAAIAAUAAAACAAEAAAAIAAUAAAABAAEAAAAIAAUAAAABAAIAAAAIAAUAAAABAAMAAAAIAAUAAAABAAQAAAAIAAUAAAABAAUAAAAIAAUAAAABAAYAAAAIAAUAAAABAAcAAAAIAAUAAAABAAgAAAAIAAUAAAABAAkAAAAIAAUAAAACAAkAAAAIAAUAAAACAAgAAAAIAAUAAAACAAcAAAAIAAUAAAACAAYAAAAIAAUAAAACAAUAAAAIAAUAAAACAAQAAAAIAAUAAAACAAMAAAAIAAUAAAACAAIAAAAIAAUAAAADAAIAAAAIAAUAAAADAAMAAAAIAAUAAAADAAQAAAAIAAUAAAADAAUAAAAIAAUAAAADAAYAAAAIAAUAAAADAAcAAAAIAAUAAAADAAgAAAAIAAUAAAADAAkAAAAIAAUAAAAEAAkAAAAIAAUAAAAEAAgAAAAIAAUAAAAEAAcAAAAIAAUAAAAEAAYAAAAIAAUAAAAEAAUAAAAIAAUAAAAEAAQAAAAIAAUAAAAEAAMAAAAIAAUAAAAEAAIAAAAIAAUAAAAFAAgAAAAIAAUAAAAFAAkAAAAIAAUAAAAGAAkAAAAIAAUAAAAGAAgAAAAIAAUAAAAGAAcAAAAIAAUAAAAGAAYAAAAIAAUAAAAGAAUAAAAIAAUAAAAGAAQAAAAIAAUAAAAGAAMAAAAIAAUAAAAGAAIAAAAIAAUAAAAGAAEAAAAIAAUAAAAHAAEAAAAIAAUAAAAHAAIAAAAIAAUAAAAHAAMAAAAIAAUAAAAHAAQAAAAIAAUAAAAHAAUAAAAIAAUAAAAHAAYAAAAIAAUAAAAHAAcAAAAIAAUAAAAHAAgAAAAIAAUAAAAHAAkAAAAIAAUAAAAIAAkAAAAIAAUAAAAIAAgAAAAIAAUAAAAIAAcAAAAIAAUAAAAIAAYAAAAIAAUAAAAIAAUAAAAIAAUAAAAIAAQAAAAIAAUAAAAIAAMAAAAIAAUAAAAIAAIAAAAIAAUAAAAIAAEAAAAIAAUAAAAJAAEAAAAIAAUAAAAJAAIAAAAIAAUAAAAJAAMAAAAIAAUAAAAJAAQAAAAIAAUAAAAJAAUAAAAIAAUAAAAJAAYAAAAIAAUAAAAJAAcAAAAIAAUAAAAJAAgAAAAIAAUAAAAJAAkAAAAIAAUAAAAAAAsAAAAIAAUAAAABAAsAAAAIAAUAAAACAAsAAAAIAAUAAAADAAsAAAAIAAUAAAAEAAsAAAAIAAUAAAAFAAsAAAAIAAUAAAAGAAsAAAAIAAUAAAAHAAsAAAAIAAUAAAAIAAsAAAAIAAUAAAAJAAsAAAAIAAUAAAAKAAsAAAAIAAUAAAALAAsAAAAIAAUAAAALAAoAAAAIAAUAAAALAAkAAAAIAAUAAAALAAgAAAAIAAUAAAALAAcAAAAIAAUAAAALAAYAAAAIAAUAAAALAAUAAAAIAAUAAAALAAQAAAAIAAUAAAALAAMAAAAIAAUAAAALAAIAAAAIAAUAAAALAAEAAAAIAAUAAAALAAAAAAAIAAUAAAD/////AAAIAAUAAAAAAP//AAAIAAUAAAABAP//AAAIAAUAAAACAP//AAAIAAUAAAADAP//AAAIAAUAAAAEAP//AAAIAAUAAAAFAP//AAAIAAUAAAAGAP//AAAIAAUAAAAHAP//AAAIAAUAAAAIAP//AAAIAAUAAAAJAP//AAAIAAUAAAAKAP//AAAIAAUAAAALAP//AAAIAAUAAAAMAP//AAAIAAUAAAAMAAAAAAAIAAUAAAAMAAEAAAAIAAUAAAAMAAIAAAAIAAUAAAAMAAMAAAAIAAUAAAAMAAQAAAAIAAUAAAAMAAUAAAAIAAUAAAAMAAYAAAAIAAUAAAAMAAcAAAAIAAUAAAAMAAgAAAAIAAUAAAAMAAkAAAAIAAUAAAAMAAoAAAAIAAUAAAAMAAsAAAAIAAUAAAAMAAwAAAAIAAUAAAALAAwAAAAIAAUAAAAKAAwAAAAIAAUAAAAJAAwAAAAIAAUAAAAIAAwAAAAIAAUAAAAHAAwAAAAIAAUAAAAGAAwAAAAIAAUAAAAFAAwAAAAIAAUAAAAEAAwAAAAIAAUAAAADAAwAAAAIAAUAAAACAAwAAAAIAAUAAAABAAwAAAAIAAUAAAAAAAwAAAAIAAUAAAD//wwAAAAIAAUAAAD//wsAAAAIAAUAAAD//woAAAAIAAUAAAD//wkAAAAIAAUAAAD//wgAAAAIAAUAAAD//wcAAAAIAAUAAAD//wYAAAAIAAUAAAD//wUAAAAIAAUAAAD//wQAAAAIAAUAAAD//wMAAAAIAAUAAAD//wIAAAAIAAUAAAD//wEAAAAIAAUAAAD//wAAAAAIAAUAAAA=")
+tile_set = ExtResource("1")
+collision_enabled = false
+navigation_enabled = false
 
-[node name="Walls" type="TileMap" parent="."]
-pause_mode = 2
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_mask = 3
-bake_navigation = true
-format = 1
-tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 65536, 1, 0, 65547, 1, 0, 131072, 1, 0, 131083, 1, 0, 196608, 1, 0, 196619, 1, 0, 262144, 1, 0, 262155, 1, 0, 327680, 1, 0, 327691, 1, 0, 393216, 1, 0, 393222, 1, 0, 393223, 1, 0, 393224, 1, 0, 393225, 1, 0, 393226, 1, 0, 393227, 1, 0, 458752, 1, 0, 458758, 1, 0, 458763, 1, 0, 524288, 1, 0, 524294, 1, 0, 524296, 0, 0, 524299, 1, 0, 589824, 1, 0, 589830, 1, 0, 589835, 1, 0, 655360, 1, 0, 655366, 1, 0, 655371, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0 )
+[node name="Walls" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAGAAYAAAAAAA0AAAAGAAcAAAAAAA0AAAAGAAgAAAAAAA0AAAAGAAkAAAAAAA0AAAAAAAAAAAAAAA0AAAACAAAAAAAAAA0AAAADAAAAAAAAAA0AAAAEAAAAAAAAAA0AAAAFAAAAAAAAAA0AAAAGAAAAAAAAAA0AAAAHAAAAAAAAAA0AAAAIAAAAAAAAAA0AAAAJAAAAAAAAAA0AAAAKAAAAAAAAAA0AAAAAAAEAAAAAAA0AAAAAAAIAAAAAAA0AAAAAAAMAAAAAAA0AAAAAAAQAAAAAAA0AAAAAAAUAAAAAAA0AAAAAAAYAAAAAAA0AAAAAAAcAAAAAAA0AAAAAAAgAAAAAAA0AAAAAAAkAAAAAAA0AAAAAAAoAAAAAAA0AAAALAAAAAAAAAA0AAAALAAEAAAAAAA0AAAALAAIAAAAAAA0AAAALAAMAAAAAAA0AAAALAAQAAAAAAA0AAAALAAUAAAAAAA0AAAALAAYAAAAAAA0AAAALAAcAAAAAAA0AAAALAAgAAAAAAA0AAAALAAkAAAAAAA0AAAALAAoAAAAAAA0AAAAAAAsAAAAAAA0AAAABAAsAAAAAAA0AAAACAAsAAAAAAA0AAAAFAAsAAAAAAA0AAAAGAAsAAAAAAA0AAAAHAAsAAAAAAA0AAAAIAAsAAAAAAA0AAAAJAAsAAAAAAA0AAAAKAAsAAAAAAA0AAAALAAsAAAAAAA0AAAADAAsAAAAAAA0AAAAEAAsAAAAAAA0AAAAHAAYAAAAAAA0AAAAIAAYAAAAAAA0AAAAJAAYAAAAAAA0AAAAKAAYAAAAAAA0AAAAGAAoAAAAAAA0AAAA=")
+tile_set = ExtResource("1")
 
 [node name="Camera2D" type="Camera2D" parent="Walls"]
-pause_mode = 2
-position = Vector2( 96, 96 )
-current = true
-zoom = Vector2( 0.3, 0.3 )
+position = Vector2(96, 96)
+zoom = Vector2(3.33, 3.33)
 
-[node name="Envelope" type="TileMap" parent="."]
-pause_mode = 2
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 8
-collision_mask = 3
-bake_navigation = true
-format = 1
-tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, -65527, 1, 0, -65526, 1, 0, -65525, 1, 0, -65524, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 0, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 131071, 1, 0, 65536, 1, 0, 65547, 1, 0, 65548, 1, 0, 196607, 1, 0, 131072, 1, 0, 131083, 1, 0, 131084, 1, 0, 262143, 1, 0, 196608, 1, 0, 196619, 1, 0, 196620, 1, 0, 327679, 1, 0, 262144, 1, 0, 262155, 1, 0, 262156, 1, 0, 393215, 1, 0, 327680, 1, 0, 327691, 1, 0, 327692, 1, 0, 458751, 1, 0, 393216, 1, 0, 393227, 1, 0, 393228, 1, 0, 524287, 1, 0, 458752, 1, 0, 458763, 1, 0, 458764, 1, 0, 589823, 1, 0, 524288, 1, 0, 524296, 0, 0, 524299, 1, 0, 524300, 1, 0, 655359, 1, 0, 589824, 1, 0, 589835, 1, 0, 589836, 1, 0, 720895, 1, 0, 655360, 1, 0, 655371, 1, 0, 655372, 1, 0, 786431, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 851967, 1, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0 )
+[node name="Envelope" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD/////AAAAAA0AAAAAAP//AAAAAA0AAAABAP//AAAAAA0AAAACAP//AAAAAA0AAAADAP//AAAAAA0AAAAEAP//AAAAAA0AAAAFAP//AAAAAA0AAAAGAP//AAAAAA0AAAAHAP//AAAAAA0AAAAIAP//AAAAAA0AAAAJAP//AAAAAA0AAAAKAP//AAAAAA0AAAALAP//AAAAAA0AAAD//wsAAAAAAA0AAAD//woAAAAAAA0AAAD//wkAAAAAAA0AAAD//wgAAAAAAA0AAAD//wcAAAAAAA0AAAD//wYAAAAAAA0AAAD//wUAAAAAAA0AAAD//wQAAAAAAA0AAAD//wMAAAAAAA0AAAD//wIAAAAAAA0AAAD//wEAAAAAAA0AAAD//wAAAAAAAA0AAAAMAAsAAAAAAA0AAAAMAAoAAAAAAA0AAAAMAAkAAAAAAA0AAAAMAAgAAAAAAA0AAAAMAAcAAAAAAA0AAAAMAAYAAAAAAA0AAAAMAAUAAAAAAA0AAAAMAAQAAAAAAA0AAAAMAAMAAAAAAA0AAAAMAAIAAAAAAA0AAAAMAAEAAAAAAA0AAAAMAAAAAAAAAA0AAAAMAP//AAAAAA0AAAD//wwAAAAAAA0AAAAAAAwAAAAAAA0AAAABAAwAAAAAAA0AAAACAAwAAAAAAA0AAAADAAwAAAAAAA0AAAAEAAwAAAAAAA0AAAAFAAwAAAAAAA0AAAAGAAwAAAAAAA0AAAAHAAwAAAAAAA0AAAAIAAwAAAAAAA0AAAAJAAwAAAAAAA0AAAAKAAwAAAAAAA0AAAALAAwAAAAAAA0AAAAMAAwAAAAAAA0AAAA=")
+tile_set = ExtResource("4_ef5vu")
 
-[node name="W" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 96, 48 )
-texture = ExtResource( 8 )
+[node name="W" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(96, 48)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 288, 160, 16, 16 )
+region_rect = Rect2(288, 160, 16, 16)
 
-[node name="A" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 80, 64 )
-texture = ExtResource( 8 )
+[node name="A" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(80, 64)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 288, 176, 16, 16 )
+region_rect = Rect2(288, 176, 16, 16)
 
-[node name="S" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 96, 64 )
-texture = ExtResource( 8 )
+[node name="S" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(96, 64)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 304, 176, 16, 16 )
+region_rect = Rect2(304, 176, 16, 16)
 
-[node name="D" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 112, 64 )
-texture = ExtResource( 8 )
+[node name="D" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(112, 64)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 320, 176, 16, 16 )
+region_rect = Rect2(320, 176, 16, 16)
 
-[node name="SHIFT" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 64, 80 )
-texture = ExtResource( 8 )
+[node name="SHIFT" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(64, 80)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 272, 240, 32, 16 )
+region_rect = Rect2(272, 240, 32, 16)
 
-[node name="SPACE" type="Sprite" parent="."]
-pause_mode = 2
-position = Vector2( 144, 144 )
-texture = ExtResource( 8 )
+[node name="SPACE" type="Sprite2D" parent="."]
+process_mode = 3
+position = Vector2(144, 144)
+texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2( 496, 224, 48, 16 )
+region_rect = Rect2(496, 224, 48, 16)
 
-[node name="Stairs" type="Sprite" parent="."]
-pause_mode = 2
-modulate = Color( 0.745098, 0.745098, 0.745098, 1 )
-position = Vector2( 24, 8 )
-texture = ExtResource( 9 )
+[node name="Stairs" type="Sprite2D" parent="."]
+process_mode = 3
+modulate = Color(0.745098, 0.745098, 0.745098, 1)
+position = Vector2(24, 8)
+texture = ExtResource("9")
 region_enabled = true
-region_rect = Rect2( 48, 96, 16, 16 )
+region_rect = Rect2(48, 96, 16, 16)
 
 [node name="Entities" type="Node2D" parent="."]
-pause_mode = 1
+process_mode = 1
 
-[node name="Lamp2" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 128, 56 )
+[node name="Lamp2" parent="Entities" instance=ExtResource("5")]
+position = Vector2(136, 56)
 
-[node name="Lamp3" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 56, 136 )
+[node name="Lamp3" parent="Entities" instance=ExtResource("5")]
+position = Vector2(56, 128)
 
-[node name="Lamp4" parent="Entities" instance=ExtResource( 5 )]
-position = Vector2( 56, 56 )
+[node name="Lamp4" parent="Entities" instance=ExtResource("5")]
+position = Vector2(56, 56)
 
-[node name="Player" parent="Entities" instance=ExtResource( 3 )]
-position = Vector2( 24, 24 )
+[node name="Player" parent="Entities" instance=ExtResource("3")]
+position = Vector2(24, 24)
 
-[node name="Exit" parent="Entities" instance=ExtResource( 2 )]
-position = Vector2( 168, 168 )
+[node name="Exit" parent="Entities" instance=ExtResource("2")]
+position = Vector2(168, 168)
 
-[node name="Enemy" parent="Entities" instance=ExtResource( 6 )]
-position = Vector2( 136, 128 )
+[node name="Enemy" parent="Entities" instance=ExtResource("6")]
+position = Vector2(136, 128)
 
 [connection signal="exit_reached" from="Entities/Exit" to="." method="_on_exit_reached"]

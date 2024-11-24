@@ -1,55 +1,50 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dsn3dmsr7a5ni"]
 
-[ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/entities/TankEnemy.gd" type="Script" id=2]
-[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=3]
-[ext_resource path="res://common/bloodvision.material" type="Material" id=4]
+[ext_resource type="PackedScene" uid="uid://ub7s5qdwisi1" path="res://scenes/entities/Enemy.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/entities/TankEnemy.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="3"]
+[ext_resource type="Material" uid="uid://d4jjfns1s5tel" path="res://common/bloodvision.material" id="4"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 6 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(12, 12)
 
-[node name="TankEnemy" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="TankEnemy" instance=ExtResource("1")]
+script = ExtResource("2")
 
-[node name="YSort" type="YSort" parent="." index="0"]
+[node name="Node2D" type="Node2D" parent="." index="0"]
 
-[node name="Shield" type="StaticBody2D" parent="YSort" index="0"]
-position = Vector2( 0, 5 )
+[node name="Shield" type="StaticBody2D" parent="Node2D" index="0"]
+position = Vector2(0, 5)
 collision_layer = 4
 collision_mask = 2
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="YSort/Shield" index="0"]
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Shield" index="0"]
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 592, 48, 16, 16 )
+region_rect = Rect2(592, 48, 16, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Shield" index="1"]
-position = Vector2( 0, 1 )
-shape = SubResource( 1 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Shield" index="1"]
+position = Vector2(0, 1)
+shape = SubResource("1")
 
-[node name="Sprite" type="Sprite" parent="YSort" index="1"]
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" index="1"]
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 400, 80, 16, 16 )
+region_rect = Rect2(400, 80, 16, 16)
 
-[node name="SpriteShaded" type="Sprite" parent="YSort" index="2"]
+[node name="SpriteShaded" type="Sprite2D" parent="Node2D" index="2"]
 visible = false
-material = ExtResource( 4 )
 z_index = 5
 z_as_relative = false
-texture = ExtResource( 3 )
+material = ExtResource("4")
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 400, 80, 16, 16 )
+region_rect = Rect2(400, 80, 16, 16)
 
 [node name="ShieldTimer" type="Timer" parent="." index="1"]
 autostart = true
 
-[node name="ShieldTween" type="Tween" parent="." index="2"]
-
-[node name="Sprite" parent="." index="3"]
+[node name="Sprite2D" parent="." index="2"]
 visible = false
 
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]

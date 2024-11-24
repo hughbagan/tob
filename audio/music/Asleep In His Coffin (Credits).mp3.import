@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Asleep In His Coffin (Credits).mp3-6c9d97591ac1d6f364b0432241067ae0.mp3str"
+uid="uid://bv0s4wviu70sm"
+path="res://.godot/imported/Asleep In His Coffin (Credits).mp3-6c9d97591ac1d6f364b0432241067ae0.mp3str"
 
 [deps]
 
 source_file="res://audio/music/Asleep In His Coffin (Credits).mp3"
-dest_files=[ "res://.import/Asleep In His Coffin (Credits).mp3-6c9d97591ac1d6f364b0432241067ae0.mp3str" ]
+dest_files=["res://.godot/imported/Asleep In His Coffin (Credits).mp3-6c9d97591ac1d6f364b0432241067ae0.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

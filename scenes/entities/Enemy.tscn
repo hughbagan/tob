@@ -1,164 +1,167 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://ub7s5qdwisi1"]
 
-[ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" type="AudioStream" id=1]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/entities/Enemy.gd" type="Script" id=3]
-[ext_resource path="res://common/bloodvision.material" type="Material" id=4]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-001.wav" type="AudioStream" id=5]
-[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" type="AudioStream" id=6]
-[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" type="AudioStream" id=7]
-[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 04.wav" type="AudioStream" id=8]
-[ext_resource path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" type="AudioStream" id=9]
-[ext_resource path="res://common/monochrome-transparent_packed.png" type="Texture" id=10]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-003.wav" type="AudioStream" id=11]
-[ext_resource path="res://common/radial.png" type="Texture" id=12]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-005.wav" type="AudioStream" id=13]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-002.wav" type="AudioStream" id=14]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-003.wav" type="AudioStream" id=15]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-001.wav" type="AudioStream" id=16]
-[ext_resource path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-004.wav" type="AudioStream" id=17]
+[ext_resource type="AudioStream" uid="uid://d4felchet573e" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-002.wav" id="1"]
+[ext_resource type="AudioStream" uid="uid://bvfgan75fteyd" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-004.wav" id="2"]
+[ext_resource type="Script" path="res://scenes/entities/Enemy.gd" id="3"]
+[ext_resource type="Material" uid="uid://d4jjfns1s5tel" path="res://common/bloodvision.material" id="4"]
+[ext_resource type="AudioStream" uid="uid://cq6dmqgkxpu5p" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-001.wav" id="5"]
+[ext_resource type="AudioStream" uid="uid://bj0lcggdw2unl" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 02.wav" id="6"]
+[ext_resource type="AudioStream" uid="uid://cji52i2yg4d33" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 06.wav" id="7"]
+[ext_resource type="AudioStream" uid="uid://0qays6c2cvfs" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 04.wav" id="8"]
+[ext_resource type="AudioStream" uid="uid://brr71uhr7l4y" path="res://audio/sfx/FootstepSFX/FOLEYFeet_CleanConcrete_Boots_Medium 05.wav" id="9"]
+[ext_resource type="Texture2D" uid="uid://cw0ecuikdd7rs" path="res://common/monochrome-transparent_packed.png" id="10"]
+[ext_resource type="AudioStream" uid="uid://borr4bxbb1k62" path="res://audio/sfx/EnemySFX/EnemyArmourSFX/Armour Plate Hit Scrape Impact Thump-003.wav" id="11"]
+[ext_resource type="Texture2D" uid="uid://preq1df673hk" path="res://common/radial.png" id="12"]
+[ext_resource type="AudioStream" uid="uid://bmg7dgdg8j6vh" path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-005.wav" id="13"]
+[ext_resource type="AudioStream" uid="uid://tylim541p5rb" path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-002.wav" id="14"]
+[ext_resource type="AudioStream" uid="uid://cnk1isy7rwcfd" path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-003.wav" id="15"]
+[ext_resource type="AudioStream" uid="uid://liyduhnm4d6i" path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-001.wav" id="16"]
+[ext_resource type="AudioStream" uid="uid://bnnmavy86ckm4" path="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-004.wav" id="17"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 radius = 7.0
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
+texture_filter = 1
 collision_layer = 4
 collision_mask = 3
-script = ExtResource( 3 )
+motion_mode = 1
+script = ExtResource("3")
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 10 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("10")
 region_enabled = true
-region_rect = Rect2( 464, 96, 16, 16 )
+region_rect = Rect2(464, 96, 16, 16)
 
-[node name="SpriteShaded" type="Sprite" parent="."]
+[node name="SpriteShaded" type="Sprite2D" parent="."]
 visible = false
-material = ExtResource( 4 )
 z_index = 5
 z_as_relative = false
-texture = ExtResource( 10 )
+material = ExtResource("4")
+texture = ExtResource("10")
 region_enabled = true
-region_rect = Rect2( 464, 96, 16, 16 )
+region_rect = Rect2(464, 96, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="SightTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 0 )
+target_position = Vector2(0, 0)
 collision_mask = 3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 4.0
+path_postprocessing = 1
 
-[node name="RedLight" type="Light2D" parent="."]
+[node name="RedLight" type="PointLight2D" parent="."]
 visible = false
-texture = ExtResource( 12 )
-color = Color( 1, 0.588235, 0.588235, 1 )
+color = Color(1, 0.588235, 0.588235, 1)
 shadow_enabled = true
+texture = ExtResource("12")
 
 [node name="EnemySFX" type="Node2D" parent="."]
 
 [node name="EnemyBootsSFX" type="Node2D" parent="EnemySFX"]
 
 [node name="EnemyBootsSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
-stream = ExtResource( 6 )
+stream = ExtResource("6")
 volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyBootsSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
 volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyBootsSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
-stream = ExtResource( 9 )
+stream = ExtResource("9")
 volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyBootsSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyBootsSFX"]
-stream = ExtResource( 7 )
+stream = ExtResource("7")
 volume_db = -2.0
 pitch_scale = 0.38
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyArmourSFX" type="Node2D" parent="EnemySFX"]
 
 [node name="EnemyArmourSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
 volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyArmourSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
-stream = ExtResource( 1 )
+stream = ExtResource("1")
 volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyArmourSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
-stream = ExtResource( 11 )
+stream = ExtResource("11")
 volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemyArmourSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemyArmourSFX"]
-stream = ExtResource( 2 )
+stream = ExtResource("2")
 volume_db = -6.0
 pitch_scale = 0.55
 max_distance = 500.0
 attenuation = -0.5
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemySwingSFX" type="Node2D" parent="EnemySFX"]
 
 [node name="EnemySwingSFX1" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
-stream = ExtResource( 16 )
+stream = ExtResource("16")
 volume_db = -2.0
 pitch_scale = 0.63
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemySwingSFX2" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
-stream = ExtResource( 14 )
+stream = ExtResource("14")
 volume_db = -2.0
 pitch_scale = 0.63
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemySwingSFX3" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
-stream = ExtResource( 15 )
+stream = ExtResource("15")
 volume_db = -2.0
 pitch_scale = 0.63
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemySwingSFX4" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
-stream = ExtResource( 17 )
+stream = ExtResource("17")
 volume_db = -2.0
 pitch_scale = 0.63
-bus = "SFX"
+bus = &"SFX"
 
 [node name="EnemySwingSFX5" type="AudioStreamPlayer2D" parent="EnemySFX/EnemySwingSFX"]
-stream = ExtResource( 13 )
+stream = ExtResource("13")
 volume_db = -2.0
 pitch_scale = 0.63
-bus = "SFX"
+bus = &"SFX"

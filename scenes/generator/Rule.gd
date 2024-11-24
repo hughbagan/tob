@@ -4,7 +4,7 @@ const EMPTY:int = -1 # no tile
 var rule_array:Array = [] # 2D array
 
 
-func _init(match_radius:int, position:Vector2, sample:TileMap):
+func _init(match_radius:int, position:Vector2, sample:TileMapLayer):
 # static func construct(match_radius:int, position:Vector2, sample:TileMap) -> Rule:
 	# var new_rule = get_script().new()
 	var match_rad_vector:Vector2 = Vector2(match_radius, match_radius)
@@ -12,7 +12,7 @@ func _init(match_radius:int, position:Vector2, sample:TileMap):
 	for i in rule_array.size():
 		for j in rule_array.size():
 			var coord:Vector2 = position-match_rad_vector+Vector2(i, j)
-			var tile_id:int = sample.get_cell(coord.x, coord.y)
+			var tile_id:int = Global.get_cell_id(sample, Vector2i(coord))
 			rule_array[i][j] = tile_id
 
 

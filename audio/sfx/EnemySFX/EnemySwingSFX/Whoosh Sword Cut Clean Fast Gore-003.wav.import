@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Whoosh Sword Cut Clean Fast Gore-003.wav-82188d2d5628e36f5ab41d5a2ac3c16d.sample"
+type="AudioStreamWAV"
+uid="uid://cnk1isy7rwcfd"
+path="res://.godot/imported/Whoosh Sword Cut Clean Fast Gore-003.wav-82188d2d5628e36f5ab41d5a2ac3c16d.sample"
 
 [deps]
 
 source_file="res://audio/sfx/EnemySFX/EnemySwingSFX/Whoosh Sword Cut Clean Fast Gore-003.wav"
-dest_files=[ "res://.import/Whoosh Sword Cut Clean Fast Gore-003.wav-82188d2d5628e36f5ab41d5a2ac3c16d.sample" ]
+dest_files=["res://.godot/imported/Whoosh Sword Cut Clean Fast Gore-003.wav-82188d2d5628e36f5ab41d5a2ac3c16d.sample"]
 
 [params]
 

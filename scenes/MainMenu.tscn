@@ -1,99 +1,114 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://bw6rwjxsl5mw5"]
 
-[ext_resource path="res://common/gothicfont.theme" type="Theme" id=1]
-[ext_resource path="res://common/right.png" type="Texture" id=2]
-[ext_resource path="res://common/information.png" type="Texture" id=3]
-[ext_resource path="res://common/gear.png" type="Texture" id=4]
-[ext_resource path="res://scenes/MainMenu.gd" type="Script" id=5]
-[ext_resource path="res://common/DungeonFont.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://common/return.png" type="Texture" id=8]
+[ext_resource type="Theme" path="res://common/gothicfont.theme" id="1"]
+[ext_resource type="Texture2D" uid="uid://cmuqk7ncjf7l8" path="res://common/right.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dy2ahgdyfc5rl" path="res://common/information.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dsalkqhrajol3" path="res://common/gear.png" id="4"]
+[ext_resource type="Script" path="res://scenes/MainMenu.gd" id="5"]
+[ext_resource type="FontFile" uid="uid://dmmcqgnl2wik2" path="res://common/DungeonFont.ttf" id="7"]
+[ext_resource type="Texture2D" uid="uid://dvxaw0vjf1fnr" path="res://common/return.png" id="8"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 7 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("7")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/34/0/ascent = 0.0
+cache/0/34/0/descent = 0.0
+cache/0/34/0/underline_position = 0.0
+cache/0/34/0/underline_thickness = 0.0
+cache/0/34/0/scale = 1.0
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Theme" id="2"]
+default_font = SubResource("1")
+default_font_size = 34
 
 [node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 5 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.145098, 0, 0, 1 )
+color = Color(0.145098, 0, 0, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 114.0
-margin_top = 146.0
-margin_right = 526.0
-margin_bottom = 493.0
+layout_mode = 2
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 412.0
-margin_bottom = 243.0
-theme = ExtResource( 1 )
+layout_mode = 2
+theme = ExtResource("1")
+theme_override_font_sizes/font_size = 95
 text = "Tower of
 Blood"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 247.0
-margin_right = 412.0
-margin_bottom = 347.0
+layout_mode = 2
 alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 visible = false
-margin_left = 52.0
-margin_right = 152.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 4 )
+layout_mode = 2
+texture_normal = ExtResource("4")
 
 [node name="InfoButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 204.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 3 )
+layout_mode = 2
+texture_normal = ExtResource("3")
 
 [node name="PlayButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-margin_left = 208.0
-margin_right = 308.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 2 )
+layout_mode = 2
+texture_normal = ExtResource("2")
 
 [node name="Credits" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="Background" type="ColorRect" parent="Credits"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.145098, 0, 0, 1 )
+color = Color(0.145098, 0, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Credits"]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -292.0
-margin_top = 30.0
-margin_right = 292.0
-margin_bottom = 357.0
+offset_left = -292.0
+offset_top = 30.0
+offset_right = 292.0
+offset_bottom = 357.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Credits/MarginContainer"]
-margin_right = 584.0
-margin_bottom = 533.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="Credits/MarginContainer/VBoxContainer"]
-margin_right = 584.0
-margin_bottom = 393.0
-theme = SubResource( 2 )
+layout_mode = 2
+theme = SubResource("2")
 text = "A game by Hugh Bagan
 hughb.itch.io
 & Aiden Collins-Cruickshank
@@ -104,26 +119,23 @@ aidencc.itch.io
 Gothic Pixels font by akezhar.itch.io
 DungeonFont by vrtxrry.itch.io
 
-Made proudly in Godot Engine 3.5
+Made proudly in Godot Engine 4.3
 "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
-margin_top = 397.0
-margin_right = 584.0
-margin_bottom = 497.0
+layout_mode = 2
 alignment = 1
 
 [node name="BackButton" type="TextureButton" parent="Credits/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 242.0
-margin_right = 342.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 8 )
+layout_mode = 2
+texture_normal = ExtResource("8")
 
 [node name="RedRect" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.145098, 0, 0, 0 )
+color = Color(0.145098, 0, 0, 0)
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

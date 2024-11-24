@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/stairs.wav-f74db688cbd30c467b49a9150bfdb5f8.sample"
+type="AudioStreamWAV"
+uid="uid://0fopy12fccb7"
+path="res://.godot/imported/stairs.wav-f74db688cbd30c467b49a9150bfdb5f8.sample"
 
 [deps]
 
 source_file="res://audio/sfx/stairs.wav"
-dest_files=[ "res://.import/stairs.wav-f74db688cbd30c467b49a9150bfdb5f8.sample" ]
+dest_files=["res://.godot/imported/stairs.wav-f74db688cbd30c467b49a9150bfdb5f8.sample"]
 
 [params]
 
